@@ -17,6 +17,8 @@
     pkgs.go-outline
     pkgs.golangci-lint
     pkgs.powerline-fonts
+    pkgs.google-cloud-sdk
+    pkgs.aws
   ];
 
   # This value determines the Home Manager release that your
@@ -99,7 +101,8 @@
       hostname-only-if-ssh = true;
       mode = "compatible";
     };
-      modules = ["host" "ssh" "cwd" "gitlite" "jobs" "exit"];
+    modules = ["host" "ssh" "cwd" "gitlite" "jobs" "exit"];
+    modulesRight = ["duration"];
   };
 
   # SERVICES
