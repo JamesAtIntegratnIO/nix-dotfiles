@@ -106,7 +106,17 @@
   };
 
   # SERVICES
-  services.lorri = {
-    enable = true;
+  services = { 
+    lorri = {
+      enable = true;
+    };
+    gpg-agent = {
+      enable = true;
+      defaultCacheTtl = 60;
+      maxCacheTtl = 120;
+      enableSshSupport = true;
+      extraConfig = "ttyname =$GPG_TTY";
+    };
   };
+
 }
