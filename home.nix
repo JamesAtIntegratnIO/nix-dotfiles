@@ -1,11 +1,22 @@
 { config, pkgs, ... }:
 
 {
+  news.display = "silent";
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "james";
   home.homeDirectory = "/home/james";
-
+  # Packages to install
+  home.packages = [
+    pkgs.tmux
+    pkgs.python3
+    pkgs.nodejs
+    pkgs.bottom
+    pkgs.gotools
+    pkgs.gopls
+    pkgs.go-outline
+    pkgs.golangci-lint
+  ];
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -18,4 +29,55 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  # Git Config
+  programs.git = {
+    enable = true;
+    userName = "jamesAtIntegratnIO";
+    userEmail = "james@integratn.io";
+    aliases = {
+      st = "status";
+    };
+  };
+
+  programs.go = {
+    enable = true;
+    packages = {
+    };
+
+  };
+
+  # VIM CONFIG
+  programs.vim = {
+    enable = true;
+    plugins = [
+      pkgs.vimPlugins.vim-go
+      pkgs.vimPlugins.neon
+      pkgs.vimPlugins.nerdtree
+      pkgs.vimPlugins.fzf-vim 
+      pkgs.vimPlugins.vim-lsp
+    ];
+    settings = {
+    };
+    extraConfig = ''
+      syntax enable
+      set number 
+    '';
+  };
+  
+  # ZSH CONFIG
+  programs.zsh = {
+    enable = true;
+    oh-my-zsh = {
+      enable = true;
+    };
+    dotDir = ".config/zsh";
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
+
+  };
+
+  # SERVICES
+  services.lorri = {
+    enable = true;
+  };
 }
