@@ -16,7 +16,13 @@
     pkgs.gopls
     pkgs.go-outline
     pkgs.golangci-lint
+    pkgs.openssh
   ];
+  # Sesion Variables to set
+  home.sessionVariables = {
+    GIT_SSH="${pkgs.openssh}/bin/ssh";
+  };
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
