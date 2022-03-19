@@ -16,6 +16,7 @@
     pkgs.gopls
     pkgs.go-outline
     pkgs.golangci-lint
+    pkgs.powerline-fonts
   ];
 
   # This value determines the Home Manager release that your
@@ -71,6 +72,10 @@
     oh-my-zsh = {
       enable = true;
     };
+    
+    localVariables = {
+        
+    };
     dotDir = ".config/zsh";
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
@@ -86,6 +91,15 @@
 
   programs.direnv = {
     enable = true;
+  };
+
+  programs.powerline-go = {
+    enable = true;
+    settings = {
+      hostname-only-if-ssh = true;
+      mode = "compatible";
+    };
+      modules = ["host" "ssh" "cwd" "gitlite" "jobs" "exit"];
   };
 
   # SERVICES
