@@ -75,8 +75,12 @@
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     sessionVariables = {
-    GIT_SSH="/usr/bin/ssh";
+      GIT_SSH="/usr/bin/ssh";
+      GPG_TTY="$(tty)";
+      SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)";
+
     };
+    initExtraFirst = "gpgconf --launch gpg-agent";
 
   };
 
