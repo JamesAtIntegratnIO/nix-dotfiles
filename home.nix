@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
-
-{
+let vim-nerdtree-direnter = pkgs.callPackage ./nix-pkgs/vim-nerdtree-direnter.nix { };
+in {
   news.display = "silent";
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -19,7 +19,14 @@
     pkgs.powerline-fonts
     pkgs.google-cloud-sdk
     pkgs.aws
+    pkgs.vimPlugins.dracula-vim
   ];
+  
+  # Allow fonts installed in home.packages to be discovered and 
+  # auto installed
+  fonts.fontconfig = {
+    enable = true;
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -31,80 +38,92 @@
   # changes in each release.
   home.stateVersion = "22.05";
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-  # Git Config
-  programs.git = {
-    enable = true;
-    userName = "jamesAtIntegratnIO";
-    userEmail = "james@integratn.io";
-    aliases = {
-      st = "status";
+  programs = {
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
+    # Git Config
+    git = {
+      enable = true;
+      userName = "jamesAtIntegratnIO";
+      userEmail = "james@integratn.io";
+      aliases = {
+        st = "status";
+      };
     };
-  };
-
-  programs.go = {
-    enable = true;
-    packages = {
+    go = {
+      enable = true;
+      packages = {
+      };
     };
+    # VIM CONFIG
+    vim = {
+      enable = true;
+      plugins = [
+        pkgs.vimPlugins.vim-go
+        vim-nerdtree-direnter
+        pkgs.vimPlugins.dracula-vim
+        pkgs.vimPlugins.nerdtree
+        pkgs.vimPlugins.nerdtree-git-plugin
+        pkgs.vimPlugins.fzf-vim 
+        pkgs.vimPlugins.vim-lsp
+      ];
+      settings = {
+        number = true;
+        background = "dark";
+        mouse = "a";
+        expandtab = true;
 
-  };
-
-  # VIM CONFIG
-  programs.vim = {
-    enable = true;
-    plugins = [
-      pkgs.vimPlugins.vim-go
-      pkgs.vimPlugins.neon
-      pkgs.vimPlugins.nerdtree
-      pkgs.vimPlugins.fzf-vim 
-      pkgs.vimPlugins.vim-lsp
-    ];
-    settings = {
+      };
+      extraConfig = ''
+        set termguicolors
+        syntax on
+        set showtabline=1
+        set tabpagemax=8
+	nnoremap <leader>n :NERDTreeFocus<CR>
+	nnoremap <C-n> :NERDTree<CR>
+	nnoremap <C-t> :NERDTreeToggle<CR>
+        nnoremap <C-f> :NERDTreeFind<CR>
+        let NERDTreeMapOpenInTab='\r'
+	" Start NERDTree and put the cursor back in the other window.
+	autocmd VimEnter * NERDTree | wincmd p
+	" Exit Vim if NERDTree is the only window remaining in the only tab.
+	autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+      '';
     };
-    extraConfig = ''
-      syntax enable
-      set number 
-    '';
-  };
-  
-  # ZSH CONFIG
-  programs.zsh = {
-    enable = true;
-    oh-my-zsh = {
+    # ZSH CONFIG
+    zsh = {
+      enable = true;
+      oh-my-zsh = {
+        enable = true;
+      };
+    
+      localVariables = {
+        
+      };
+      dotDir = ".config/zsh";
+      enableAutosuggestions = true;
+      enableSyntaxHighlighting = true;
+      sessionVariables = {
+        GIT_SSH="/usr/bin/ssh";
+        GPG_TTY="$(tty)";
+        SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)";
+
+      };
+      initExtraFirst = "gpgconf --launch gpg-agent";
+    };
+    direnv = {
       enable = true;
     };
-    
-    localVariables = {
-        
+    powerline-go = {
+      enable = true;
+      settings = {
+        hostname-only-if-ssh = true;
+        mode = "compatible";
+      };
+      modules = ["host" "ssh" "cwd" "gitlite" "jobs" "exit"];
+      modulesRight = ["duration"];
     };
-    dotDir = ".config/zsh";
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
-    sessionVariables = {
-      GIT_SSH="/usr/bin/ssh";
-      GPG_TTY="$(tty)";
-      SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)";
-
-    };
-    initExtraFirst = "gpgconf --launch gpg-agent";
-
   };
-
-  programs.direnv = {
-    enable = true;
-  };
-
-  programs.powerline-go = {
-    enable = true;
-    settings = {
-      hostname-only-if-ssh = true;
-      mode = "compatible";
-    };
-    modules = ["host" "ssh" "cwd" "gitlite" "jobs" "exit"];
-    modulesRight = ["duration"];
-  };
-
   # SERVICES
   services = { 
     lorri = {
