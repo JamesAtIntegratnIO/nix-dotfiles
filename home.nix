@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 let vim-nerdtree-direnter = pkgs.callPackage ./nix-pkgs/vim-nerdtree-direnter.nix { };
 in {
+  nixpkgs.config.allowUnfree = true;
   news.display = "silent";
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -79,15 +80,15 @@ in {
         syntax on
         set showtabline=1
         set tabpagemax=8
-	nnoremap <leader>n :NERDTreeFocus<CR>
-	nnoremap <C-n> :NERDTree<CR>
-	nnoremap <C-t> :NERDTreeToggle<CR>
+	      nnoremap <leader>n :NERDTreeFocus<CR>
+	      nnoremap <C-n> :NERDTree<CR>
+	      nnoremap <C-t> :NERDTreeToggle<CR>
         nnoremap <C-f> :NERDTreeFind<CR>
         let NERDTreeMapOpenInTab='\r'
-	" Start NERDTree and put the cursor back in the other window.
-	autocmd VimEnter * NERDTree | wincmd p
-	" Exit Vim if NERDTree is the only window remaining in the only tab.
-	autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+	      " Start NERDTree and put the cursor back in the other window.
+	      autocmd VimEnter * NERDTree | wincmd p
+	      " Exit Vim if NERDTree is the only window remaining in the only tab.
+	      autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
       '';
     };
     # ZSH CONFIG
@@ -96,12 +97,21 @@ in {
       oh-my-zsh = {
         enable = true;
       };
-    
-      localVariables = {
-        
-      };
+      plugins = [
+        {
+          name = "zsh-nix-shell";
+          file = "nix-shell.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "chisui";
+            repo = "zsh-nix-shell";
+            rev = "v0.4.0";
+            sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
+          };
+        }
+      ];
+      localVariables = {};
       dotDir = ".config/zsh";
-      enableAutosuggestions = true;
+      enableAutosuggestions = false;
       enableSyntaxHighlighting = true;
       sessionVariables = {
         GIT_SSH="/usr/bin/ssh";
@@ -122,6 +132,25 @@ in {
       };
       modules = ["host" "ssh" "cwd" "gitlite" "jobs" "exit"];
       modulesRight = ["duration"];
+    };
+    vscode = {
+      enable = true;
+      extensions = [
+        pkgs.vscode-extensions.golang.go
+        pkgs.vscode-extensions.github.copilot
+        pkgs.vscode-extensions.mhutchie.git-graph
+        pkgs.vscode-extensions.eamodio.gitlens
+        pkgs.vscode-extensions.viktorqvarfordt.vscode-pitch-black-theme
+        pkgs.vscode-extensions.ms-python.python
+        pkgs.vscode-extensions.matklad.rust-analyzer
+        pkgs.vscode-extensions.bbenoist.nix
+        pkgs.vscode-extensions.arrterian.nix-env-selector
+        pkgs.vscode-extensions.ms-kubernetes-tools.vscode-kubernetes-tools
+        pkgs.vscode-extensions.ms-azuretools.vscode-docker
+        pkgs.vscode-extensions.timonwong.shellcheck
+        pkgs.vscode-extensions.tamasfe.even-better-toml
+        pkgs.vscode-extensions.redhat.vscode-yaml
+      ];
     };
   };
   # SERVICES
