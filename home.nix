@@ -21,6 +21,11 @@ in {
     pkgs.google-cloud-sdk
     pkgs.aws
     pkgs.vimPlugins.dracula-vim
+    pkgs.thunderbird
+    pkgs.glibc
+    pkgs.glibcLocales
+    pkgs.terraform-docs
+    pkgs.pre-commit
   ];
   
   # Allow fonts installed in home.packages to be discovered and 
@@ -37,7 +42,7 @@ in {
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
 
   programs = {
     # Let Home Manager install and manage itself.
@@ -91,6 +96,7 @@ in {
 	      autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
       '';
     };
+    bash.enable = true;
     # ZSH CONFIG
     zsh = {
       enable = true;
@@ -133,25 +139,25 @@ in {
       modules = ["host" "ssh" "cwd" "gitlite" "jobs" "exit"];
       modulesRight = ["duration"];
     };
-    vscode = {
-      enable = true;
-      extensions = [
-        pkgs.vscode-extensions.golang.go
-        pkgs.vscode-extensions.github.copilot
-        pkgs.vscode-extensions.mhutchie.git-graph
-        pkgs.vscode-extensions.eamodio.gitlens
-        pkgs.vscode-extensions.viktorqvarfordt.vscode-pitch-black-theme
-        pkgs.vscode-extensions.ms-python.python
-        pkgs.vscode-extensions.matklad.rust-analyzer
-        pkgs.vscode-extensions.bbenoist.nix
-        pkgs.vscode-extensions.arrterian.nix-env-selector
-        pkgs.vscode-extensions.ms-kubernetes-tools.vscode-kubernetes-tools
-        pkgs.vscode-extensions.ms-azuretools.vscode-docker
-        pkgs.vscode-extensions.timonwong.shellcheck
-        pkgs.vscode-extensions.tamasfe.even-better-toml
-        pkgs.vscode-extensions.redhat.vscode-yaml
-      ];
-    };
+  #   vscode = {
+  #     enable = true;
+  #     extensions = [
+  #       pkgs.vscode-extensions.golang.go
+  #       pkgs.vscode-extensions.github.copilot
+  #       pkgs.vscode-extensions.mhutchie.git-graph
+  #       pkgs.vscode-extensions.eamodio.gitlens
+  #       pkgs.vscode-extensions.viktorqvarfordt.vscode-pitch-black-theme
+  #       pkgs.vscode-extensions.ms-python.python
+  #       pkgs.vscode-extensions.matklad.rust-analyzer
+  #       pkgs.vscode-extensions.bbenoist.nix
+  #       pkgs.vscode-extensions.arrterian.nix-env-selector
+  #       pkgs.vscode-extensions.ms-kubernetes-tools.vscode-kubernetes-tools
+  #       pkgs.vscode-extensions.ms-azuretools.vscode-docker
+  #       pkgs.vscode-extensions.timonwong.shellcheck
+  #       pkgs.vscode-extensions.tamasfe.even-better-toml
+  #       pkgs.vscode-extensions.redhat.vscode-yaml
+  #     ];
+  #   };
   };
   # SERVICES
   services = { 
