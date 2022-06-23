@@ -17,26 +17,32 @@
   in {
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
       inherit stateVersion system username;
-    };
+      homeDirectory = "/Users/${username}";
 
-    homeDirectory = "/Users/${username}";
-
-    pkgs = import nixpkgs { inherit system; };
-
-    configuration = { pkgs, ... }: {
-      programs = {
-        home-manager = {
-          enable = true
+      pkgs = import nixpkgs { 
+        inherit system; 
+        config = {
+          allowUnfree = true;
         };
       };
-      imports = [
-        ./vscode.nix
-      ];
-      packages = ./packages.nix { inherit pkgs; };
-      sessionVariables = {
-        WELCOME = "Welcome to your flake-driven Home Manager config";
+
+      configuration = { pkgs, ... }: {
+        programs = {
+          home-manager = {
+            enable = true;
+          };
+        };
+        imports = [
+          ./vscode.nix
+          ./vim.nix
+        ];
+        home = {
+          packages = import ./packages.nix { inherit pkgs; };
+          sessionVariables = {
+            WELCOME = "Welcome to your flake-driven Home Manager config";
+          };
+        };
       };
     };
   };
-
 }

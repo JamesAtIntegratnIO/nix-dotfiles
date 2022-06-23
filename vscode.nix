@@ -1,9 +1,10 @@
+{ pkgs, ... }:
 {
   programs.vscode = {
      enable = true;
      extensions = [
        pkgs.vscode-extensions.golang.go
-       pkgs.vscode-extensions.github.copilot
+      #  pkgs.vscode-extensions.github.copilot
        pkgs.vscode-extensions.mhutchie.git-graph
        pkgs.vscode-extensions.eamodio.gitlens
        pkgs.vscode-extensions.viktorqvarfordt.vscode-pitch-black-theme
