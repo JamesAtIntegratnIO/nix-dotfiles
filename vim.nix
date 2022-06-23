@@ -1,6 +1,6 @@
 { pkgs, ... }:
-{
-  vim-nerdtree-direnter = pkgs.callPackage ./nix-pkgs/vim-nerdtree-direnter.nix { };
+
+{ 
   programs.vim = {
     enable = true;
     plugins = [
@@ -34,5 +34,6 @@
       " Exit Vim if NERDTree is the only window remaining in the only tab.
       autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
     '';
+  };
   };
 }
