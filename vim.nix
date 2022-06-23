@@ -4,7 +4,6 @@
       enable = true;
       plugins = [
         pkgs.vimPlugins.vim-go
-        pkgs.vim-nerdtree-direnter
         pkgs.vimPlugins.dracula-vim
         pkgs.vimPlugins.nerdtree
         pkgs.vimPlugins.nerdtree-git-plugin
