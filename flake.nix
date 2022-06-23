@@ -25,8 +25,6 @@
           allowUnfree = true;
         };
       };
-      news.display = "silent";
-
       configuration = { pkgs, ... }: {
         programs = {
           home-manager.enable = true;

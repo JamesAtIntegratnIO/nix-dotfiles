@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  vim-nerdtree-direnter = pkgs.callPackage ./nix-pkgs/vim-nerdtree-direnter.nix { };
   programs.vim = {
     enable = true;
     plugins = [
@@ -9,6 +10,7 @@
       pkgs.vimPlugins.nerdtree-git-plugin
       pkgs.vimPlugins.fzf-vim 
       pkgs.vimPlugins.vim-lsp
+      vim-nerdtree-direnter
     ];
     settings = {
       number = true;
