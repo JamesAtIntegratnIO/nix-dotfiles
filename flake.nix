@@ -25,18 +25,33 @@
           allowUnfree = true;
         };
       };
+      news.display = "silent";
 
       configuration = { pkgs, ... }: {
         programs = {
-          home-manager = {
-            enable = true;
-          };
+          home-manager.enable = true;
+          bash.enable = true;
+          direnv.enable = true;
+          go.enable = true;
         };
         imports = [
           ./vscode.nix
           ./vim.nix
           ./git.nix
+          ./zsh.nix
         ];
+        services = {
+          lorri = {
+            enable = true;
+          };
+          gpg-agent = {
+            enable = true;
+            defaultCacheTtl = 60;
+            maxCacheTtl = 120;
+            enableSshSupport = true;
+            extraConfig = "ttyname =$GPG_TTY";
+          };
+        };
         home = {
           packages = import ./packages.nix { inherit pkgs; };
           sessionVariables = {
