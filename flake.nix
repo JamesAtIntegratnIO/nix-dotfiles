@@ -35,6 +35,7 @@
         imports = [
           ./vscode.nix
           ./vim.nix
+          ./git.nix
         ];
         home = {
           packages = import ./packages.nix { inherit pkgs; };
