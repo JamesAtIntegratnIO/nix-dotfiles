@@ -14,7 +14,6 @@
     username = "boboysdadda";
     system = "x86_64-linux";
     stateVersion = "22.11";
-    vim-nerdtree-direnter = pkgs.callPackage ./nix-pkgs/vim-nerdtree-direnter.nix { };
   in {
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
       inherit stateVersion system username;

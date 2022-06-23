@@ -10,7 +10,6 @@
       pkgs.vimPlugins.nerdtree-git-plugin
       pkgs.vimPlugins.fzf-vim 
       pkgs.vimPlugins.vim-lsp
-      vim-nerdtree-direnter
     ];
     settings = {
       number = true;
