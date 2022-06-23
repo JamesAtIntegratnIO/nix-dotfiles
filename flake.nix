@@ -11,10 +11,10 @@
 
   outputs = { self, nixpkgs, home-manager }:
     {
-    linux-rig = (
+    linuxRig = (
       import ./outputs/linux-rig.nix {
-        inherit nixpkgs home-manager
+        inherit nixpkgs home-manager;
       }
-    )
-  }
+    );
+  };
 }

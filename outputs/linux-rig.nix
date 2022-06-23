@@ -1,3 +1,5 @@
+{ nixpkgs, home-manager, ... }:
+
 let
   username = "boboysdadda";
   system = "x86_64-linux";
