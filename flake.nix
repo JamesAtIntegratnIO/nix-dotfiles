@@ -13,11 +13,11 @@
 
     {
       homeConfigurations = {
-          bobysdadda = home-manager.lib.homeManagerConfiguration;
+        bobysdadda = home-manager.lib.homeManagerConfiguration {
           username = "boboysdadda";
           system = "x86_64-linux";
           stateVersion = "22.11";
-
+        
           homeDirectory = "/home/${username}";
 
           pkgs = import nixpkgs {  
@@ -59,8 +59,9 @@
             };
           };
         };
+      };
       
-      boboysdadda = self.homeConfigurations.boboysdadda.boboysdadda.activationPackage;
+      boboysdadda = self.homeConfigurations.boboysdadda.activationPackage;
       };
     
 }
