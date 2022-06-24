@@ -5,7 +5,7 @@ let
   system = "x86_64-linux";
   stateVersion = "22.11";
 in {
-  homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+  username = home-manager.lib.homeManagerConfiguration {
     inherit stateVersion system username;
     homeDirectory = "/Users/${username}";
 
