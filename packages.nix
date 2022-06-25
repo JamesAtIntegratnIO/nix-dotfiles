@@ -20,5 +20,6 @@ let
     pkgs.terraform-docs
     pkgs.pre-commit
     pkgs.neofetch
+    pkgs.cht-sh
   ];
 in homePackages

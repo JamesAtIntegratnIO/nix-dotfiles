@@ -37,4 +37,7 @@
   tb = "nc termbin.com 9999";
   upd = "/usr/bin/update";
   code = "codium";
+
+  # home-manager shortcuts
+  hmsb = "home-manager switch --flake '.#boboysdadda' -b backup";
 }
