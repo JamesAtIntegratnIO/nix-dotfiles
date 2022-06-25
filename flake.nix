@@ -33,7 +33,7 @@
         username = "james";
         system = "x86_64-darwin";
         stateVersion = "22.11";
-        homeDirectory = "/Users/james";
+        homeDirectory = "/Users/${username}";
         pkgs = import nixpkgs { 
           inherit system;
           config = {
