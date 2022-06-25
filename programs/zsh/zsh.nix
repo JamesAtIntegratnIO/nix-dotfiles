@@ -49,13 +49,17 @@
     dotDir = ".config/zsh";
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
+    history = {
+      size = 50000;
+      save = 10000;
+      ignorePatterns = ["rm *" "pkill *"];
+      expireDuplicatesFirst = true;
+      extended = true;
+    };
     sessionVariables = {
       GIT_SSH="/usr/bin/ssh";
       GPG_TTY="$(tty)";
       SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)";
-      HISTFILE = /home/boboysdadda/.zhistory;
-      HISTSIZE = 50000;
-      SAVEHIST = 10000;
       XDG_DATA_DIRS="/home/boboysdadda/.nix-profile/share/:/home/boboysdadda/.local/share/:/usr/share/:/usr/local/share/";
     };
     initExtraFirst = "gpgconf --launch gpg-agent";
