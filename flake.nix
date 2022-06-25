@@ -13,15 +13,15 @@
 
     {
       homeConfigurations = {
-        bobysdadda = home-manager.lib.homeManagerConfiguration {
+        boboysdadda = home-manager.lib.homeManagerConfiguration {
           username = "boboysdadda";
           system = "x86_64-linux";
           stateVersion = "22.11";
         
-          homeDirectory = "/home/${username}";
+          homeDirectory = "/home/boboysdadda";
 
           pkgs = import nixpkgs {  
-            inherit system;
+            system = "x86_64-linux";
             config = {
               allowUnfree = true;
             };
