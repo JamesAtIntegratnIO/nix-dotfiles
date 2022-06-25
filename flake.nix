@@ -24,7 +24,7 @@
         };
         configuration = { pkgs, ... }: {
           imports = [
-            ./users/linux.nix
+            ./system/linux.nix
           ];
         };
         
@@ -42,7 +42,7 @@
         };
         configuration = { pkgs, ... }: {
           imports = [
-            ./users/mac.nix
+            ./system/mac.nix
           ];
         };
       };
@@ -59,7 +59,7 @@
         };
         configuration = { pkgs, system, ... }: {
           imports = [
-            ./users/linux.nix
+            ./system/linux.nix
           ];
         };
       };
