@@ -20,9 +20,10 @@
       pkgs.vscode-extensions.redhat.vscode-yaml
      ];
     userSettings = {
-        "editor.fontSize" = 10;
+        "editor.fontSize" = 11;
         "editor.tabSize" = 2;
-        "terminal.integrated.fontSize" = 10;
+        "terminal.integrated.fontSize" = 11;
+        "editor.fontFamily" = "'FiraCode Nerd Font Mono'";
     };
      
    };
