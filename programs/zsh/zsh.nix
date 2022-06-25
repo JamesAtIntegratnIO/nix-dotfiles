@@ -56,7 +56,7 @@
       HISTFILE = /home/boboysdadda/.zhistory;
       HISTSIZE = 50000;
       SAVEHIST = 10000;
-
+      XDG_DATA_DIRS="/home/boboysdadda/.nix-profile/share/:/home/boboysdadda/.local/share/:/usr/share/:/usr/local/share/";
     };
     initExtraFirst = "gpgconf --launch gpg-agent";
     initExtra = ''
