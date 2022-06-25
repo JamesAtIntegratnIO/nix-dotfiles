@@ -19,5 +19,6 @@ let
     pkgs.glibcLocales
     pkgs.terraform-docs
     pkgs.pre-commit
+    pkgs.neofetch
   ];
 in homePackages
