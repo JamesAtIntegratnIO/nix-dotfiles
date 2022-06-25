@@ -8,7 +8,7 @@ window:
     lines: 30
   dynamic_padding: true
   decorations: full
-  title: Alacritty@Garuda
+  title: Boboysdadda's Happy Place
   opacity: 0.6
   class:
     instance: Alacritty
