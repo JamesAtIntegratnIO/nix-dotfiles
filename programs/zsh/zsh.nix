@@ -2,9 +2,7 @@
 {
   programs.zsh = {
     enable = true;
-    oh-my-zsh = {
-      enable = true;
-    };
+    oh-my-zsh.enable = true;
     plugins = [
       {
         name = "zsh-nix-shell";
@@ -19,7 +17,7 @@
     ];
     localVariables = {};
     dotDir = ".config/zsh";
-    enableAutosuggestions = false;
+    enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
     sessionVariables = {
       GIT_SSH="/usr/bin/ssh";
@@ -28,5 +26,8 @@
 
     };
     initExtraFirst = "gpgconf --launch gpg-agent";
+    shellAliases = {
+      imports = [./aliases.nix]
+    };
   };
 }

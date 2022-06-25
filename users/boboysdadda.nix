@@ -10,7 +10,7 @@
     ../programs/vscode.nix
     ../programs/vim.nix
     ../programs/git.nix
-    ../programs/zsh.nix
+    ../programs/zsh/zsh.nix
   ];
   services = {
     lorri = {
