@@ -75,7 +75,7 @@
 
       autoload -U +X bashcompinit && bashcompinit
 
-      
+      neofetch
     '';
     shellAliases = import ./aliases.nix;
   };
@@ -84,5 +84,10 @@
     enableZshIntegration = true;
     enableBashIntegration = true;
   };
+  programs.starship = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+  }
 }
 

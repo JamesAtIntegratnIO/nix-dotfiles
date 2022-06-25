@@ -29,6 +29,7 @@
     sessionVariables = {
       WELCOME = "Welcome to your flake-driven Home Manager config";
     };
-    ".config/neofetch.config.conf".source = ./dotfiles/neofetch.conf;
+    file.".config/neofetch/config.conf".source = ../dotfiles/neofetch.conf;
+    file.".config/starship.toml".source = ../dotfiles/starship.toml;
   };
 }

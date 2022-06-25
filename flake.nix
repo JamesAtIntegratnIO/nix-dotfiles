@@ -16,7 +16,7 @@
         system = "x86_64-linux";
         stateVersion = "22.11";
         # inherit stateVersion system username;
-        homeDirectory = "/Users/boboysdadda";
+        homeDirectory = "/home/boboysdadda";
         pkgs = import nixpkgs { 
           system = "x86_64-linux";
           config = {
