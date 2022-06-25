@@ -1,16 +1,14 @@
-{ nixpkgs, home-manager, ... }:
-
-let
-  username = "boboysdadda";
-  system = "x86_64-linux";
-  stateVersion = "22.11";
-in {
-  username = home-manager.lib.homeManagerConfiguration {
-    inherit stateVersion system username;
-    homeDirectory = "/Users/${username}";
+{ self, nixpkgs, home-manager, ... }:
+{
+  home-manager.lib.homeManagerConfiguration = {
+    username = "boboysdadda";
+    system = "x86_64-linux";
+    stateVersion = "22.11";
+    # inherit stateVersion system username;
+    homeDirectory = "/Users/boboysdadda";
 
     pkgs = import nixpkgs { 
-      inherit system; 
+      system = "x86_64-linux";
       config = {
         allowUnfree = true;
       };
