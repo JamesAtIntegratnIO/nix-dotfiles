@@ -1,20 +1,9 @@
 { pkgs, ... }:
 {
-  programs.zsh = {
+  programs.zsh = with pkgs; {
     enable = true;
     oh-my-zsh.enable = true;
-    plugins = [
-      {
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "chisui";
-          repo = "zsh-nix-shell";
-          rev = "v0.4.0";
-          sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
-        };
-      }
-    ];
+    plugins = import ./plugins.nix;
     localVariables = {};
     dotDir = ".config/zsh";
     enableAutosuggestions = true;
@@ -26,8 +15,12 @@
 
     };
     initExtraFirst = "gpgconf --launch gpg-agent";
-    shellAliases = {
-      imports = [./aliases.nix]
-    };
+    shellAliases = import ./aliases.nix;
+  };
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
   };
 }
+
