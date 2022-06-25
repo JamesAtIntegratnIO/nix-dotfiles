@@ -2,25 +2,25 @@
 
 let
   homePackages = with pkgs; [
-    pkgs.tmux
-    pkgs.python3
-    pkgs.nodejs
-    pkgs.bottom
-    pkgs.gotools
-    pkgs.gopls
-    pkgs.go-outline
-    pkgs.golangci-lint
-    pkgs.powerline-fonts
-    pkgs.google-cloud-sdk
-    pkgs.aws
-    pkgs.vimPlugins.dracula-vim
-    pkgs.thunderbird
-    pkgs.glibc
-    pkgs.glibcLocales
-    pkgs.terraform-docs
-    pkgs.pre-commit
-    pkgs.neofetch
-    pkgs.cht-sh
+    tmux
+    python3
+    nodejs
+    bottom
+    gotools
+    gopls
+    go-outline
+    golangci-lint
+    powerline-fonts
+    google-cloud-sdk
+    aws
+    vimPlugins.dracula-vim
+    thunderbird
+    glibc
+    glibcLocales
+    terraform-docs
+    pre-commit
+    neofetch
+    cht-sh
     fira
     fira-code
     fira-mono
