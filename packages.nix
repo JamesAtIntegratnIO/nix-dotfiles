@@ -21,5 +21,9 @@ let
     pkgs.pre-commit
     pkgs.neofetch
     pkgs.cht-sh
+    fira
+    fira-code
+    fira-mono
+    fira-code-symbols
   ];
 in homePackages

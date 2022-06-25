@@ -24,6 +24,7 @@
       extraConfig = "ttyname =$GPG_TTY";
     };
   };
+  fonts.fontconfig.enable = true;
   home = {
     packages = import ../packages.nix { inherit pkgs; };
     sessionVariables = {
