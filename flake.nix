@@ -9,57 +9,29 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, ... }: {
+    homeConfigurations = {
+      boboysdadda = home-manager.lib.homeManagerConfiguration {
+        username = "boboysdadda";
+        system = "x86_64-linux";
+        stateVersion = "22.11";
+        # inherit stateVersion system username;
+        homeDirectory = "/Users/boboysdadda";
 
-    {
-      homeConfigurations = {
-        boboysdadda = import ./users/boboysdadda.nix;
-        # boboysdadda = home-manager.lib.homeManagerConfiguration {
-        #   username = "boboysdadda";
-        #   system = "x86_64-linux";
-        #   stateVersion = "22.11";
-        
-        #   homeDirectory = "/home/boboysdadda";
-
-        #   pkgs = import nixpkgs {  
-        #     system = "x86_64-linux";
-        #     config = {
-        #       allowUnfree = true;
-        #     };
-        #   };
-        #   configuration = { pkgs, ... }: {
-        #     programs = {
-        #       home-manager.enable = true;
-        #       bash.enable = true;
-        #       direnv.enable = true;
-        #       go.enable = true;
-        #     };
-        #     imports = [
-        #       ./programs/vscode.nix
-        #       ./programs/vim.nix
-        #       ./programs/git.nix
-        #       ./programs/zsh.nix
-        #     ];
-        #     services = {
-        #       lorri = {
-        #         enable = true;
-        #       };
-        #       gpg-agent = {
-        #         enable = true;
-        #         defaultCacheTtl = 60;
-        #         maxCacheTtl = 120;
-        #         enableSshSupport = true;
-        #         extraConfig = "ttyname =$GPG_TTY";
-        #       };
-        #     };
-        #     home = {
-        #       packages = import ./packages.nix { inherit pkgs; };
-        #       sessionVariables = {
-        #         WELCOME = "Welcome to your flake-driven Home Manager config";
-        #       };
-        #     };
-        #   };
+        pkgs = import nixpkgs { 
+          system = "x86_64-linux";
+          config = {
+            allowUnfree = true;
+          };
         };
-        boboysdadda = self.homeConfigurations.boboysdadda.activationPackage;
+        configuration = { pkgs, ... }: {
+          imports = [
+            ./users/boboysdadda.nix
+          ];
+        };
       };
+      
+    };
+    boboysdadda = self.homeConfigurations.boboysdadda.activationPackage;
+  };
 }

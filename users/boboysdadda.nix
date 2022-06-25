@@ -1,49 +1,33 @@
-{ self, nixpkgs, home-manager, ... }:
+{ self, nixpkgs, home-manager, pkgs, ... }:
 {
-  home-manager.lib.homeManagerConfiguration = {
-    username = "boboysdadda";
-    system = "x86_64-linux";
-    stateVersion = "22.11";
-    # inherit stateVersion system username;
-    homeDirectory = "/Users/boboysdadda";
-
-    pkgs = import nixpkgs { 
-      system = "x86_64-linux";
-      config = {
-        allowUnfree = true;
-      };
+   programs = {
+    home-manager.enable = true;
+    bash.enable = true;
+    direnv.enable = true;
+    go.enable = true;
+  };
+  imports = [
+    ../programs/vscode.nix
+    ../programs/vim.nix
+    ../programs/git.nix
+    ../programs/zsh.nix
+  ];
+  services = {
+    lorri = {
+      enable = true;
     };
-    configuration = { pkgs, ... }: {
-      programs = {
-        home-manager.enable = true;
-        bash.enable = true;
-        direnv.enable = true;
-        go.enable = true;
-      };
-      imports = [
-        ../programs/vscode.nix
-        ../programs/vim.nix
-        ../programs/git.nix
-        ../programs/zsh.nix
-      ];
-      services = {
-        lorri = {
-          enable = true;
-        };
-        gpg-agent = {
-          enable = true;
-          defaultCacheTtl = 60;
-          maxCacheTtl = 120;
-          enableSshSupport = true;
-          extraConfig = "ttyname =$GPG_TTY";
-        };
-      };
-      home = {
-        packages = import ./packages.nix { inherit pkgs; };
-        sessionVariables = {
-          WELCOME = "Welcome to your flake-driven Home Manager config";
-        };
-      };
+    gpg-agent = {
+      enable = true;
+      defaultCacheTtl = 60;
+      maxCacheTtl = 120;
+      enableSshSupport = true;
+      extraConfig = "ttyname =$GPG_TTY";
+    };
+  };
+  home = {
+    packages = import ../packages.nix { inherit pkgs; };
+    sessionVariables = {
+      WELCOME = "Welcome to your flake-driven Home Manager config";
     };
   };
 }
