@@ -44,7 +44,7 @@ min_time = 1
 # Somethere at the beginning
 [battery]
 charging_symbol = ""
-disabled = true
+disabled = false
 discharging_symbol = ""
 full_symbol = ""
 
@@ -54,12 +54,12 @@ style = "bold red"
 threshold = 15
 
 [[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
-disabled = true
+disabled = false
 style = "bold yellow"
 threshold = 50
 
 [[battery.display]]  # "bold green" style when capacity is between 10% and 30%
-disabled = true
+disabled = false
 style = "bold green"
 threshold = 80
 
