@@ -23,6 +23,7 @@
         overlays = [ nixgl.overlay ];
       };
       # Inspired by https://github.com/jonringer/nixpkgs-config/blob/master/flake.nix#L32-L38
+      # Also showed me how to get access to the pkgs.stdenv isLinux isDarwin
       mkHomeConfiguration = args: home-manager.lib.homeManagerConfiguration (rec {
           username = args.username;
           system = args.system or "x86_64-linux";
@@ -55,6 +56,7 @@
           withGUI = true;
         };
       };
+
       rhJames = mkHomeConfiguration rec {
         username = "james";
         homeDirectory = "/home/${username}";
@@ -64,8 +66,5 @@
       };
       
     };
-    boboysdadda = self.homeConfigurations.boboysdadda.activationPackage;
-    mac = self.homeConfigurations.macJames.activationPackage;
-    rh = self.homeConfigurations.rhJames.activationPackage;
   };
 }
