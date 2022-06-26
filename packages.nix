@@ -3,7 +3,6 @@
 let
   homePackages = with pkgs; [
     tmux
-    python3
     nodejs
     bottom
     gotools

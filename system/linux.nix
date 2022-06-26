@@ -1,4 +1,8 @@
-{ self, nixpkgs, home-manager, pkgs, system, ... }:
+{ self, lib, nixpkgs, home-manager, pkgs, system, ... }:
+let
+inherit (lib) mkIf;
+inherit (pkgs.stdenv) isLinux isDarwin;
+in
 {
    programs = {
     home-manager.enable = true;
@@ -17,7 +21,7 @@
       enable = true;
     };
     gpg-agent = {
-      enable = true;
+      enable = isLinux;
       defaultCacheTtl = 60;
       maxCacheTtl = 120;
       enableSshSupport = true;

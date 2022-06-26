@@ -9,59 +9,48 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }: {
-    homeConfigurations = {
-      boboysdadda = home-manager.lib.homeManagerConfiguration rec {
-        username = "boboysdadda";
-        system = "x86_64-linux";
-        stateVersion = "22.11";
-        homeDirectory = "/home/${username}";
-        pkgs = import nixpkgs { 
-          inherit system;
-          config = {
-            allowUnfree = true;
-          };
+  outputs = { self, nixpkgs, home-manager, ... }:
+    let
+      pkgsForSystem = system: import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
         };
-        configuration = { pkgs, ... }: {
-          imports = [
-            ./system/linux.nix
-          ];
-        };
-        
       };
-      macJames = home-manager.lib.homeManagerConfiguration rec {
+      # Inspired by https://github.com/jonringer/nixpkgs-config/blob/master/flake.nix#L32-L38
+      mkHomeConfiguration = args: home-manager.lib.homeManagerConfiguration (rec {
+        username = args.username;
+        system = args.system or "x86_64-linux";
+        pkgs = pkgsForSystem system;
+        homeDirectory = args.homeDirectory;
+        configuration = { pkgs, ... }: {
+          imports = [ ./system/linux.nix ];
+        };
+        stateVersion = "22.11";
+    });
+    in 
+   {
+    inherit home-manager;
+
+    homeConfigurations = {
+      
+      personal = mkHomeConfiguration rec {
+        username = "boboysdadda";
+        homeDirectory = "/home/${username}";
+        homeConfig = import "./system/linux.nix";
+      };
+      
+      macJames = mkHomeConfiguration rec {
         username = "james";
         system = "x86_64-darwin";
-        stateVersion = "22.11";
         homeDirectory = "/Users/${username}";
-        pkgs = import nixpkgs { 
-          inherit system;
-          config = {
-            allowUnfree = true;
-          };
-        };
-        configuration = { pkgs, ... }: {
-          imports = [
-            ./system/mac.nix
-          ];
-        };
+        homeConfig = import "./system/linux.nix";
       };
-      rhJames = home-manager.lib.homeManagerConfiguration rec {
+      rhJames = mkHomeConfiguration rec {
         username = "james";
         system = "x86_64-linux";
-        stateVersion = "22.11";
         homeDirectory = "/home/${username}";
-        pkgs = import nixpkgs { 
-          inherit system;
-          config = {
-            allowUnfree = true;
-          };
-        };
-        configuration = { pkgs, system, ... }: {
-          imports = [
-            ./system/linux.nix
-          ];
-        };
+        homeConfig = import "./system/linux.nix";
       };
       
     };
