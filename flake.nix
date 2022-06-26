@@ -46,7 +46,6 @@
       };
       rhJames = mkHomeConfiguration rec {
         username = "james";
-        system = "x86_64-linux";
         homeDirectory = "/home/${username}";
       };
       
