@@ -65,7 +65,7 @@ threshold = 80
 
 # Prompt: optional param 1
 [time]
-disabled = true
+disabled = false
 format = " 🕙 $time($style)\n"
 style = "bright-white"
 time_format = "%T"
