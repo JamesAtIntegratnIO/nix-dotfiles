@@ -24,7 +24,7 @@
         pkgs = pkgsForSystem system;
         homeDirectory = args.homeDirectory;
         configuration = { pkgs, ... }: {
-          imports = [ ./system/linux.nix ];
+          imports = [ ./home.nix ];
         };
         stateVersion = "22.11";
     });
@@ -37,20 +37,17 @@
       personal = mkHomeConfiguration rec {
         username = "boboysdadda";
         homeDirectory = "/home/${username}";
-        homeConfig = import "./system/linux.nix";
       };
       
       macJames = mkHomeConfiguration rec {
         username = "james";
         system = "x86_64-darwin";
         homeDirectory = "/Users/${username}";
-        homeConfig = import "./system/linux.nix";
       };
       rhJames = mkHomeConfiguration rec {
         username = "james";
         system = "x86_64-linux";
         homeDirectory = "/home/${username}";
-        homeConfig = import "./system/linux.nix";
       };
       
     };
