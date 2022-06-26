@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, withGUI, ... }:
 {
   programs.vscode = {
-    enable = true;
+    enable = withGUI;
     package = pkgs.vscodium;
     extensions = [
       pkgs.vscode-extensions.golang.go

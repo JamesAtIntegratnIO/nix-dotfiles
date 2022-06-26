@@ -24,5 +24,6 @@ let
     fira-code
     fira-mono
     fira-code-symbols
+    pkgs.nixgl.auto.nixGLDefault
   ];
 in homePackages
