@@ -38,6 +38,6 @@
   upd = "/usr/bin/update";
   code = "codium";
 
-  # home-manager shortcuts
-  hmsb = "home-manager switch --flake '.#boboysdadda' -b backup";
+ # fix for alacritty
+ aterm = "nixGL alacritty";
 }

@@ -1,4 +1,4 @@
-{ pkgs, withGUI, ... }:
+{ pkgs, withGUI, fontSize, ... }:
 {
   programs.vscode = {
     enable = withGUI;
@@ -20,10 +20,10 @@
       pkgs.vscode-extensions.redhat.vscode-yaml
      ];
     userSettings = {
-        "editor.fontSize" = 11;
+        "editor.fontSize" = fontSize;
         "editor.tabSize" = 2;
-        "terminal.integrated.fontSize" = 11;
-        "editor.fontFamily" = "'FiraCode Nerd Font Mono'";
+        "terminal.integrated.fontSize" = fontSize;
+        "editor.fontFamily" = "'Fira Code'";
     };
      
    };

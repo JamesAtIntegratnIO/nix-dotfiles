@@ -9,7 +9,7 @@ window:
   dynamic_padding: true
   decorations: full
   title: Boboysdadda's Happy Place
-  opacity: 0.6
+  opacity: 1
   class:
     instance: Alacritty
     general: Alacritty
@@ -20,16 +20,16 @@ scrolling:
   multiplier: 3
 
 font:
-  size: 8.0
+  size: 12.0
   normal:
-    family: FiraCode Nerd Font Mono
+    family: Fira Code  
   bold:
-    family:  FiraCode Nerd Font Mono
+    family:  Fira Code 
   italic:
-    family:  FiraCode Nerd Font Mono
+    family:  Fira Code  
   bold_italic:
-    family:  FiraCode Nerd Font Mono
-    size: 8.0
+    family:  Fira Code 
+    size: 12.0
 
 draw_bold_text_with_bright_colors: true
 
