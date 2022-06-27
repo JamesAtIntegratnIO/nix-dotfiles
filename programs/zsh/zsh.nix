@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, homeDirectory, ... }:
 {
   programs.zsh = with pkgs; {
     enable = true;
@@ -19,7 +19,7 @@
       GIT_SSH="/usr/bin/ssh";
       GPG_TTY="$(tty)";
       SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)";
-      XDG_DATA_DIRS="/home/boboysdadda/.nix-profile/share/:/home/boboysdadda/.local/share/:/usr/share/:/usr/local/share/";
+      XDG_DATA_DIRS="${homeDirectory}/.nix-profile/share/:${homeDirectory}/.local/share/:/usr/share/:/usr/local/share/:$XDG_DATA_DIRS";
     };
     initExtraFirst = "gpgconf --launch gpg-agent";
     initExtra = ''

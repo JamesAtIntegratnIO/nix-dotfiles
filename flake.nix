@@ -64,6 +64,7 @@
         extraSpecialArgs = {
           withGUI = true;
           fontSize = 14;
+          homeDirectory = "/home/james";
         };
       };
       

@@ -1,8 +1,8 @@
-{ self, lib, nixpkgs, home-manager, pkgs, system, specialArgs, ... }:
+{ self, lib, nixpkgs, home-manager, pkgs, system, args, specialArgs, ... }:
 let
 inherit (lib) mkIf;
 inherit (pkgs.stdenv) isLinux isDarwin;
-inherit (specialArgs) withGUI fontSize;
+inherit (specialArgs) withGUI fontSize homeDirectory;
 in
 {
    programs = {
