@@ -46,6 +46,7 @@
         extraSpecialArgs = {
           withGUI = true;
           fontSize = 8;
+          homeDirectory = "/home/boboysdadda";
         };
       };
       
@@ -55,6 +56,7 @@
         homeDirectory = "/Users/${username}";
         extraSpecialArgs = {
           withGUI = true;
+          homeDirectory = "/Users/james";
         };
       };
 
