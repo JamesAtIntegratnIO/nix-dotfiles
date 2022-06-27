@@ -20,6 +20,7 @@ in
     ./programs/vim.nix
     ./programs/git.nix
     ./programs/zsh/zsh.nix
+    ./programs/alacritty.nix
   ];
   services = {
     lorri = {
@@ -41,6 +42,6 @@ in
     };
     file.".config/neofetch/config.conf".source = ./dotfiles/neofetch.conf;
     file.".config/starship.toml".source = ./dotfiles/starship.toml;
-    file.".config/alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
+    # file.".config/alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
   };
 }

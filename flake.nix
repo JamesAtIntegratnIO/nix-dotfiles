@@ -45,7 +45,7 @@
         homeDirectory = "/home/${username}";
         extraSpecialArgs = {
           withGUI = true;
-          fontSize = 8;
+          fontSize = 14;
           homeDirectory = "/home/boboysdadda";
         };
       };
