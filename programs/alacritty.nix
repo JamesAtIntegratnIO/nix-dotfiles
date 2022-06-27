@@ -1,4 +1,4 @@
-{pkgs, font, alacrittyFontSize, ...}:
+{pkgs, font, fontSize, ...}:
 {
   programs.alacritty = {
     enable = true;
@@ -26,7 +26,7 @@
         multiplier = 3;
       };
       font = {
-        size = alacrittyFontSize;
+        size = fontSize;
         normal = {
           family = font;
         };
@@ -38,7 +38,7 @@
         };
         bold_italic = {
           family = font;
-          size = alacrittyFontSize;
+          size = fontSize;
         };
       };
       draw_bold_text_with_bright_colors = true;

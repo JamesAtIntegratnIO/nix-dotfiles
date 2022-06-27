@@ -47,7 +47,6 @@
           withGUI = true;
           font = "Fira Code";
           fontSize = 14;
-          alacrittyFontSize = 8;
           homeDirectory = "/home/boboysdadda";
         };
       };
@@ -60,7 +59,6 @@
           withGUI = true;
           font = "Fira Code";
           fontSize = 14;
-          alacrittyFontSize = 10;
           homeDirectory = "/Users/james";
         };
       };
@@ -71,7 +69,6 @@
         extraSpecialArgs = {
           withGUI = true;
           fontSize = 14;
-          alacrittyFontSize = 10;
           homeDirectory = "/home/james";
         };
       };

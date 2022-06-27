@@ -2,7 +2,7 @@
 let
 inherit (lib) mkIf;
 inherit (pkgs.stdenv) isLinux isDarwin;
-inherit (specialArgs) withGUI font alacrittyFontSize fontSize homeDirectory;
+inherit (specialArgs) withGUI font fontSize homeDirectory;
 in
 {
    programs = {

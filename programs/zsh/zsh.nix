@@ -20,6 +20,8 @@
       GPG_TTY="$(tty)";
       SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)";
       XDG_DATA_DIRS="${homeDirectory}/.nix-profile/share/:${homeDirectory}/.local/share/:/usr/share/:/usr/local/share/:$XDG_DATA_DIRS";
+      # For Alacritty : See https://github.com/alacritty/alacritty/issues/1501
+      WINIT_X11_SCALE_FACTOR= "1.0";
     };
     initExtraFirst = "gpgconf --launch gpg-agent";
     initExtra = ''
