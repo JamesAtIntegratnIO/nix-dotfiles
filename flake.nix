@@ -45,7 +45,9 @@
         homeDirectory = "/home/${username}";
         extraSpecialArgs = {
           withGUI = true;
+          font = "Fira Code";
           fontSize = 14;
+          alacrittyFontSize = 8;
           homeDirectory = "/home/boboysdadda";
         };
       };
@@ -56,6 +58,9 @@
         homeDirectory = "/Users/${username}";
         extraSpecialArgs = {
           withGUI = true;
+          font = "Fira Code";
+          fontSize = 14;
+          alacrittyFontSize = 10;
           homeDirectory = "/Users/james";
         };
       };
@@ -66,6 +71,7 @@
         extraSpecialArgs = {
           withGUI = true;
           fontSize = 14;
+          alacrittyFontSize = 10;
           homeDirectory = "/home/james";
         };
       };

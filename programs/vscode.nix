@@ -1,4 +1,4 @@
-{ pkgs, withGUI, fontSize, ... }:
+{ pkgs, withGUI, font, fontSize, ... }:
 {
   programs.vscode = {
     enable = withGUI;
@@ -23,7 +23,7 @@
         "editor.fontSize" = fontSize;
         "editor.tabSize" = 2;
         "terminal.integrated.fontSize" = fontSize;
-        "editor.fontFamily" = "'Fira Code'";
+        "editor.fontFamily" = "'${font}'";
     };
      
    };
