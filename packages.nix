@@ -5,10 +5,10 @@ let
     tmux
     nodejs
     bottom
-    gotools
     gopls
     go-outline
     golangci-lint
+    gocode
     powerline-fonts
     google-cloud-sdk
     aws
@@ -20,6 +20,7 @@ let
     pre-commit
     neofetch
     cht-sh
+    nerdfonts
     fira
     fira-code
     fira-mono

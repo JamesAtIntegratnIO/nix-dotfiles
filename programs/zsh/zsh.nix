@@ -41,6 +41,7 @@
       autoload -U +X bashcompinit && bashcompinit
 
       neofetch
+      PATH="$PATH:$(go env GOPATH)/bin";
     '';
     shellAliases = import ./aliases.nix;
   };

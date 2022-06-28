@@ -9,7 +9,6 @@ in
     home-manager.enable = true;
     bash.enable = true;
     direnv.enable = true;
-    go.enable = true;
     # You will have to update the desktop app to run
     # nixGL alacritty 
     # refer to https://github.com/NixOS/nixpkgs/issues/122671
@@ -42,6 +41,5 @@ in
     };
     file.".config/neofetch/config.conf".source = ./dotfiles/neofetch.conf;
     file.".config/starship.toml".source = ./dotfiles/starship.toml;
-    # file.".config/alacritty/alacritty.yml".source = ./dotfiles/alacritty.yml;
   };
 }
