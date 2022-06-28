@@ -20,6 +20,7 @@ in
     ./programs/git.nix
     ./programs/zsh/zsh.nix
     ./programs/alacritty.nix
+    ./programs/go.nix
   ];
   services = {
     lorri = {
