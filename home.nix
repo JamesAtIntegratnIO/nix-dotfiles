@@ -23,9 +23,6 @@ in
     ./programs/go.nix
   ];
   services = {
-    lorri = {
-      enable = true;
-    };
     gpg-agent = {
       enable = isLinux;
       defaultCacheTtl = 60;
