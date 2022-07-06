@@ -25,6 +25,7 @@ let
     fira-code
     fira-mono
     fira-code-symbols
+    stern
     pkgs.nixgl.auto.nixGLDefault
   ];
 in homePackages
