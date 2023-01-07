@@ -5,9 +5,14 @@ in
 {
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
-    discord
     git
+  ] ++ lib.optionals (withGUI) 
+  [
+    discord
+    firefox
+    awscli2
   ];
+
   programs = {
     bash.enable = true;
     direnv.enable = true;
