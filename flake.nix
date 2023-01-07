@@ -32,6 +32,7 @@
                 targets.genericLinux.enable = true;
                 imports = [
                   ./personal.nix
+                  ./user-boboysdadda.nix
                 ];
               }
             );
