@@ -16,6 +16,9 @@
     nixosConfigurations = {
       devvm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = {
+          withGUI = true;
+        };
         modules = [
           ./system/dev-nixos-vm/configuration.nix
           ./user-boboysdadda.nix
@@ -23,21 +26,23 @@
           ({ config, pkgs, ... }: {
             services.vscode-server.enable = true;
           })
-          home-manager.nixosModules.home-manager {
+          home-manager.nixosModules.home-manager ({ specialArgs, ... }: {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.boboysdadda = (
-              { config, pkgs, ... }:
+              { config, pkgs, extraSpecialArgs, ... }:
               {
                 home.stateVersion = "20.09";
                 targets.genericLinux.enable = true;
                 imports = [
                   ./personal.nix
+                  ./programs/vscode.nix
                 ];
               }
             );
             
-          }
+          })
         ];
       };
     };

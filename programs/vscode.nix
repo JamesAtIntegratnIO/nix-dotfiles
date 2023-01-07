@@ -1,4 +1,7 @@
-{ pkgs, withGUI, font, fontSize, ... }:
+{ pkgs, specialArgs, ... }:
+let
+inherit (specialArgs) withGUI;
+in
 {
   programs.vscode = {
     enable = withGUI;
@@ -19,12 +22,12 @@
       pkgs.vscode-extensions.tamasfe.even-better-toml
       pkgs.vscode-extensions.redhat.vscode-yaml
      ];
-    userSettings = {
-        "editor.fontSize" = fontSize;
-        "editor.tabSize" = 2;
-        "terminal.integrated.fontSize" = fontSize;
-        "editor.fontFamily" = "'${font}'";
-    };
+    # userSettings = {
+    #     "editor.fontSize" = fontSize;
+    #     "editor.tabSize" = 2;
+    #     "terminal.integrated.fontSize" = fontSize;
+    #     "editor.fontFamily" = "'${font}'";
+    # };
      
    };
 }
