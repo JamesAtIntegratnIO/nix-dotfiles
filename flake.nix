@@ -37,7 +37,6 @@
                 targets.genericLinux.enable = true;
                 imports = [
                   ./personal.nix
-                  ./programs/vscode.nix
                 ];
               }
             );

@@ -1,7 +1,4 @@
-{ pkgs, specialArgs, ... }:
-let
-inherit (specialArgs) withGUI;
-in
+{ pkgs, withGUI, ... }:
 {
   programs.vscode = {
     enable = withGUI;

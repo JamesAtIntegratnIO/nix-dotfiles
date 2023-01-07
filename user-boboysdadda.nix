@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, specialArgs, ... }:
 {
     users.users.boboysdadda = {
         isNormalUser = true;
