@@ -18,6 +18,7 @@
         system = "x86_64-linux";
         modules = [
           ./system/dev-nixos-vm/configuration.nix
+          ./user-boboysdadda.nix
           vscode-server.nixosModule
           ({ config, pkgs, ... }: {
             services.vscode-server.enable = true;
@@ -32,7 +33,6 @@
                 targets.genericLinux.enable = true;
                 imports = [
                   ./personal.nix
-                  ./user-boboysdadda.nix
                 ];
               }
             );
