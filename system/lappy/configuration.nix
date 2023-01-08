@@ -64,7 +64,7 @@
   # Enable the fingerprint reader
   services.fprintd.enable = true;
   services.fprintd.tod.enable = true;
-  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

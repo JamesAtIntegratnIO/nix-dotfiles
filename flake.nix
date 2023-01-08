@@ -49,7 +49,7 @@
         specialArgs = {
           withGUI = true;
           homeDirectory = "/home/boboysdadda";
-          fontSize = "14";
+          fontSize = 10.0;
           font = "FiraCode Nerd Font Mono";
         };
         modules = [

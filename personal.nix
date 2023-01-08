@@ -40,8 +40,8 @@ in
   };
   imports = [
     ./programs/vscode.nix
-    ./programs/zsh/zsh.nix
-    ./programs/alacritty.nix
+#     ./programs/zsh/zsh.nix
+#     ./programs/alacritty.nix
     ./programs/git.nix
     ./programs/go.nix
     ./programs/vim.nix
