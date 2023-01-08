@@ -51,6 +51,7 @@
         };
         modules = [
           ./system/lappy/configuration.nix
+         # ./system/lappy/thinkpad_fan.nix
           ./user-boboysdadda.nix
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen{}
           vscode-server.nixosModule
