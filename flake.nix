@@ -11,7 +11,7 @@
     vscode-server.url = "github:msteen/nixos-vscode-server";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server, ... }: rec {
+  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, ... }: rec {
     overlays = {};
     nixosConfigurations = {
       devvm = nixpkgs.lib.nixosSystem {
@@ -50,8 +50,9 @@
           withGUI = true;
         };
         modules = [
-          ./system/dev-nixos-vm/configuration.nix
+          ./system/lappy/configuration.nix
           ./user-boboysdadda.nix
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen{}
           vscode-server.nixosModule
           ({ config, pkgs, ... }: {
             services.vscode-server.enable = true;
