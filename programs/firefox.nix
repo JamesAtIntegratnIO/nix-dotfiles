@@ -1,4 +1,4 @@
-{ pkgs, withGUI, ... }:
+{ config, pkgs, withGUI, ... }:
 {
     programs.firefox = {
         enable = withGUI;

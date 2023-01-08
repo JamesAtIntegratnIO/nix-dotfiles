@@ -9,10 +9,13 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     flake-utils.url = "github:numtide/flake-utils";
     vscode-server.url = "github:msteen/nixos-vscode-server";
+    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, ... }: rec {
-    overlays = {};
+  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, nur, ... }: rec {
+    overlays = {
+      nur = inputs.nur.overlay;
+    };
     nixosConfigurations = {
       devvm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -59,6 +62,7 @@
           ./services/tailscale.nix
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen{
             nix.settings.experimental-features = [ "nix-command" "flakes" ];
+            nixpkgs.overlays = (nixpkgs.lib.attrValues overlays);
           }
           vscode-server.nixosModule
           ({ config, pkgs, ... }: {
