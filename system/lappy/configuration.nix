@@ -99,9 +99,7 @@
     description = "James Dreier";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      firefox
       kate
-      git
     #  thunderbird
     ];
   };

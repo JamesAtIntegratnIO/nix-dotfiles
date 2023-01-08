@@ -56,6 +56,7 @@
           ./system/lappy/configuration.nix
          # ./system/lappy/thinkpad_fan.nix
           ./user-boboysdadda.nix
+          ./services/tailscale.nix
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen{
             nix.settings.experimental-features = [ "nix-command" "flakes" ];
           }

@@ -2,7 +2,7 @@
 {
     services.tailscale = {
         enable = true;
-        permitCertUid = "boboysdadda@gmail.com"
+        permitCertUid = "boboysdadda@gmail.com";
     };
     networking.firewall.checkReversePath = "loose";
 }

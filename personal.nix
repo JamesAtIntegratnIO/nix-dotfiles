@@ -31,7 +31,6 @@ in
   ] ++ lib.optionals (withGUI) 
   [
     discord
-    firefox
     awscli2
     bluedevil
   ];
@@ -41,12 +40,13 @@ in
   };
   imports = [
     ./programs/vscode.nix
-#     ./programs/zsh/zsh.nix
-#     ./programs/alacritty.nix
+    ./programs/zsh/zsh.nix
+    ./programs/alacritty.nix
+    ./programs/firefox.nix
     ./programs/git.nix
     ./programs/go.nix
     ./programs/vim.nix
-  ];
+ ];
   home = {
     
     file.".config/neofetch/config.conf".source = ./dotfiles/neofetch.conf;
