@@ -48,6 +48,9 @@
         system = "x86_64-linux";
         specialArgs = {
           withGUI = true;
+          homeDirectory = "/home/boboysdadda";
+          fontSize = "14";
+          font = "FiraCode Nerd Font Mono";
         };
         modules = [
           ./system/lappy/configuration.nix

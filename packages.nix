@@ -1,10 +1,11 @@
-{ pkgs }:
+{ pkgs, withGUI }:
 
 let
   homePackages = with pkgs; [
     tmux
     nodejs
     bottom
+    git
     gopls
     go-outline
     golangci-lint
@@ -26,6 +27,11 @@ let
     fira-mono
     fira-code-symbols
     stern
-    pkgs.nixgl.auto.nixGLDefault
+    # pkgs.nixgl.auto.nixGLDefault
+  ] ++ lib.optionals (withGUI) 
+  [
+    discord
+    firefox
+    awscli2
   ];
 in homePackages
