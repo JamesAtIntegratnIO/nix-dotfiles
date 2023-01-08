@@ -61,13 +61,17 @@
     xkbVariant = "";
   };
 
+  # Disabled because fprint is forced even if the laptop is closed
   # Enable the fingerprint reader
-  services.fprintd.enable = true;
-  services.fprintd.tod.enable = true;
-  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
+  # services.fprintd.enable = true;
+  # services.fprintd.tod.enable = true;
+  # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Enable bluetooth hardware
+  hardware.bluetooth.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -110,6 +114,7 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

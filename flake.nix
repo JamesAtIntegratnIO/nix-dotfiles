@@ -56,7 +56,9 @@
           ./system/lappy/configuration.nix
          # ./system/lappy/thinkpad_fan.nix
           ./user-boboysdadda.nix
-          nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen{}
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen{
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+          }
           vscode-server.nixosModule
           ({ config, pkgs, ... }: {
             services.vscode-server.enable = true;

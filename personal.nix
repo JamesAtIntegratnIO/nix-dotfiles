@@ -33,6 +33,7 @@ in
     discord
     firefox
     awscli2
+    bluedevil
   ];
   programs = {
     bash.enable = true;
