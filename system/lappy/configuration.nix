@@ -61,6 +61,11 @@
     xkbVariant = "";
   };
 
+  # Enable the fingerprint reader
+  services.fprintd.enable = true;
+  services.fprintd.tod.enable = true;
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
