@@ -48,20 +48,18 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  # Enable touchegg
-  services.touchegg.enable = true;
-  # Configure keymap in X11
   services.xserver = {
+    # Enable the X11 windowing system.
+    enable = true;
+    # Enable the KDE Plasma Desktop Environment.
+    displayManager.sddm.enable = true;
+    desktopManager.plasma5.enable = true;
+    # Configure keymap in X11
     layout = "us";
     xkbVariant = "";
   };
+  # Enable touchegg
+  services.touchegg.enable = true;
 
   # For zsa keyboards
   hardware.keyboard.zsa.enable = true;
