@@ -60,6 +60,7 @@
          # ./system/lappy/thinkpad_fan.nix
           ./user-boboysdadda.nix
           ./services/tailscale.nix
+          ./services/podman.nix
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen{
             nix.settings.experimental-features = [ "nix-command" "flakes" ];
             nixpkgs.overlays = (nixpkgs.lib.attrValues overlays);
