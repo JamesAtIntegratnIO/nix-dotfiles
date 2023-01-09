@@ -1,7 +1,7 @@
-{pkgs, font, fontSize, ...}:
+{pkgs, font, fontSize, withGUI, ...}:
 {
   programs.alacritty = {
-    enable = true;
+    enable = withGUI;
     settings = {
       env = {
         TERM = "xterm-256color";
@@ -19,14 +19,13 @@
           instance = "Alacritty";
           general = "Alacritty";
         };
-        gtk_theme_variant = "dark";
+        decorations_theme_variant = "dark";
       };
       scrolling = {
         history = 10000;
         multiplier = 3;
       };
       font = {
-        size = fontSize;
         normal = {
           family = font;
         };
@@ -38,8 +37,8 @@
         };
         bold_italic = {
           family = font;
-          size = fontSize;
         };
+        size = fontSize;
       };
       draw_bold_text_with_bright_colors = true;
       save_to_clipboard = true;
@@ -49,7 +48,7 @@
       };
       live_config_reload = true;
       shell = {
-        program = "/usr/bin/zsh";
+        program = "/etc/profiles/per-user/boboysdadda/bin/zsh";
         args = [
           "--login"
         ];

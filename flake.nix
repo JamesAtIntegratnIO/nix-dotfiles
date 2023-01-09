@@ -1,79 +1,94 @@
 {
-  description = "Home Manager configs";
-
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    # nixgl is needed for alacritty outside of nixOS
-    # refer to https://github.com/NixOS/nixpkgs/issues/122671
-    # https://github.com/guibou/nixGL/#use-an-overlay
-    nixgl.url = "github:guibou/nixGL";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    flake-utils.url = "github:numtide/flake-utils";
+    vscode-server.url = "github:msteen/nixos-vscode-server";
+    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixgl, ... }:
-    let
-      pkgsForSystem = system: import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-        overlays = [ nixgl.overlay ];
-      };
-      # Inspired by https://github.com/jonringer/nixpkgs-config/blob/master/flake.nix#L32-L38
-      # Also showed me how to get access to the pkgs.stdenv isLinux isDarwin
-      mkHomeConfiguration = args: home-manager.lib.homeManagerConfiguration (rec {
-          username = args.username;
-          system = args.system or "x86_64-linux";
-          pkgs = pkgsForSystem system;
-          homeDirectory = args.homeDirectory;
-          configuration = { pkgs, ... }: {
-            imports = [ ./home.nix ];
-          };
-          stateVersion = "22.11";
-        }// args);
-    in 
-   {
-    inherit home-manager;
-
-    homeConfigurations = {
-      
-      personal = mkHomeConfiguration rec {
-        username = "boboysdadda";
-        homeDirectory = "/home/${username}";
-        extraSpecialArgs = {
+  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, nur, ... }: rec {
+    overlays = {
+      nur = inputs.nur.overlay;
+    };
+    nixosConfigurations = {
+      devvm = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
           withGUI = true;
-          font = "FiraCode Nerd Font Mono";
-          fontSize = 14;
+          enablePodman = true;
+        };
+        modules = [
+          ./system/dev-nixos-vm/configuration.nix
+          ./user-boboysdadda.nix
+          vscode-server.nixosModule
+          ({ config, pkgs, ... }: {
+            services.vscode-server.enable = true;
+          })
+          home-manager.nixosModules.home-manager ({ specialArgs, ... }: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.users.boboysdadda = (
+              { config, pkgs, extraSpecialArgs, ... }:
+              {
+                home.stateVersion = "20.09";
+                targets.genericLinux.enable = true;
+                imports = [
+                  ./personal.nix
+                ];
+              }
+            );
+            
+          })
+        ];
+      };
+      lappy = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          withGUI = true;
           homeDirectory = "/home/boboysdadda";
-        };
-      };
-      
-      macJames = mkHomeConfiguration rec {
-        username = "james";
-        system = "x86_64-darwin";
-        homeDirectory = "/Users/${username}";
-        extraSpecialArgs = {
-          withGUI = true;
+          fontSize = 10.0;
           font = "FiraCode Nerd Font Mono";
-          fontSize = 14;
-          homeDirectory = "/Users/james";
+          enablePodman = true;
         };
-      };
+        modules = [
+          ./system/lappy/configuration.nix
+         # ./system/lappy/thinkpad_fan.nix
+          ./user-boboysdadda.nix
+          ./services/tailscale.nix
+          ./services/podman.nix
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen{
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+            nixpkgs.overlays = (nixpkgs.lib.attrValues overlays);
+          }
+          vscode-server.nixosModule
+          ({ config, pkgs, ... }: {
+            services.vscode-server.enable = true;
+          })
+          home-manager.nixosModules.home-manager ({ specialArgs, ... }: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = specialArgs;
+            home-manager.users.boboysdadda = (
+              { config, pkgs, extraSpecialArgs, ... }:
+              {
+                home.stateVersion = "20.09";
+                targets.genericLinux.enable = true;
+                imports = [
+                  ./personal.nix
+                ];
+              }
+            );
 
-      rhJames = mkHomeConfiguration rec {
-        username = "james";
-        homeDirectory = "/home/${username}";
-        extraSpecialArgs = {
-          withGUI = true;
-          font = "FiraCode Nerd Font Mono";
-          fontSize = 14;
-          homeDirectory = "/home/james";
-        };
+          })
+        ];
       };
-      
     };
   };
 }

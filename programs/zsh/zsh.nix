@@ -16,7 +16,6 @@
       extended = true;
     };
     sessionVariables = {
-      GIT_SSH="/usr/bin/ssh";
       GPG_TTY="$(tty)";
       SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)";
       XDG_DATA_DIRS="${homeDirectory}/.nix-profile/share/:${homeDirectory}/.local/share/:/usr/share/:/usr/local/share/:$XDG_DATA_DIRS";
