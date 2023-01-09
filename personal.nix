@@ -18,6 +18,7 @@ in
     glibc
     glibcLocales
     terraform-docs
+    plasma-browser-integration
     pre-commit
     neofetch
     cht-sh

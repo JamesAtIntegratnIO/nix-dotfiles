@@ -61,6 +61,9 @@
     xkbVariant = "";
   };
 
+  # For zsa keyboards
+  hardware.keyboard.zsa.enable = true;
+
   # Disabled because fprint is forced even if the laptop is closed
   # Enable the fingerprint reader
   # services.fprintd.enable = true;
@@ -112,7 +115,7 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
-
+    wally-cli
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
