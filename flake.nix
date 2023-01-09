@@ -21,6 +21,7 @@
         system = "x86_64-linux";
         specialArgs = {
           withGUI = true;
+          enablePodman = true;
         };
         modules = [
           ./system/dev-nixos-vm/configuration.nix
@@ -54,6 +55,7 @@
           homeDirectory = "/home/boboysdadda";
           fontSize = 10.0;
           font = "FiraCode Nerd Font Mono";
+          enablePodman = true;
         };
         modules = [
           ./system/lappy/configuration.nix

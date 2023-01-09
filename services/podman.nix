@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, enablePodman, ... }:
 {
   virtualisation = {
     podman = {
@@ -8,8 +8,9 @@
       dockerCompat = true;
       # Make the Podman socket available in place of the Docker socket, so
       #  Docker tools can find the Podman socket.
-      dockerSocket.enable = true;
-      extraPackages = [ pkgs.podman-compose ];
+      dockerSocket.enable = false;
+      extraPackages = [ 
+      ];
 
       autoPrune = {
         enable = true;
@@ -19,6 +20,5 @@
       # Required for containers under podman-compose to be able to talk to each other.
       defaultNetwork.settings.dns_enabled = true;
     };
-
   };
 }

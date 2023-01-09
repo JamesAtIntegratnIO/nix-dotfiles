@@ -1,6 +1,6 @@
 { config, pkgs, specialArgs, ... }:
 let
-inherit (specialArgs) withGUI font fontSize homeDirectory;
+inherit (specialArgs) withGUI font fontSize homeDirectory enablePodman;
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -33,6 +33,9 @@ in
     discord
     awscli2
     bluedevil
+  ] ++ lib.optionals (enablePodman)
+  [
+    podman-compose
   ];
   programs = {
     bash.enable = true;
