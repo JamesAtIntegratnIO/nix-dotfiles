@@ -57,6 +57,8 @@
     # Configure keymap in X11
     layout = "us";
     xkbVariant = "";
+    # Swap capslock with escape
+    xkbOptions = "caps:swapescape";
   };
   # Enable touchegg
   services.touchegg.enable = true;
