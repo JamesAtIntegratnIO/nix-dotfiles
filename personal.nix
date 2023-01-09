@@ -50,6 +50,7 @@ in
     ./programs/git.nix
     ./programs/go.nix
     ./programs/vim.nix
+    ./programs/appimage.nix
  ];
   home = {
     
