@@ -55,6 +55,8 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
+  # Enable touchegg
+  services.touchegg.enable = true;
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -103,6 +105,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       kate
+      slack
     #  thunderbird
     ];
   };

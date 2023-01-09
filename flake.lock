@@ -120,7 +120,24 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
+        "toucheggkde": "toucheggkde",
         "vscode-server": "vscode-server"
+      }
+    },
+    "toucheggkde": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1648418182,
+        "narHash": "sha256-h4QsvG+TxbV78MdiOu0XKNVxvp5lvek/kseVuKABkgs=",
+        "owner": "NayamAmarshe",
+        "repo": "ToucheggKDE",
+        "rev": "1f7edacc17022c8ec393b472ce682d8b24054a5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NayamAmarshe",
+        "repo": "ToucheggKDE",
+        "type": "github"
       }
     },
     "utils": {

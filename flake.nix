@@ -10,9 +10,13 @@
     flake-utils.url = "github:numtide/flake-utils";
     vscode-server.url = "github:msteen/nixos-vscode-server";
     nur.url = "github:nix-community/NUR";
+    toucheggkde = {
+      url = "github:NayamAmarshe/ToucheggKDE";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, nur, ... }: rec {
+  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, nur, toucheggkde, ... }: rec {
     overlays = {
       nur = inputs.nur.overlay;
     };
@@ -43,8 +47,7 @@
                   ./personal.nix
                 ];
               }
-            );
-            
+            );            
           })
         ];
       };
@@ -83,9 +86,9 @@
                 imports = [
                   ./personal.nix
                 ];
+                xdg.configFile."touchegg/touchegg.conf".source = "${toucheggkde}/touchegg.conf";
               }
             );
-
           })
         ];
       };
