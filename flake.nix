@@ -14,6 +14,7 @@
       url = "github:NayamAmarshe/ToucheggKDE";
       flake = false;
     };
+
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, nur, toucheggkde, ... }: rec {
@@ -49,6 +50,16 @@
               }
             );            
           })
+        ];
+      };
+      klippyPi = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        imports = [
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+        ];
+        modules = [
+          ./system/rpi4/configuration.nix
+          ./user-boboysdadda.nix
         ];
       };
       lappy = nixpkgs.lib.nixosSystem {
