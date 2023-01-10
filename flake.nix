@@ -14,10 +14,14 @@
       url = "github:NayamAmarshe/ToucheggKDE";
       flake = false;
     };
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, nur, toucheggkde, ... }: rec {
+  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, nur, toucheggkde, agenix, ... }: rec {
     overlays = {
       nur = inputs.nur.overlay;
     };
@@ -52,15 +56,22 @@
           })
         ];
       };
+      # Build CMD
+      # NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix build .#nixosConfigurations.klippyPi.config.system.build.sdImage
       klippyPi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
-        imports = [
-          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
-        ];
         modules = [
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
           ./system/rpi4/configuration.nix
           ./user-boboysdadda.nix
+          nixos-hardware.nixosModules.raspberry-pi-4 {
+            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+            hardware.raspberry-pi."4".poe-hat.enable = false;
+            hardware.raspberry-pi."4".poe-plus-hat.enable = false;
+            hardware.raspberry-pi."4".pwm0.enable = false;
+          }
         ];
+        
       };
       lappy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -73,12 +84,17 @@
         };
         modules = [
           ./system/lappy/configuration.nix
-         # ./system/lappy/thinkpad_fan.nix
           ./user-boboysdadda.nix
           ./services/tailscale.nix
           ./services/podman.nix
+          agenix.nixosModule
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen{
-            nix.settings.experimental-features = [ "nix-command" "flakes" ];
+            nix = {
+              settings = {
+                experimental-features = [ "nix-command" "flakes" "recursive-nix" ];
+                system-features = [ "recursive-nix" ];
+              };
+            };
             nixpkgs.overlays = (nixpkgs.lib.attrValues overlays);
           }
           vscode-server.nixosModule

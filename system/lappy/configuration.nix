@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
@@ -25,16 +25,22 @@
       "/crypto_keyfile.bin" = null;
     };
   };
+  networking = {
+    # Define your hostname
+    hostName = "lappy";
+    # Enable networking
+    networkmanager.enable = true;
+    # Configure my wireless network
+    wireless.networks."AllKindsOfTcpIps".psk = (lib.fileContents "../../secrets/allkindsoftcpips-password");
+  };
 
-  networking.hostName = "lappy"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  
 
   # Set your time zone.
   time.timeZone = "America/Denver";

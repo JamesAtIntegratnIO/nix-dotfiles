@@ -1,6 +1,21 @@
 # configuration.nix
 { lib, pkgs, ... }: {
-  systemd.network.enable = true;
+
+  nixpkgs.overlays = [
+    (final: super: {
+      makeModulesClosure = x:
+        super.makeModulesClosure (x // { allowMissing = true; });
+    })
+  ];
+
+  networking = {
+    # Define your hostname
+    hostName = "klipperpi";
+    # Enable networking
+    networkmanager.enable = true;
+    # Configure my wireless network
+    wireless.networks."AllKindsOfTcpIps".psk = (lib.fileContents "../../secrets/allkindsoftcpips-password");
+  };
 
   # Enable SSH with root login
   services.openssh = {
@@ -13,4 +28,5 @@
     extraGroups = [ "wheel" ];
     packages = with pkgs; [];
   };  
+  system.stateVersion = "22.11";
 }
