@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.05";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +21,7 @@
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, nur, toucheggkde, agenix, ... }: rec {
+  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-unstable, vscode-server,nixos-hardware, nur, toucheggkde, agenix, ... }: rec {
     overlays = {
       nur = inputs.nur.overlay;
     };

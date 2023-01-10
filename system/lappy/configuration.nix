@@ -90,12 +90,14 @@
   # Enable bluetooth hardware
   hardware.bluetooth.enable = true;
 
+  # Enable cause sound don't work
+  hardware.enableAllFirmware = true;
   # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
+    enable = false;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
@@ -116,6 +118,7 @@
     description = "James Dreier";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
+      plex-media-player
       kate
       slack
     #  thunderbird

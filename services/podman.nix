@@ -1,4 +1,4 @@
-{ pkgs, enablePodman, ... }:
+{ pkgs-unstable, enablePodman, ... }:
 {
   virtualisation = {
     podman = {
@@ -12,13 +12,13 @@
       extraPackages = [ 
       ];
 
-      autoPrune = {
-        enable = true;
-        dates = "monthly";
-      };
+      # autoPrune = {
+      #   enable = true;
+      #   dates = "monthly";
+      # };
 
-      # Required for containers under podman-compose to be able to talk to each other.
-      defaultNetwork.settings.dns_enabled = true;
+      # # Required for containers under podman-compose to be able to talk to each other.
+      # defaultNetwork.settings.dns_enabled = true;
     };
   };
 }
