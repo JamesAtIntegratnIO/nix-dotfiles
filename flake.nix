@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +21,7 @@
 
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-unstable, vscode-server,nixos-hardware, nur, toucheggkde, agenix, ... }: rec {
+  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, nur, toucheggkde, agenix, ... }: rec {
     overlays = {
       nur = inputs.nur.overlay;
     };
@@ -61,15 +61,19 @@
       klippyPi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
-          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"{
+            sdImage.compressImage = false;
+            sdImage.imageBaseName = "klippyPi-nixos-sd-image";
+          }
           ./system/rpi4/configuration.nix
           ./user-boboysdadda.nix
-          nixos-hardware.nixosModules.raspberry-pi-4 {
-            nix.settings.experimental-features = [ "nix-command" "flakes" ];
-            hardware.raspberry-pi."4".poe-hat.enable = false;
-            hardware.raspberry-pi."4".poe-plus-hat.enable = false;
-            hardware.raspberry-pi."4".pwm0.enable = false;
-          }
+          # nixos-hardware.nixosModules.raspberry-pi-4 {
+          #   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+          #   hardware.raspberry-pi."4".poe-hat.enable = false;
+          #   hardware.raspberry-pi."4".poe-plus-hat.enable = false;
+          #   hardware.raspberry-pi."4".pwm0.enable = false;
+            
+          # }
         ];
         
       };

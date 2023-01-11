@@ -10,6 +10,7 @@
       ./hardware-configuration.nix
     ];
   boot = {
+    kernelPackages = pkgs.linuxPackages_6_1;
     # Bootloader.
     loader = {
       systemd-boot.enable = true;
@@ -30,8 +31,9 @@
     hostName = "lappy";
     # Enable networking
     networkmanager.enable = true;
+    # wireless.enable = true;
     # Configure my wireless network
-    wireless.networks."AllKindsOfTcpIps".psk = (lib.fileContents "../../secrets/allkindsoftcpips-password");
+    # wireless.networks."AllKindsOfTcpIps".psk = (lib.fileContents "../../secrets/allkindsoftcpips-password");
   };
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -64,8 +66,8 @@
     # Enable the X11 windowing system.
     enable = true;
     # Enable the KDE Plasma Desktop Environment.
-    displayManager.sddm.enable = true;
-    desktopManager.plasma5.enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
     # Configure keymap in X11
     layout = "us";
     xkbVariant = "";
@@ -94,10 +96,10 @@
   hardware.enableAllFirmware = true;
   # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = false;
+    enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
@@ -119,7 +121,6 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       plex-media-player
-      kate
       slack
     #  thunderbird
     ];

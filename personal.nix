@@ -7,6 +7,7 @@ in
   home.packages = with pkgs; [
     tmux
     nodejs
+    bind
     bottom
     gopls
     go-outline
