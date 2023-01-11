@@ -3,6 +3,8 @@
   ...
 }: rec {
   home.packages = with pkgs.gnomeExtensions; [
+    libgda
+    gsoud
     blur-my-shell
     pano
     gsconnect
@@ -49,7 +51,7 @@
     };
 
     # Configure Panel Corners
-    "/org/gnome/shell/extensions/panel-corners" = {
+    "org/gnome/shell/extensions/panel-corners" = {
       panel-corner-background-color = "rgb(0,0,0)";
       panel-corner-opacity = 1;
       panel-corners = true;
@@ -57,7 +59,7 @@
     };
 
     # Configure Rounded Window Corners
-    "/org/gnome/shell/extensions/rounded-window-corners" = {
+    "org/gnome/shell/extensions/rounded-window-corners" = {
       tweak-kitty-terminal = true;
     };
   };
