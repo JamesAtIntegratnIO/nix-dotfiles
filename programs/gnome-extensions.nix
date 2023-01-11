@@ -3,8 +3,6 @@
   ...
 }: rec {
   home.packages = with pkgs.gnomeExtensions; [
-    libgda
-    gsoud
     blur-my-shell
     pano
     gsconnect
