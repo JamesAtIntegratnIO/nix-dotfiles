@@ -51,6 +51,7 @@ in
     ./programs/git.nix
     ./programs/go.nix
     ./programs/vim.nix
+    ./programs/gnome-extensions.nix
  ];
   home = {
     
