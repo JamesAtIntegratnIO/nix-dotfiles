@@ -17,14 +17,15 @@
       pkgs.vscode-extensions.ms-azuretools.vscode-docker
       pkgs.vscode-extensions.timonwong.shellcheck
       pkgs.vscode-extensions.tamasfe.even-better-toml
+      pkgs.vscode-extensions.ms-vscode-remote.remote-ssh
       pkgs.vscode-extensions.redhat.vscode-yaml
      ];
-    # userSettings = {
+    userSettings = {
     #     "editor.fontSize" = fontSize;
-    #     "editor.tabSize" = 2;
+      "editor.tabSize" = 2;
     #     "terminal.integrated.fontSize" = fontSize;
     #     "editor.fontFamily" = "'${font}'";
-    # };
+    };
      
    };
 }

@@ -1,10 +1,11 @@
-{ config, pkgs, specialArgs, ... }:
+{ config, pkgs, specialArgs, system, ... }:
 let
 inherit (specialArgs) withGUI font fontSize homeDirectory enablePodman;
 in
 {
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
+    
     tmux
     nodejs
     bind

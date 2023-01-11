@@ -1,9 +1,5 @@
 # configuration.nix
 { lib, pkgs, config, system, ... }: {
-  # import networking until I solve secrets
-  imports = [
-    ../../secrets/klippypiNetworking.nix
-  ];
 
   nixpkgs.overlays = [
     (final: super: {
@@ -33,23 +29,25 @@
 
   hardware.enableRedistributableFirmware = true;  # Includes wifi kernel modules.
 
-  # networking = {
-  #   # Define your hostname
-  #   hostName = "klipperpi";
-  #   # Enable networking if not using wpa
-  #   networkmanager.enable = false;
-  #   # Configure my wireless network
-  #   wireless = {
-  #     enable = true;
-  #     interfaces = ["wlan0"];
-  #     userControlled.enable = true;
-  #     networks."sperSecretWifiName" = {
-  #       # This forces the need for `--impure`
-  #       psk = "superSecretWifiPasswordGoesHere";
-  #       priority = 1;      
-  #     };
-  #   };
-  # };
+  age.secrets.klipperpi.file = ../../secrets/klipperpi.age;
+  networking = {
+    # Define your hostname
+    hostName = "klipperpi";
+    # Enable networking if not using wpa
+    networkmanager.enable = false;
+    # Configure my wireless network
+    wireless = {
+      enable = true;
+      environmentFile = config.age.secrets.klipperpi.path;
+      interfaces = ["wlan0"];
+      userControlled.enable = true;
+      networks."AllKindsOfTcpIps" = {
+        # This forces the need for `--impure`
+        psk = "@PSK_ALLKINDSOFTCPIPS@";
+        priority = 1;      
+      };
+    };
+  };
 
   # Enable SSH with root login
   services = {

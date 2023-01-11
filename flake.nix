@@ -39,7 +39,7 @@
           ({ config, pkgs, ... }: {
             services.vscode-server.enable = true;
           })
-          home-manager.nixosModules.home-manager ({ specialArgs, ... }: {
+          home-manager.nixosModules.home-manager ({ specialArgs, agenix, ... }: {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = specialArgs;
@@ -58,7 +58,7 @@
       };
       # Build CMD
       # NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix build .#nixosConfigurations.klippyPi.config.system.build.sdImage
-      klippyPi = nixpkgs.lib.nixosSystem {
+      klipperpi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
           "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"{
@@ -67,6 +67,10 @@
           }
           ./system/rpi4/configuration.nix
           ./user-boboysdadda.nix
+          {
+            nix.settings.trusted-users = [ "boboysdadda" ];
+            security.sudo.wheelNeedsPassword = false;
+          }
           # nixos-hardware.nixosModules.raspberry-pi-4 {
           #   nix.settings.experimental-features = [ "nix-command" "flakes" ];
           #   hardware.raspberry-pi."4".poe-hat.enable = false;
