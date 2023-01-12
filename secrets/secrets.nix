@@ -6,11 +6,14 @@
 # nix run github:ryantm/agenix -- -e klipperpi.age
 let
   klipperpi-root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINjXTQVFOmQfiCXypfWP9D6h7HZzhm5AHcbMgt1VnFmS";
-  users = [ klipperpi-root ];
+  lappy-root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2QZHMsM5MwYtjk20GpYWNJ4Z0nnfkB2iMfdO/03a6j root@nixos";
+  users = [ klipperpi-root lappy-root ];
 
   klipperpi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINjXTQVFOmQfiCXypfWP9D6h7HZzhm5AHcbMgt1VnFmS";
-  systems = [ klipperpi ];
+  lappy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2QZHMsM5MwYtjk20GpYWNJ4Z0nnfkB2iMfdO/03a6j root@nixos";
+  systems = [ klipperpi lappy ];
 in
 {
   "klipperpi.age".publicKeys = [ klipperpi-root klipperpi ];
+  "lappy-borg.age".publicKeys = [ lappy-root lappy ];
 }
