@@ -56,8 +56,10 @@
           })
         ];
       };
-      # Build CMD
+      # Build SD card CMD
       # NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 nix build .#nixosConfigurations.klippyPi.config.system.build.sdImage
+      # Remote Deploy CMD
+      # nixos-rebuild --target-host boboysdadda@klipperpi.home.arpa --use-remote-sudo switch --flake .#klipperpi
       klipperpi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
@@ -69,6 +71,7 @@
           ./system/klipperpi/klipper.nix
           ./system/klipperpi/moonraker.nix
           ./user-boboysdadda.nix
+          ./services/tailscale.nix
           agenix.nixosModule
           {
             nix.settings.trusted-users = [ "boboysdadda" ];
