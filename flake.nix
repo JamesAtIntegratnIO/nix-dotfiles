@@ -65,8 +65,11 @@
             sdImage.compressImage = false;
             sdImage.imageBaseName = "klippyPi-nixos-sd-image";
           }
-          ./system/rpi4/configuration.nix
+          ./system/klipperpi/configuration.nix
+          ./system/klipperpi/klipper.nix
+          ./system/klipperpi/moonraker.nix
           ./user-boboysdadda.nix
+          agenix.nixosModule
           {
             nix.settings.trusted-users = [ "boboysdadda" ];
             security.sudo.wheelNeedsPassword = false;
