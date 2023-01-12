@@ -47,7 +47,11 @@
         priority = 1;      
       };
     };
+    firewall = {
+      enable = false;
+    };
   };
+  security.polkit.enable = true;
 
   # Enable SSH with root login
   services = {
@@ -62,6 +66,11 @@
     automatic = true;
     options = "--delete-older-than 30d";
   };
+
+
+  environment.systemPackages = with pkgs; [
+    polkit
+  ];
   # users.users.boboysdadda = {
   #   isNormalUser = true;
   #   description = "James Dreier";

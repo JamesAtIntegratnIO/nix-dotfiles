@@ -1,6 +1,8 @@
 
 {
   services.fluidd.enable = true;
+  # Increase max upload size for uploading .gcode files from PrusaSlicer
+  services.nginx.clientMaxBodySize = "1000m";
   services.moonraker = {
     user = "root";
     enable = true;
@@ -9,7 +11,7 @@
       octoprint_compat = { };
       history = { };
       authorization = {
-        force_logins = true;
+        # force_logins = true;
         cors_domains = [
           "*.local"
           "*.lan"
