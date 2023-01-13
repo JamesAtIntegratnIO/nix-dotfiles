@@ -53,11 +53,17 @@
           }
         ];
       };
-      # hooks = {
-      #   before_everything = [''${pkgs.notify-desktop}/bin/notify-desktop "Borgmatic is starting"''];
-      #   after_everything = [''${pkgs.notify-desktop}/bin/notify-desktop "Borgmatic has successfully completed"''];
-      #   on_error = [''${pkgs.notify-desktop}/bin/notify-desktop "Borgmatic fucked up. You might want to `journalctl -xeu borgmatic`"''];
-      # };
+      hooks = {
+        before_everything = [
+          "echo $(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H%M%S) starting borgmatic backup >> /var/log/borgmatic.log"
+        ];
+        after_everything = [
+          "echo $(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H%M%S) borgmatic backup finished >> /var/log/borgmatic.log"
+        ];
+        on_error = [
+          "echo $(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H%M%S) borgmatic backup encountered an error. Check `journalctl -xeu borgmatic`"
+        ];
+      };
     };  
   }; 
  }

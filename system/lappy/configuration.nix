@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./borgmatic.nix
+      ./logrotate.nix
     ];
   boot = {
     kernelPackages = pkgs.linuxPackages_6_1;
@@ -136,7 +137,7 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
     wally-cli
-    notify-desktop
+    libnotify
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
