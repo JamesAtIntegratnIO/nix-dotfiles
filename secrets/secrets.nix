@@ -16,4 +16,5 @@ in
 {
   "klipperpi.age".publicKeys = [ klipperpi-root klipperpi ];
   "lappy-borg.age".publicKeys = [ lappy-root lappy ];
+  "lappy-borg-encryption-pw.age".publicKeys = [ lappy-root lappy ];
 }
