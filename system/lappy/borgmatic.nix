@@ -3,6 +3,10 @@
  {
   age.secrets.lappy-borg.file = ../../secrets/lappy-borg.age;
   age.secrets.pw.file = ../../secrets/lappy-borg-encryption-pw.age;
+  systemd.tmpfiles.rules = [
+    "d /var/log/borgmatic 0777 root root"
+    "f /var/log/borgmatic/borgmatic.log 0777 root root"
+  ];
   services.borgmatic = { 
     enable = true;
     settings = { 
@@ -55,13 +59,13 @@
       };
       hooks = {
         before_everything = [
-          "echo $(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H%M%S) starting borgmatic backup >> /var/log/borgmatic.log"
+          "echo $(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H%M%S) starting borgmatic backup >> /var/log/borgmatic/borgmatic.log"
         ];
         after_everything = [
-          "echo $(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H%M%S) borgmatic backup finished >> /var/log/borgmatic.log"
+          "echo $(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H%M%S) borgmatic backup finished >> /var/log/borgmatic/borgmatic.log"
         ];
         on_error = [
-          "echo $(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H%M%S) borgmatic backup encountered an error. Check `journalctl -xeu borgmatic`"
+          "echo $(${pkgs.coreutils}/bin/date +%Y-%m-%d_%H%M%S) borgmatic backup encountered an error. Check `journalctl -xeu borgmatic` >> /var/log/borgmatic/borgmatic.log"
         ];
       };
     };  
