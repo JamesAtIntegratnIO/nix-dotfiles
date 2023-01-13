@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./borgmatic.nix
+      ./borgmatic2.nix
     ];
   boot = {
     kernelPackages = pkgs.linuxPackages_6_1;

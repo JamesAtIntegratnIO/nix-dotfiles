@@ -1,6 +1,5 @@
  {pkgs, config, ... }: 
 
- let  in
  {
   age.secrets.lappy-borg.file = ../../secrets/lappy-borg.age;
   age.secrets.pw.file = ../../secrets/lappy-borg-encryption-pw.age;
@@ -13,7 +12,13 @@
         ];  
         source_directories = [ 
           "/home/boboysdadda"
-        ];  
+        ];
+        exclude_patterns = [
+          "'/home/*/Downloads/'"
+          "'/home/*/.cache'"
+          "'*/.vim*.tmp'"
+
+        ];
       };  
       storage = { 
         compression = "auto,zstd";
@@ -30,16 +35,15 @@
       };
       consistency = {
         checks = [
-          "repository"
           {
-            archives = {
-              frequency  = "2 weeks";
-            };
+            name = "repository";
+          }
+          {
+            name = "archives";
+            frequency = "2 weeks";
           }
         ];
-
       };
-
     };  
   }; 
  }
