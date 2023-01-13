@@ -53,6 +53,11 @@
           }
         ];
       };
+      # hooks = {
+      #   before_everything = [''${pkgs.notify-desktop}/bin/notify-desktop "Borgmatic is starting"''];
+      #   after_everything = [''${pkgs.notify-desktop}/bin/notify-desktop "Borgmatic has successfully completed"''];
+      #   on_error = [''${pkgs.notify-desktop}/bin/notify-desktop "Borgmatic fucked up. You might want to `journalctl -xeu borgmatic`"''];
+      # };
     };  
   }; 
  }
