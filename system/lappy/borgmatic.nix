@@ -37,10 +37,19 @@
         checks = [
           {
             name = "repository";
+            frequency = "2 weeks";
           }
           {
             name = "archives";
-            frequency = "2 weeks";
+            frequency = "4 weeks";
+          }
+          {
+            name = "data";
+            frequency = "6 weeks";
+          }
+          {
+            name = "extract";
+            frequency = "6 weeks";
           }
         ];
       };
