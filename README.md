@@ -33,7 +33,7 @@ Flash the sd for the pi as an access point. Fetch the pubkey and then proceed wi
 2. Add that pubkey to [secrets.nix](./secrets/secrets.nix)
     1. I think you can use a different secret for things that are specific to the user. But I haven't had a need yet.
 3. Create the secret
-    1. `cd secrets/`
+    1. `cd secrets/` or make the directory and cd there
     2. `nix run github:ryantm/agenix -- -e klipperpi.age` < This should point at the `secretName.age` you just added
     3. A text editor will pop up and you add your secret in whatever format you need (k:v, rsa, env, string)
     4. Save the file and it will populate as `secrets/secretName.age`
