@@ -12,6 +12,8 @@
     coverflow-alt-tab
     panel-corners
     rounded-window-corners
+    custom-hot-corners-extended
+    gtile
   ];
 
   dconf.settings = {
@@ -44,7 +46,7 @@
 
     # Configure Bluetooth Quick Connect
     "org/gnome/shell/extensions/bluetooth-quick-connect" = {
-      keep-menu-on-toggle = false;
+      keep-menu-on-toggle = true;
       refresh-button-on = true;
     };
 

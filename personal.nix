@@ -5,7 +5,9 @@ in
 {
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs; [
-    
+    _1password
+    _1password-gui
+    yubioath-flutter
     tmux
     nodejs
     bind

@@ -1,7 +1,7 @@
 {pkgs, font, fontSize, withGUI, ...}:
 {
   programs.alacritty = {
-    enable = withGUI;
+    enable = false;
     settings = {
       env = {
         TERM = "xterm-256color";

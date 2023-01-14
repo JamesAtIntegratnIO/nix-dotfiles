@@ -73,8 +73,6 @@
     # Configure keymap in X11
     layout = "us";
     xkbVariant = "";
-    # Swap capslock with escape
-    xkbOptions = "caps:swapescape";
   };
   # Enable touchegg
   services.touchegg.enable = true;
@@ -152,6 +150,14 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Yubikey
+  services.udev.packages = [ pkgs.yubikey-personalization ];
+  services.pcscd.enable = true;
+  security.pam.services = {
+    login.u2fAuth = true;
+    sudo.u2fAuth = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
