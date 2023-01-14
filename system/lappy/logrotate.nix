@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   services.logrotate = {
-    enable = true;
+    enable = false;
     settings = {
       borgmatic = {
         files = [
