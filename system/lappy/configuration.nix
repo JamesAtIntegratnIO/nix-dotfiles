@@ -36,6 +36,16 @@
     # wireless.enable = true;
     # Configure my wireless network
     # wireless.networks."AllKindsOfTcpIps".psk = (lib.fileContents "../../secrets/allkindsoftcpips-password");
+    firewall = {
+      allowedTCPPortRanges = [
+        # KDE Connect
+        { from = 1714; to = 1764; }
+      ];
+      allowedUDPPortRanges = [
+        # KDE Connect
+        { from = 1714; to = 1764; }
+      ];
+    };
   };
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
