@@ -13,15 +13,17 @@
     panel-corners
     rounded-window-corners
     custom-hot-corners-extended
-    gtile
+    gsnap
   ];
 
+  # To get these settings so that you can add them to your configuration after manually configuring them
+  # dconf dump /org/gnome/
   dconf.settings = {
-    # Enable installed extensions
     "org/gnome/shell".enabled-extensions = map (extension: extension.extensionUuid) home.packages;
-
     "org/gnome/shell".disabled-extensions = [];
 
+    "org/gnome/shell/extensions/apps-menu" = { enabled = true; };
+        
     # Configure blur-my-shell
     "org/gnome/shell/extensions/blur-my-shell" = {
       brightness = 0.85;
@@ -44,6 +46,7 @@
       incognito-shortcut = ["<Shift><Super>less"];
     };
 
+
     # Configure Bluetooth Quick Connect
     "org/gnome/shell/extensions/bluetooth-quick-connect" = {
       keep-menu-on-toggle = true;
@@ -57,10 +60,32 @@
       panel-corners = true;
       screen-corners = true;
     };
-
     # Configure Rounded Window Corners
     "org/gnome/shell/extensions/rounded-window-corners" = {
       tweak-kitty-terminal = true;
+    };
+    # Configure Extended Hot Corners
+    "org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-top-left-0" = {
+      action = "toggle-overview";
+    };
+    "org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-top-left-1" = {
+      action = "move-win-to-prev-ws";
+    };
+    "org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-top-left-6" = {  
+      action = "show-applications";
+      ctrl = true;
+    };
+    "org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-top-right-1" = {
+      action = "move-win-to-next-ws";
+      fullscreen = true;
+    };
+    "org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-top-right-6" = {
+      ctrl = true;
+    };
+
+    # Keybindings
+    "org/gnome/shell/keybindings" = {
+      show-screenshot-ui=["<Shift><Super>s"];
     };
   };
 }
