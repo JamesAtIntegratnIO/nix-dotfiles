@@ -35,7 +35,7 @@ in
     # pkgs.nixgl.auto.nixGLDefault
   ] ++ lib.optionals (withGUI) 
   [
-    discord
+    discord-ptb
     awscli2
     bluedevil
   ] ++ lib.optionals (enablePodman)
