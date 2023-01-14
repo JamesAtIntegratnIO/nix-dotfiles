@@ -97,7 +97,10 @@
   # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090;
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.brlaser ];
+  };
 
   # Enable bluetooth hardware
   hardware.bluetooth.enable = true;
