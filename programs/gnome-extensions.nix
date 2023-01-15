@@ -116,31 +116,49 @@
       display-all-workspaces = true;
     };
 
-    # Workspace Indicator panel
-    "org/gnome/desktop/wm/preferences" = {
-      workspace-names = [
-        "Browser"
-        "Code"
-        "Chat"
-      ];
-    };
-
     # Set the theme
     "org/gnome/shell/extensions/user-theme" = {
       # GTK Theme https://www.opendesktop.org/s/Gnome/p/1253385/
       name = "Sweet-Dark";
     };
     "org/gnome/desktop/interface" = {
+      ## Theme stuff
       cursor-theme = "Breeze_Snow";
       # Icon theme https://www.pling.com/p/1305251/
       icon-theme = "candy-icons";
       gtk-theme = "Sweet-Dark";
-    };
 
+      ## Clock
+      clock-show-weekday = true;
+      clock-show-date = true;
+
+      ## Font stuff
+      monospace-font-name = "RobotoMono Nerd Font 10";
+      font-antialiasing = "rgba";
+    };
 
     # Keybindings
     "org/gnome/shell/keybindings" = {
       show-screenshot-ui=["<Shift><Super>s"];
+    };
+
+    "org/gnome/desktop/wm/preferences" = {
+      # Workspace Indicator panel
+      workspace-names = [
+        "Browser"
+        "Code"
+        "Chat"
+      ];
+      button-layout = "appmenu:minimize,maximize,close";
+    };
+
+    # Lock Screen Wallpaper
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/drool-l.svg";
+    };
+    # File Chooser
+    "org/gtk/settings/file-chooser" = {
+      sort-directories-first = true;
     };
   };
 }

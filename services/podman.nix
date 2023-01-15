@@ -1,5 +1,8 @@
-{ pkgs-unstable, enablePodman, ... }:
 {
+  pkgs-unstable,
+  enablePodman,
+  ...
+}: {
   virtualisation = {
     podman = {
       enable = true;
@@ -9,7 +12,7 @@
       # Make the Podman socket available in place of the Docker socket, so
       #  Docker tools can find the Podman socket.
       dockerSocket.enable = false;
-      extraPackages = [ 
+      extraPackages = [
       ];
 
       # autoPrune = {

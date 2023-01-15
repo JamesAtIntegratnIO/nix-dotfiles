@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   services.logrotate = {
     enable = false;
     settings = {

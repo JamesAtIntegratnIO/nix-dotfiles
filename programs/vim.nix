@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{ 
+{pkgs, ...}: {
   programs.vim = {
     enable = true;
     plugins = [
@@ -8,7 +6,7 @@
       pkgs.vimPlugins.dracula-vim
       pkgs.vimPlugins.nerdtree
       pkgs.vimPlugins.nerdtree-git-plugin
-      pkgs.vimPlugins.fzf-vim 
+      pkgs.vimPlugins.fzf-vim
       pkgs.vimPlugins.vim-lsp
     ];
     settings = {
@@ -16,7 +14,6 @@
       background = "dark";
       mouse = "a";
       expandtab = true;
-
     };
     extraConfig = ''
       set termguicolors

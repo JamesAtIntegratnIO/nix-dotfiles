@@ -1,4 +1,3 @@
-
 {
   services.fluidd.enable = true;
   # Increase max upload size for uploading .gcode files from PrusaSlicer
@@ -8,8 +7,8 @@
     enable = true;
     address = "0.0.0.0";
     settings = {
-      octoprint_compat = { };
-      history = { };
+      octoprint_compat = {};
+      history = {};
       authorization = {
         # force_logins = true;
         cors_domains = [
@@ -32,4 +31,3 @@
     };
   };
 }
-  

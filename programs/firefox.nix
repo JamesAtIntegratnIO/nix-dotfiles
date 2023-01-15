@@ -1,5 +1,9 @@
-{ config, pkgs, withGUI, ... }:
-let 
+{
+  config,
+  pkgs,
+  withGUI,
+  ...
+}: let
   defaultSettings = {
     "app.normandy.api_url" = "";
     "app.normandy.enabled" = false;
@@ -39,21 +43,21 @@ let
     "datareporting.healthreport.service.enabled" = false;
     "datareporting.healthreport.uploadEnabled" = false;
     "datareporting.policy.dataSubmissionEnabled" = false;
-    "toolkit.telemetry.archive.enabled" =  false;
-    "toolkit.telemetry.bhrPing.enabled" =  false;
-    "toolkit.telemetry.cachedClientID" =  "";
-    "toolkit.telemetry.enabled" =  false;
-    "toolkit.telemetry.firstShutdownPing.enabled" =  false;
-    "toolkit.telemetry.hybridContent.enabled" =  false;
-    "toolkit.telemetry.newProfilePing.enabled" =  false;
-    "toolkit.telemetry.prompted" =  2;
-    "toolkit.telemetry.rejected" =  true;
-    "toolkit.telemetry.reportingpolicy.firstRun" =  false;
-    "toolkit.telemetry.server" =  "";
-    "toolkit.telemetry.shutdownPingSender.enabled" =  false;
-    "toolkit.telemetry.unified" =  false;
-    "toolkit.telemetry.unifiedIsOptIn" =  false;
-    "toolkit.telemetry.updatePing.enabled" =  false;
+    "toolkit.telemetry.archive.enabled" = false;
+    "toolkit.telemetry.bhrPing.enabled" = false;
+    "toolkit.telemetry.cachedClientID" = "";
+    "toolkit.telemetry.enabled" = false;
+    "toolkit.telemetry.firstShutdownPing.enabled" = false;
+    "toolkit.telemetry.hybridContent.enabled" = false;
+    "toolkit.telemetry.newProfilePing.enabled" = false;
+    "toolkit.telemetry.prompted" = 2;
+    "toolkit.telemetry.rejected" = true;
+    "toolkit.telemetry.reportingpolicy.firstRun" = false;
+    "toolkit.telemetry.server" = "";
+    "toolkit.telemetry.shutdownPingSender.enabled" = false;
+    "toolkit.telemetry.unified" = false;
+    "toolkit.telemetry.unifiedIsOptIn" = false;
+    "toolkit.telemetry.updatePing.enabled" = false;
     "experiments.enabled" = false;
     "extensions.greasemonkey.stats.optedin" = false;
     "extensions.greasemonkey.stats.url" = "";
@@ -62,7 +66,7 @@ let
     "device.sensors.enabled" = false;
     "network.dns.disablePrefetch" = true;
     "network.dns.disablePrefetchFromHTTPS" = true;
-    "network.allow-experiments" =  false;
+    "network.allow-experiments" = false;
     "network.captive-portal-service.enabled" = false;
     "network.cookie.cookieBehavior" = 1;
     "network.http.referer.spoofSource" = true;
@@ -70,17 +74,16 @@ let
     "network.predictor.enable-prefetch" = false;
     "network.predictor.enabled" = false;
     "network.prefetch-next" = false;
-    "privacy.donottrackheader.enabled" =  true;
+    "privacy.donottrackheader.enabled" = true;
     "privacy.donottrackheader.value" = 1;
     "privacy.query_stripping" = true;
     "privacy.trackingprotection.cryptomining.enabled" = true;
-    "privacy.trackingprotection.enabled" =  true;
+    "privacy.trackingprotection.enabled" = true;
     "privacy.trackingprotection.fingerprinting.enabled" = true;
-    "privacy.trackingprotection.pbmode.enabled" =  true;
+    "privacy.trackingprotection.pbmode.enabled" = true;
     "privacy.usercontext.about_newtab_segregation.enabled" = true;
-};
-in
-{
+  };
+in {
   programs.firefox = {
     enable = withGUI;
     extensions = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -92,11 +95,12 @@ in
       name = "James";
       isDefault = true;
       # // allows you to add overrides to the default settings
-      settings = defaultSettings // {
-        "app.update.auto" = false;
-        "browser.startup.homepage" = "https://lobste.rs";
-      };
+      settings =
+        defaultSettings
+        // {
+          "app.update.auto" = false;
+          "browser.startup.homepage" = "https://lobste.rs";
+        };
     };
   };
-  
 }

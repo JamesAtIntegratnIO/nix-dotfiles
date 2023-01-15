@@ -1,5 +1,10 @@
-{pkgs, font, fontSize, withGUI, ...}:
 {
+  pkgs,
+  font,
+  fontSize,
+  withGUI,
+  ...
+}: {
   programs.alacritty = {
     enable = false;
     settings = {
@@ -126,6 +131,5 @@
         };
       };
     };
-    
   };
 }

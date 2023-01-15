@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   programs.go = {
     enable = true;
     goPath = "go";
@@ -11,4 +10,4 @@
     #   "github.com/golangci/golangci-lint" = builtins.fetchGit "https://github.com/golangci/golangci-lint";
     # };
   };
-} 
+}

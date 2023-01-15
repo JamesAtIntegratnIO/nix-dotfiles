@@ -18,10 +18,24 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    alejandra.url = "github:kamadorueda/alejandra/3.0.0";
+    alejandra.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, flake-utils, nixpkgs-stable, vscode-server,nixos-hardware, nur, toucheggkde, agenix, ... }: rec {
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    home-manager,
+    flake-utils,
+    nixpkgs-stable,
+    vscode-server,
+    nixos-hardware,
+    nur,
+    toucheggkde,
+    agenix,
+    alejandra,
+    ...
+  }: rec {
     overlays = {
       nur = inputs.nur.overlay;
     };
@@ -36,23 +50,36 @@
           ./system/dev-nixos-vm/configuration.nix
           ./user-boboysdadda.nix
           vscode-server.nixosModule
-          ({ config, pkgs, ... }: {
+          ({
+            config,
+            pkgs,
+            ...
+          }: {
             services.vscode-server.enable = true;
           })
-          home-manager.nixosModules.home-manager ({ specialArgs, agenix, ... }: {
+          home-manager.nixosModules.home-manager
+          ({
+            specialArgs,
+            agenix,
+            ...
+          }: {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.boboysdadda = (
-              { config, pkgs, extraSpecialArgs, ... }:
               {
+                config,
+                pkgs,
+                extraSpecialArgs,
+                ...
+              }: {
                 home.stateVersion = "20.09";
                 targets.genericLinux.enable = true;
                 imports = [
                   ./personal.nix
                 ];
               }
-            );            
+            );
           })
         ];
       };
@@ -63,7 +90,8 @@
       klipperpi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
-          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"{
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          {
             sdImage.compressImage = false;
             sdImage.imageBaseName = "klippyPi-nixos-sd-image";
           }
@@ -74,7 +102,7 @@
           ./services/tailscale.nix
           agenix.nixosModule
           {
-            nix.settings.trusted-users = [ "boboysdadda" ];
+            nix.settings.trusted-users = ["boboysdadda"];
             security.sudo.wheelNeedsPassword = false;
           }
           # nixos-hardware.nixosModules.raspberry-pi-4 {
@@ -82,10 +110,9 @@
           #   hardware.raspberry-pi."4".poe-hat.enable = false;
           #   hardware.raspberry-pi."4".poe-plus-hat.enable = false;
           #   hardware.raspberry-pi."4".pwm0.enable = false;
-            
+
           # }
         ];
-        
       };
       lappy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -102,26 +129,36 @@
           ./services/tailscale.nix
           ./services/podman.nix
           agenix.nixosModule
-          nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen{
+          nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
+          {
             nix = {
               settings = {
-                experimental-features = [ "nix-command" "flakes" "recursive-nix" ];
-                system-features = [ "recursive-nix" ];
+                experimental-features = ["nix-command" "flakes" "recursive-nix"];
+                system-features = ["recursive-nix"];
               };
             };
-            nixpkgs.overlays = (nixpkgs.lib.attrValues overlays);
+            nixpkgs.overlays = nixpkgs.lib.attrValues overlays;
           }
           vscode-server.nixosModule
-          ({ config, pkgs, ... }: {
+          ({
+            config,
+            pkgs,
+            ...
+          }: {
             services.vscode-server.enable = true;
           })
-          home-manager.nixosModules.home-manager ({ specialArgs, ... }: {
+          home-manager.nixosModules.home-manager
+          ({specialArgs, ...}: {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = specialArgs;
             home-manager.users.boboysdadda = (
-              { config, pkgs, extraSpecialArgs, ... }:
               {
+                config,
+                pkgs,
+                extraSpecialArgs,
+                ...
+              }: {
                 home.stateVersion = "20.09";
                 targets.genericLinux.enable = true;
                 imports = [

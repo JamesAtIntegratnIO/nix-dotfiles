@@ -1,11 +1,14 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, lib, inputs, pkgs, ... }:
-
 {
-  imports = [ 
+  config,
+  lib,
+  inputs,
+  pkgs,
+  ...
+}: {
+  imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./borgmatic.nix
@@ -23,24 +26,25 @@
       };
     };
     # Enable building for ARM
-    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    binfmt.emulatedSystems = ["aarch64-linux"];
     # Setup keyfile
     initrd.secrets = {
       "/crypto_keyfile.bin" = null;
     };
   };
-    environment = {
+  environment = {
     variables = {
       WEBKIT_DISABLE_COMPOSITING_MODE = "1";
     };
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    #  wget
+      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      #  wget
       wally-cli
       libnotify
       cups-pdf-to-pdf
+      alejandra
     ];
   };
 
@@ -82,11 +86,17 @@
     firewall = {
       allowedTCPPortRanges = [
         # KDE Connect
-        { from = 1714; to = 1764; }
+        {
+          from = 1714;
+          to = 1764;
+        }
       ];
       allowedUDPPortRanges = [
         # KDE Connect
-        { from = 1714; to = 1764; }
+        {
+          from = 1714;
+          to = 1764;
+        }
       ];
     };
   };
@@ -102,7 +112,7 @@
       sudo.u2fAuth = true;
     };
     rtkit.enable = true;
-  };  
+  };
 
   services = {
     logind = {
@@ -129,7 +139,7 @@
     # Enable CUPS to print documents.
     printing = {
       enable = true;
-      drivers = [ pkgs.mfcl3770cdwlpr pkgs.mfcl3770cdwcupswrapper ];
+      drivers = [pkgs.mfcl3770cdwlpr pkgs.mfcl3770cdwcupswrapper];
     };
     pipewire = {
       enable = true;
@@ -146,15 +156,14 @@
     # Enable the OpenSSH daemon.
     openssh.enable = true;
 
-  # Yubikey
-    udev.packages = [ pkgs.yubikey-personalization ];
+    # Yubikey
+    udev.packages = [pkgs.yubikey-personalization];
     pcscd.enable = true;
-  
   };
 
   # Enable sound with pipewire.
   sound.enable = true;
-  
+
   # Set your time zone.
   time.timeZone = "America/Denver";
 
@@ -165,14 +174,12 @@
   users.users.boboysdadda = {
     isNormalUser = true;
     description = "James Dreier";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       plex-media-player
       slack
     ];
   };
-
-  
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -182,7 +189,6 @@
     enableSSHSupport = true;
   };
 
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -190,5 +196,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
-
 }

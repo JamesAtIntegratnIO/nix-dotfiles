@@ -14,7 +14,7 @@
         serial = "/dev/serial/by-id/usb-Klipper_lpc1768_19F0FF0207083DAFD23D665CC52000F5-if00";
       };
       printer = {
-        kinematics = "corexy";  
+        kinematics = "corexy";
         max_velocity = 300;
         max_accel = 5000;
         # square_corner_velocity= 15
@@ -23,14 +23,14 @@
       };
       display_status = {};
       pause_resume = {};
-      
+
       fan = {
-        pin= "P2.3";
+        pin = "P2.3";
       };
       safe_z_home = {
-        home_xy_position= "115, 95"; # Change coordinates to the center of your print bed
+        home_xy_position = "115, 95"; # Change coordinates to the center of your print bed
         speed = 50;
-        z_hop = 10;                # Move up 10mm
+        z_hop = 10; # Move up 10mm
         z_hop_speed = 5;
       };
       virtual_sdcard = {
@@ -92,7 +92,7 @@
         dir_pin = "!P2.6";
         enable_pin = "!P2.1";
         #step_distance = .0125;
-        endstop_pin = "P1.29";  # P1.28 for X-max
+        endstop_pin = "P1.29"; # P1.28 for X-max
         position_endstop = 230;
         position_max = 230;
         homing_speed = 80;
@@ -104,7 +104,7 @@
         dir_pin = "P0.20";
         enable_pin = "!P2.8";
         #step_distance = .0125
-        endstop_pin = "P1.27";  # P1.26 for Y-max
+        endstop_pin = "P1.27"; # P1.26 for Y-max
         position_endstop = 180;
         position_min = 0;
         position_max = 180;
