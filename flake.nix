@@ -29,6 +29,8 @@
     self,
     nixpkgs,
     flake-parts,
+    flake-root,
+    mission-control,
     home-manager,
     flake-utils,
     nixpkgs-stable,

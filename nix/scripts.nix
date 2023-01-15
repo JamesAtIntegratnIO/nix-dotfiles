@@ -6,7 +6,7 @@
     pkgs,
     ...
   }: {
-    mission-control-scripts = {
+    mission-control.scripts = {
       helloWorld = {
         category = "Test";
         description = "hello world test";
