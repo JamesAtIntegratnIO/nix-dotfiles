@@ -13,6 +13,7 @@
     rounded-window-corners
     custom-hot-corners-extended
     gtile
+    tailscale-status
   ];
 
   # To get these settings so that you can add them to your configuration after manually configuring them
