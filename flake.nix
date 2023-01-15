@@ -3,6 +3,8 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-22.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-root.url = "github:srid/flake-root";
+    mission-control.url = github:Platonic-Systems/mission-control;
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,8 +43,19 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         ./systems
+        ./nix
+        inputs.flake-root.flakeModule
+        inputs.mission-control.flakeModule
       ];
       systems = ["x86_64-linux"];
-      perSystem = {inputs', ...}: {};
+      perSystem = {
+        inputs',
+        pkgs,
+        lib,
+        config,
+        ...
+      }: {
+        flake-root.projectRootFile = "flake.nix";
+      };
     };
 }
