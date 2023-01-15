@@ -118,10 +118,10 @@ in {
         enablePodman = true;
       };
       modules = [
-        ./system/lappy/configuration.nix
-        ./user-boboysdadda.nix
-        ./services/tailscale.nix
-        ./services/podman.nix
+        ./lappy/configuration.nix
+        ../user-boboysdadda.nix
+        ../services/tailscale.nix
+        ../services/podman.nix
         agenix.nixosModule
         nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
         {
@@ -156,7 +156,7 @@ in {
               home.stateVersion = "20.09";
               targets.genericLinux.enable = true;
               imports = [
-                ./personal.nix
+                ../personal.nix
               ];
               # Must have `services.touchegg.enable = true;` for this to work
               # 3 Fingers UP: Present Windows
