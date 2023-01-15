@@ -19,7 +19,13 @@
   # To get these settings so that you can add them to your configuration after manually configuring them
   # dconf dump /org/gnome/
   dconf.settings = {
-    "org/gnome/shell".enabled-extensions = map (extension: extension.extensionUuid) home.packages;
+    # First we enable every extension that we install above
+    "org/gnome/shell".enabled-extensions = (map (extension: extension.extensionUuid) home.packages)
+    # Then we add any extensions that come with gnome but aren't enabled 
+    ++ 
+    [
+      "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
+    ]; 
     "org/gnome/shell".disabled-extensions = [];
 
     "org/gnome/shell/extensions/apps-menu" = { enabled = true; };
@@ -83,6 +89,15 @@
       ctrl = true;
     };
 
+    "org/gnome/shell/extensions/auto-move-windows" = {
+      application-list = [
+        "firefox.desktop:1"
+        "codium.desktop:2"
+        "org.gnome.Console.desktop:3"
+        "slack.desktop:4"
+        "discord-ptb.desktop:4"
+      ];
+    };
     # Keybindings
     "org/gnome/shell/keybindings" = {
       show-screenshot-ui=["<Shift><Super>s"];
