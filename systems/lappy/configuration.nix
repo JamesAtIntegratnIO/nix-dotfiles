@@ -137,8 +137,6 @@
       # no need to redefine it in your config for now)
       #media-session.enable = true;
     };
-    # Enable the OpenSSH daemon.
-    openssh.enable = true;
 
     # Yubikey
     udev.packages = [pkgs.yubikey-personalization];

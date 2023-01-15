@@ -40,6 +40,8 @@
       imports = [
         ./modules/tailscale.nix
         ./modules/i18n.nix
+        ./modules/openssh.nix
+        ./modules/tcp-hardening.nix
       ];
     })
   ];
