@@ -6,5 +6,10 @@
     aliases = {
       st = "status";
     };
+    extraConfig = {
+      global = {
+        autoSetupRemote = true;
+      };
+    };
   };
 }

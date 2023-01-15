@@ -29,6 +29,19 @@
     agenix
     alejandra
     ;
+  defaultModules = [
+    {
+      _module.args = {
+        self = self;
+        inputs = inputs;
+      };
+    }
+    ({...}: {
+      imports = [
+        ./modules/tailscale
+      ]
+    })
+  ];
   overlays = {
     nur = inputs.nur.overlay;
   };
@@ -83,7 +96,7 @@ in {
     # nixos-rebuild --target-host boboysdadda@klipperpi.home.arpa --use-remote-sudo switch --flake .#klipperpi
     klipperpi = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
-      modules = [
+      modules = defaultModules ++ [
         "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
         {
           sdImage.compressImage = false;
@@ -93,7 +106,6 @@ in {
         ./system/klipperpi/klipper.nix
         ./system/klipperpi/moonraker.nix
         ./user-boboysdadda.nix
-        ./services/tailscale.nix
         agenix.nixosModule
         {
           nix.settings.trusted-users = ["boboysdadda"];
@@ -117,11 +129,10 @@ in {
         font = "FiraCode Nerd Font Mono";
         enablePodman = true;
       };
-      modules = [
+      modules = default_modules ++ [
         ./lappy/configuration.nix
         ../user-boboysdadda.nix
-        ../services/tailscale.nix
-        ../services/podman.nix
+        ./modules/podman.nix
         agenix.nixosModule
         nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
         {
