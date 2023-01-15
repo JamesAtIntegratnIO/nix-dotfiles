@@ -14,6 +14,7 @@
     custom-hot-corners-extended
     gtile
     tailscale-status
+    
   ];
 
   # To get these settings so that you can add them to your configuration after manually configuring them
@@ -31,6 +32,7 @@
       "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
       "apps-menu@gnome-shell-extensions.gcampax.github.com"
       "native-window-placement@gnome-shell-extensions.gcampax.github.com"
+      "user-theme@gnome-shell-extensions.gcampax.github.com"
     ]; 
     "org/gnome/shell".disabled-extensions = [];
 
@@ -121,6 +123,11 @@
         "Code"
         "Chat"
       ];
+    };
+
+    # Set the theme
+    "org/gnome/shell/extensions/user-theme" = {
+      name = "Sweet-mars"
     };
 
 

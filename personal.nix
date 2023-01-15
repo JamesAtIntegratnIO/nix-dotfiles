@@ -38,6 +38,7 @@ in
     discord-ptb
     awscli2
     bluedevil
+    gimp
   ] ++ lib.optionals (enablePodman)
   [
     podman-compose
