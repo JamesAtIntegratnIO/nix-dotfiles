@@ -40,15 +40,12 @@
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        ./flake-test.nix
+        ./system
       ];
       systems = ["x86_64-linux"];
       perSystem = {inputs', ...}: {};
     };
   # rec {
-  # overlays = {
-  #   nur = inputs.nur.overlay;
-  # };
 
   # flake.nixosConfigurations = {
   #   devvm = nixpkgs.lib.nixosSystem {

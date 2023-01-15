@@ -1,9 +1,37 @@
 {
   self,
   inputs,
+  nixpkgs,
+  flake-parts,
+  home-manager,
+  flake-utils,
+  nixpkgs-stable,
+  vscode-server,
+  nixos-hardware,
+  nur,
+  toucheggkde,
+  agenix,
+  alejandra,
   ...
 }: let
-  inherit (inputs) nixows-hardware nixpkgs;
+  inherit
+    (inputs)
+    self
+    nixpkgs
+    flake-parts
+    home-manager
+    flake-utils
+    nixpkgs-stable
+    vscode-server
+    nixos-hardware
+    nur
+    toucheggkde
+    agenix
+    alejandra
+    ;
+  overlays = {
+    nur = inputs.nur.overlay;
+  };
 in {
   flake.nixosConfigurations = {
     devvm = nixpkgs.lib.nixosSystem {
@@ -13,8 +41,8 @@ in {
         enablePodman = true;
       };
       modules = [
-        ./system/dev-nixos-vm/configuration.nix
-        ./user-boboysdadda.nix
+        ./dev-nixos-vm/configuration.nix
+        ../user-boboysdadda.nix
         vscode-server.nixosModule
         ({
           config,
@@ -42,7 +70,7 @@ in {
               home.stateVersion = "20.09";
               targets.genericLinux.enable = true;
               imports = [
-                ./personal.nix
+                ../personal.nix
               ];
             }
           );
