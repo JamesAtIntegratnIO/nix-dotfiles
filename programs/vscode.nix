@@ -6,22 +6,31 @@
   programs.vscode = {
     enable = withGUI;
     package = pkgs.vscodium;
-    extensions = [
-      pkgs.vscode-extensions.golang.go
+    extensions = with pkgs.vscode-extensions; [
+      golang.go
       #  pkgs.vscode-extensions.github.copilot
-      pkgs.vscode-extensions.mhutchie.git-graph
-      pkgs.vscode-extensions.eamodio.gitlens
-      pkgs.vscode-extensions.viktorqvarfordt.vscode-pitch-black-theme
-      pkgs.vscode-extensions.ms-python.python
-      pkgs.vscode-extensions.matklad.rust-analyzer
-      pkgs.vscode-extensions.bbenoist.nix
-      pkgs.vscode-extensions.arrterian.nix-env-selector
-      pkgs.vscode-extensions.ms-kubernetes-tools.vscode-kubernetes-tools
-      pkgs.vscode-extensions.ms-azuretools.vscode-docker
-      pkgs.vscode-extensions.timonwong.shellcheck
-      pkgs.vscode-extensions.tamasfe.even-better-toml
-      pkgs.vscode-extensions.ms-vscode-remote.remote-ssh
-      pkgs.vscode-extensions.redhat.vscode-yaml
+      mhutchie.git-graph
+      eamodio.gitlens
+      viktorqvarfordt.vscode-pitch-black-theme
+      ms-python.python
+      matklad.rust-analyzer
+      bbenoist.nix
+      arrterian.nix-env-selector
+      ms-kubernetes-tools.vscode-kubernetes-tools
+      ms-azuretools.vscode-docker
+      timonwong.shellcheck
+      tamasfe.even-better-toml
+      ms-vscode-remote.remote-ssh
+      redhat.vscode-yaml
+
+      # Extensions for my KB
+      foam.foam-vscode
+      yzhang.markdown-all-in-one
+      bierner.emojisense
+      bierner.markdown-mermaid
+      tomoki1207.pdf
+      gruntfuggly.todo-tree
+      esbenp.prettier-vscode
     ];
     userSettings = {
       "editor.tabSize" = 2;
