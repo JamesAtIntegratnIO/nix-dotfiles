@@ -8,16 +8,16 @@
     gsconnect
     removable-drive-menu
     bluetooth-quick-connect
-    sound-output-device-chooser
     coverflow-alt-tab
     panel-corners
     rounded-window-corners
     custom-hot-corners-extended
-    gsnap
+    gtile
   ];
 
   # To get these settings so that you can add them to your configuration after manually configuring them
-  # dconf dump /org/gnome/
+  # `dconf dump /org/gnome/`
+  # Another way to do this is to do `dconf watch /org/gnome` and then make the changes you want and then migrate them in as you see what they are.
   dconf.settings = {
     # First we enable every extension that we install above
     "org/gnome/shell".enabled-extensions = (map (extension: extension.extensionUuid) home.packages)
@@ -25,6 +25,11 @@
     ++ 
     [
       "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
+      "window-list@gnome-shell-extensions.gcampax.github.com"
+      "places-menu@gnome-shell-extensions.gcampax.github.com"
+      "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
+      "apps-menu@gnome-shell-extensions.gcampax.github.com"
+      "native-window-placement@gnome-shell-extensions.gcampax.github.com"
     ]; 
     "org/gnome/shell".disabled-extensions = [];
 
@@ -57,6 +62,7 @@
     "org/gnome/shell/extensions/bluetooth-quick-connect" = {
       keep-menu-on-toggle = true;
       refresh-button-on = true;
+      show-batter-icon-on = true;
     };
 
     # Configure Panel Corners
@@ -88,7 +94,8 @@
     "org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-top-right-6" = {
       ctrl = true;
     };
-
+    
+    # Set the default window for primary applications
     "org/gnome/shell/extensions/auto-move-windows" = {
       application-list = [
         "firefox.desktop:1"
@@ -98,6 +105,24 @@
         "discord-ptb.desktop:4"
       ];
     };
+    
+    # The open applications bar
+    "org/gnome/shell/extensions/window-list" = {
+      grouping-mode = "always";
+      show-on-all-monitors = true;
+      display-all-workspaces = true;
+    };
+
+    # Workspace Indicator panel
+    "org/gnome/desktop/wm/preferences" = {
+      workspace-names = [
+        "Browser"
+        "Code"
+        "Chat"
+      ];
+    };
+
+
     # Keybindings
     "org/gnome/shell/keybindings" = {
       show-screenshot-ui=["<Shift><Super>s"];
