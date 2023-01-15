@@ -7,11 +7,13 @@
     ...
   }: {
     mission-control.scripts = {
-      helloWorld = {
-        category = "Test";
-        description = "hello world test";
-        exec = pkgs.writeShellScriptBin "helloworld" ''
-          echo 'Hello Worls'
+      updateNixConfig = {
+        category = "deploy";
+        description = "Deploy the latest update to lappy";
+        exec = pkgs.writeShellScriptBin "update-config" ''
+          set -euo pipefail
+          hn=$(hostname -s)
+          sudo nixos-rebuild switch --flake .#$hn
         '';
       };
     };
