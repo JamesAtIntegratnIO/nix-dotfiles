@@ -127,7 +127,12 @@
 
     # Set the theme
     "org/gnome/shell/extensions/user-theme" = {
-      name = "Sweet-mars"
+      name = "Sweet-mars";
+    };
+    "org/gnome/desktop/interface" = {
+      cursor-theme = "Breeze_Snow";
+      icon-theme = "candy-icons";
+      gtk-theme = "Sweet-Dark";
     };
 
 

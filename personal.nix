@@ -39,6 +39,7 @@ in
     awscli2
     bluedevil
     gimp
+    gnome.gnome-tweaks
   ] ++ lib.optionals (enablePodman)
   [
     podman-compose
