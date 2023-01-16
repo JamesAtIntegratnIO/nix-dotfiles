@@ -62,16 +62,16 @@ in {
   flake.nixosConfigurations = {
     m900-1 = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      networking.hostName = "m900-1";
       specialArgs = {
         withGUI = false;
-        enablePodman = true;
+        enablePodman = false;
       };
       modules =
         defaultModules
         ++ [
           ./m900
           ./modules/user-boboysdadda.nix
+          {networking.hostName = "m900-1";}
         ];
     };
     devvm = nixpkgs.lib.nixosSystem {

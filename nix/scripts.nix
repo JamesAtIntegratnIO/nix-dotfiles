@@ -37,14 +37,16 @@
         description = "Builds toplevel NixOS image for dev host";
         exec = pkgs.writeShellScriptBin "nix-build-dev" ''
           set -euo pipefail
-          nix build .#nixosConfigurations.dev.config.system.build.toplevel
+
+          nix build .#nixosConfigurations.$1.config.system.build.toplevel
         '';
       };
       # ISOs
-      flash-dev-iso = {
+      flash-iso = {
         category = "Images";
         description = "Flash installer-iso image for dev";
-        exec = flash-iso-image "flash-dev-iso" "dev-iso-image";
+        exec =
+          flash-iso-image "flash-iso" "$1-iso-image";
       };
     };
   };

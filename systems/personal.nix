@@ -10,9 +10,6 @@ in {
   nixpkgs.config.allowUnfree = true;
   home.packages = with pkgs;
     [
-      _1password
-      _1password-gui
-      yubioath-flutter
       tmux
       nodejs
       bind
@@ -27,7 +24,6 @@ in {
       glibc
       glibcLocales
       terraform-docs
-      plasma-browser-integration
       pre-commit
       neofetch
       cht-sh
@@ -46,6 +42,9 @@ in {
       bluedevil
       gimp
       gnome.gnome-tweaks
+      _1password
+      _1password-gui
+      yubioath-flutter
     ]
     ++ lib.optionals enablePodman
     [

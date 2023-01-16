@@ -10,7 +10,7 @@
   }: let
     inherit (inputs) nixos-generators;
 
-    defaultModule = {...}: {
+    defaultModules = {...}: {
       imports = [
         inputs.disko.nixosModules.disko
         ./base-iso.nix
@@ -20,11 +20,11 @@
     };
   in {
     packages = {
-      dev-iso-image = nixos-generators.nixosGenerate {
+      m900-1-iso-image = nixos-generators.nixosGenerate {
         inherit pkgs;
         format = "install-iso";
         modules = [
-          defaultModule
+          defaultModules
           ({
             config,
             lib,
@@ -37,7 +37,7 @@
             disko-format = pkgs.writeShellScriptBin "disko-format" "${config.system.build.formatScript}";
 
             # system
-            system = self.nixosConfigurations.dev.config.system.build.toplevel;
+            system = self.nixosConfigurations.m900-1.config.system.build.toplevel;
 
             install-system = pkgs.writeShellScriptBin "install-system" ''
               set -euo pipefail
@@ -51,12 +51,14 @@
             '';
           in {
             imports = [
-              ../dev/disko.nix
+              ../m900/disko.nix
             ];
 
             # we don't want to generate filesystem entries on this image
             disko.enableConfig = lib.mkDefault false;
 
+            # Set the hostname so we can find it
+            networking.hostName = "m900-1";
             # add disko commands to format and mount disks
             environment.systemPackages = [
               disko
