@@ -55,17 +55,19 @@ in {
     direnv.enable = true;
   };
   imports = [
-    ./home-manager-modules/vscode.nix
-    ./home-manager-modules/zsh/zsh.nix
-    ./home-manager-modules/alacritty.nix
-    ./home-manager-modules/firefox.nix
-    ./home-manager-modules/git.nix
-    ./home-manager-modules/go.nix
-    ./home-manager-modules/vim.nix
-    ./home-manager-modules/gnome-extensions.nix
+    ./vscode.nix
+    ./zsh/zsh.nix
+    ./alacritty.nix
+    ./firefox.nix
+    ./git.nix
+    ./go.nix
+    ./vim.nix
+    ./gnome-extensions.nix
   ];
   home = {
-    file.".config/neofetch/config.conf".source = ./home-manager-modules/dotfiles/neofetch.conf;
-    file.".config/starship.toml".source = ./home-manager-modules/dotfiles/starship.toml;
+    username = "boboysdadda";
+    homeDirectory = "/home/${username}";
+    file.".config/neofetch/config.conf".source = ./dotfiles/neofetch.conf;
+    file.".config/starship.toml".source = ./dotfiles/starship.toml;
   };
 }
