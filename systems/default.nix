@@ -57,8 +57,9 @@ in {
     ./images
   ];
   flake.nixosConfigurations = {
-    dev = nixpkgs.lib.nixosSystem {
+    m900-1 = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
+      networking.hostName = "m900-1";
       specialArgs = {
         withGUI = false;
         enablePodman = true;
@@ -66,7 +67,7 @@ in {
       modules =
         defaultModules
         ++ [
-          ./dev
+          ./m900
           ./modules/user-boboysdadda.nix
           vscode-server.nixosModule
           ({
@@ -116,7 +117,7 @@ in {
                 home.stateVersion = "20.09";
                 targets.genericLinux.enable = true;
                 imports = [
-                  ../personal.nix
+                  ./personal.nix
                 ];
               }
             );
@@ -204,7 +205,7 @@ in {
                 home.stateVersion = "20.09";
                 targets.genericLinux.enable = true;
                 imports = [
-                  ../personal.nix
+                  ./personal.nix
                 ];
                 # Must have `services.touchegg.enable = true;` for this to work
                 # 3 Fingers UP: Present Windows

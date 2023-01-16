@@ -46,7 +46,7 @@ Flash the sd for the pi as an access point. Fetch the pubkey and then proceed wi
            ```
 [wireless.environmentFile reference](https://github.com/NixOS/nixpkgs/blob/92acdba79604ebab2e19a846299902a77c0eb15d/nixos/modules/services/networking/wpa_supplicant.nix#L221-L256)   
 ## Nifty Features
-### [Firfox Securish](./programs/firefox.nix): 
+### [Firfox Securish](systems/user-modules/firefox.nix): 
 In here I've set some basic sane settings for configuring firefox based on [ffprofiles.com](https://ffprofiles.com). You can create multiple profiles and override the defaultSettings with the `//` construct. 
 ```nix
 {
@@ -58,7 +58,7 @@ In here I've set some basic sane settings for configuring firefox based on [ffpr
 ```
 ### [gsconnect](https://extensions.gnome.org/extension/1319/gsconnect/):
 This is actually configured in a few places:
-* [Package install](./programs/gnome-extensions.nix)
+* [Package install](systems/user-modules/gnome-extensions.nix)
 * [Firewall Rules](./system/lappy/configuration.nix) This won't work without some TCP and UDP ports open
   ```nix
   {

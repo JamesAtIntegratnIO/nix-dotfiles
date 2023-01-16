@@ -15,6 +15,9 @@ in {
     partclone
     wget
   ];
+  imports = [
+    ../modules/user-root.nix
+  ];
 
   # Use helix as the default editor
   environment.variables.EDITOR = "vim";

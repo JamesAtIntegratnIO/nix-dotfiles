@@ -56,17 +56,17 @@ in {
     direnv.enable = true;
   };
   imports = [
-    ./programs/vscode.nix
-    ./programs/zsh/zsh.nix
-    ./programs/alacritty.nix
-    ./programs/firefox.nix
-    ./programs/git.nix
-    ./programs/go.nix
-    ./programs/vim.nix
-    ./programs/gnome-extensions.nix
+    ./user-modules/vscode.nix
+    ./user-modules/zsh/zsh.nix
+    ./user-modules/alacritty.nix
+    ./user-modules/firefox.nix
+    ./user-modules/git.nix
+    ./user-modules/go.nix
+    ./user-modules/vim.nix
+    ./user-modules/gnome-extensions.nix
   ];
   home = {
-    file.".config/neofetch/config.conf".source = ./dotfiles/neofetch.conf;
-    file.".config/starship.toml".source = ./dotfiles/starship.toml;
+    file.".config/neofetch/config.conf".source = ./user-modules/dotfiles/neofetch.conf;
+    file.".config/starship.toml".source = ./user-modules/dotfiles/starship.toml;
   };
 }
