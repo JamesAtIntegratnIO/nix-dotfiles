@@ -1,4 +1,6 @@
-{}: {
+{config, ...}:
+home-manager.nixosModules.home-manager
+({specialArgs, ...}: {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.extraSpecialArgs = specialArgs;
@@ -7,11 +9,12 @@
       config,
       pkgs,
       extraSpecialArgs,
+      ...
     }: {
       home.stateVersion = "20.09";
       targets.genericLinux.enable = true;
       imports = [
-        ../../personal.nix
+        ./personal.nix
       ];
       # Must have `services.touchegg.enable = true;` for this to work
       # 3 Fingers UP: Present Windows
@@ -22,4 +25,4 @@
       xdg.configFile."touchegg/touchegg.conf".source = "${toucheggkde}/touchegg.conf";
     }
   );
-}
+})

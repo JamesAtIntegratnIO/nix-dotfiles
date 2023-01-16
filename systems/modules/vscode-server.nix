@@ -1,12 +1,3 @@
-{ ... }: {
-  modules = {
-    vscode-server.nixosModule
-    ({
-      config,
-      pkgs,
-      ...
-    }: {
-      services.vscode-server.enable = true;
-    })
-  };
+{config, ...}: {
+  options.services.vscode-server.enable = true;
 }

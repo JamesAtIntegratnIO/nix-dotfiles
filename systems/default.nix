@@ -69,14 +69,7 @@ in {
         ++ [
           ./m900
           ./modules/user-boboysdadda.nix
-          vscode-server.nixosModule
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
-            services.vscode-server.enable = true;
-          })
+          ./modules/vscode-server.nix
         ];
     };
     devvm = nixpkgs.lib.nixosSystem {
@@ -90,14 +83,7 @@ in {
         ++ [
           ./dev-nixos-vm/configuration.nix
           ./modules/user-boboysdadda.nix
-          vscode-server.nixosModule
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
-            services.vscode-server.enable = true;
-          })
+          ./modules/vscode-server.nix
           home-manager.nixosModules.home-manager
           ({
             specialArgs,
@@ -142,6 +128,7 @@ in {
           ./system/klipperpi/klipper.nix
           ./system/klipperpi/moonraker.nix
           ./user-boboysdadda.nix
+          ./modules/vscode-server.nix
           agenix.nixosModule
           {
             nix.settings.trusted-users = ["boboysdadda"];
@@ -169,28 +156,14 @@ in {
         defaultModules
         ++ [
           ./lappy/configuration.nix
+          ./modules/nix-defaults
           ./modules/user-boboysdadda.nix
           ./modules/podman.nix
           ./modules/vscode-server.nix
           agenix.nixosModule
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
           {
-            nix = {
-              settings = {
-                experimental-features = ["nix-command" "flakes" "recursive-nix"];
-                system-features = ["recursive-nix"];
-              };
-            };
-            nixpkgs.overlays = nixpkgs.lib.attrValues overlays;
           }
-          # vscode-server.nixosModule
-          # ({
-          #   config,
-          #   pkgs,
-          #   ...
-          # }: {
-          #   services.vscode-server.enable = true;
-          # })
           home-manager.nixosModules.home-manager
           ({specialArgs, ...}: {
             home-manager.useGlobalPkgs = true;
