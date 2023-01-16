@@ -3,8 +3,8 @@
     ./boot.nix
     ./disko.nix
     ./hardware.nix
-    ./services
+    # ./services
     ./system.nix
-    ./users.nix
+    # ./users.nix
   ];
 }

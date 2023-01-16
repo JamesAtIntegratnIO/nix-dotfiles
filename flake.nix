@@ -23,6 +23,14 @@
     };
     alejandra.url = "github:kamadorueda/alejandra/3.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
+    disko = {
+      url = github:nix-community/disko;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-generators = {
+      url = github:nix-community/nixos-generators;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -40,6 +48,7 @@
     toucheggkde,
     agenix,
     alejandra,
+    disko,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} {

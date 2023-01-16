@@ -12,6 +12,7 @@
   toucheggkde,
   agenix,
   alejandra,
+  disko,
   ...
 }: let
   inherit
@@ -28,6 +29,7 @@
     toucheggkde
     agenix
     alejandra
+    disko
     ;
   defaultModules = [
     {
@@ -38,6 +40,8 @@
     }
     ({...}: {
       imports = [
+        disko.nixosModules.disko
+
         ./modules/tailscale.nix
         ./modules/i18n.nix
         ./modules/openssh.nix
@@ -49,7 +53,31 @@
     nur = inputs.nur.overlay;
   };
 in {
+  imports = [
+    ./images
+  ];
   flake.nixosConfigurations = {
+    dev = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = {
+        withGUI = false;
+        enablePodman = true;
+      };
+      modules =
+        defaultModules
+        ++ [
+          ./dev
+          ./modules/user-boboysdadda.nix
+          vscode-server.nixosModule
+          ({
+            config,
+            pkgs,
+            ...
+          }: {
+            services.vscode-server.enable = true;
+          })
+        ];
+    };
     devvm = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = {
@@ -60,7 +88,7 @@ in {
         defaultModules
         ++ [
           ./dev-nixos-vm/configuration.nix
-          ../user-boboysdadda.nix
+          ./modules/user-boboysdadda.nix
           vscode-server.nixosModule
           ({
             config,
