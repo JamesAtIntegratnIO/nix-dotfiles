@@ -47,6 +47,7 @@
         ./modules/openssh.nix
         ./modules/user-root.nix
         ./modules/nix-defaults.nix
+        ./modules/vscode-server.nix
       ];
     })
   ];
@@ -70,7 +71,6 @@ in {
         ++ [
           ./m900
           ./modules/user-boboysdadda.nix
-          ./modules/vscode-server.nix
         ];
     };
     devvm = nixpkgs.lib.nixosSystem {
@@ -84,7 +84,6 @@ in {
         ++ [
           ./dev-nixos-vm/configuration.nix
           ./modules/user-boboysdadda.nix
-          ./modules/vscode-server.nix
           home-manager.nixosModules.home-manager
           ({
             specialArgs,
@@ -127,7 +126,6 @@ in {
           }
           ./system/klipperpi
           ./user-boboysdadda.nix
-          ./modules/vscode-server.nix
           agenix.nixosModule
           {
             nix.settings.trusted-users = ["boboysdadda"];
@@ -154,11 +152,10 @@ in {
       modules =
         defaultModules
         ++ [
-          ./lappy/configuration.nix
-
+          ./lappy
           ./modules/user-boboysdadda.nix
           ./modules/podman.nix
-          ./modules/vscode-server.nix
+
           agenix.nixosModule
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
           {
