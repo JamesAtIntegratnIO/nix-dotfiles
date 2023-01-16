@@ -64,10 +64,4 @@ in {
     ./vim.nix
     ./gnome-extensions.nix
   ];
-  home = {
-    username = "boboysdadda";
-    homeDirectory = "/home/${username}";
-    file.".config/neofetch/config.conf".source = ./dotfiles/neofetch.conf;
-    file.".config/starship.toml".source = ./dotfiles/starship.toml;
-  };
 }

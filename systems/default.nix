@@ -163,7 +163,6 @@ in {
             ./lappy
             ./modules/user-boboysdadda.nix
             ./modules/podman.nix
-
             agenix.nixosModule
             nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
             {
