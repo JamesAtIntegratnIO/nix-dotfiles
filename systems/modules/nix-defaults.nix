@@ -12,6 +12,7 @@
       randomizedDelaySec = "45min";
     };
     settings = {
+      trusted-users = ["@wheel"];
       experimental-features = ["nix-command" "flakes" "recursive-nix"];
       system-features = ["recursive-nix"];
     };

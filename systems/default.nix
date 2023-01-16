@@ -54,6 +54,7 @@
   overlays = {
     nur = inputs.nur.overlay;
   };
+  security.sudo.wheelNeedsPassword = false;
 in {
   imports = [
     ./images
@@ -128,8 +129,6 @@ in {
           ./user-boboysdadda.nix
           agenix.nixosModule
           {
-            nix.settings.trusted-users = ["boboysdadda"];
-            security.sudo.wheelNeedsPassword = false;
           }
           # nixos-hardware.nixosModules.raspberry-pi-4 {
           #   nix.settings.experimental-features = [ "nix-command" "flakes" ];
