@@ -171,6 +171,7 @@ in {
           ./lappy/configuration.nix
           ./modules/user-boboysdadda.nix
           ./modules/podman.nix
+          ./modules/vscode-server.nix
           agenix.nixosModule
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
           {
@@ -182,14 +183,14 @@ in {
             };
             nixpkgs.overlays = nixpkgs.lib.attrValues overlays;
           }
-          vscode-server.nixosModule
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
-            services.vscode-server.enable = true;
-          })
+          # vscode-server.nixosModule
+          # ({
+          #   config,
+          #   pkgs,
+          #   ...
+          # }: {
+          #   services.vscode-server.enable = true;
+          # })
           home-manager.nixosModules.home-manager
           ({specialArgs, ...}: {
             home-manager.useGlobalPkgs = true;
