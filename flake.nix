@@ -12,7 +12,10 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     flake-utils.url = "github:numtide/flake-utils";
     vscode-server.url = "github:msteen/nixos-vscode-server";
-    nur.url = "github:nix-community/NUR";
+    nur = {
+      url = "github:nix-community/NUR";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
     toucheggkde = {
       url = "github:NayamAmarshe/ToucheggKDE";
       flake = false;

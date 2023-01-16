@@ -11,8 +11,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./borgmatic.nix
-    ./logrotate.nix
   ];
 
   boot = {

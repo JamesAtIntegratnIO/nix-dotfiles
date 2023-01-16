@@ -46,6 +46,7 @@
         ./modules/i18n.nix
         ./modules/openssh.nix
         ./modules/user-root.nix
+        ./modules/nix-defaults.nix
       ];
     })
   ];
@@ -124,9 +125,7 @@ in {
             sdImage.compressImage = false;
             sdImage.imageBaseName = "klippyPi-nixos-sd-image";
           }
-          ./system/klipperpi/configuration.nix
-          ./system/klipperpi/klipper.nix
-          ./system/klipperpi/moonraker.nix
+          ./system/klipperpi
           ./user-boboysdadda.nix
           ./modules/vscode-server.nix
           agenix.nixosModule
@@ -156,13 +155,14 @@ in {
         defaultModules
         ++ [
           ./lappy/configuration.nix
-          ./modules/nix-defaults
+
           ./modules/user-boboysdadda.nix
           ./modules/podman.nix
           ./modules/vscode-server.nix
           agenix.nixosModule
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
           {
+            nixpkgs.overlays = nixpkgs.lib.attrValues overlays;
           }
           home-manager.nixosModules.home-manager
           ({specialArgs, ...}: {
