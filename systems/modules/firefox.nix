@@ -49,6 +49,7 @@
       ShowHomeButton = true;
       StartDownloadsInTempDirectory = true;
     };
+    # This is copied out of a semi sane export from ffprofile.com
     preferences = {
       "app.normandy.api_url" = "";
       "app.normandy.enabled" = false;
@@ -128,21 +129,5 @@
       "privacy.trackingprotection.pbmode.enabled" = true;
       "privacy.usercontext.about_newtab_segregation.enabled" = true;
     };
-    # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-    #   onepassword-password-manager
-    #   ublock-origin
-    # ];
-    # profiles.default = {
-    #   id = 0;
-    #   name = "James";
-    #   isDefault = true;
-    #   # // allows you to add overrides to the default settings
-    #   settings =
-    #     defaultSettings
-    #     // {
-    #       "app.update.auto" = false;
-    #       "browser.startup.homepage" = "https://lobste.rs";
-    #     };
-    # };
   };
 }
