@@ -28,6 +28,7 @@
   environment = {
     variables = {
       WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+      NIXOS_OZONE_WL = "1";
     };
     # List packages installed in system profile. To search, run:
     # $ nix search wget
@@ -151,8 +152,6 @@
     description = "James Dreier";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-      plex-media-player
-      slack
     ];
   };
 

@@ -4,7 +4,7 @@
   ...
 }: {
   programs.vscode = {
-    enable = withGUI;
+    enable = false;
     package = pkgs.vscodium;
     extensions = with pkgs.vscode-extensions; [
       golang.go

@@ -35,16 +35,27 @@
             disko = pkgs.writeShellScriptBin "disko" ''${config.system.build.disko}'';
             disko-mount = pkgs.writeShellScriptBin "disko-mount" "${config.system.build.mountScript}";
             disko-format = pkgs.writeShellScriptBin "disko-format" "${config.system.build.formatScript}";
-            # we don't want to generate filesystem entries on this image
-            disko.enableConfig = lib.mkDefault false;
 
             # system
             system = self.nixosConfigurations.m900-1.config.system.build.toplevel;
+
+            install-system = pkgs.writeShellScriptBin "install-system" ''
+              set -euo pipefail
+              echo "Formatting disks..."
+              . ${disko-format}/bin/disko-format
+              echo "Mounting disks..."
+              . ${disko-mount}/bin/disko-mount
+              echo "Installing system..."
+              nixos-install --system ${system}
+              echo "Done!"
+            '';
           in {
             imports = [
               ../m900/disko.nix
-              ./modules/install-system.nix
             ];
+
+            # we don't want to generate filesystem entries on this image
+            disko.enableConfig = lib.mkDefault false;
 
             # Set the hostname so we can find it
             networking.hostName = "m900-1";
