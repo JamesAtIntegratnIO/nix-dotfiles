@@ -1,8 +1,8 @@
 {pkgs, ...}: {
-  vscode = with pkgs; [
-    vscodium
+  packages = with pkgs; [
     (vscode-with-extensions.override {
-      vscodeExtensions = vscode-extensions; [
+      vscode = vscodium;
+      vscodeExtensions = with vscode-extensions; [
         golang.go
         #  pkgs.vscode-extensions.github.copilot
         mhutchie.git-graph
