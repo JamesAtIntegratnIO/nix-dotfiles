@@ -134,8 +134,8 @@ in {
               sdImage.compressImage = false;
               sdImage.imageBaseName = "klippyPi-nixos-sd-image";
             }
-            ./system/klipperpi
-            ./user-boboysdadda.nix
+            ./klipperpi
+            ./modules/user-boboysdadda.nix
             agenix.nixosModule
             {
             }
@@ -164,6 +164,7 @@ in {
             ./modules/user-boboysdadda.nix
             ./modules/podman.nix
             ./modules/firefox.nix
+            ./modules/gnome-exclusions.nix
             agenix.nixosModule
             nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
             {
