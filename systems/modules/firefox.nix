@@ -19,6 +19,10 @@
           installation_mode = "force_installed";
           install_url = "https://addons.mozilla.org/firefox/downloads/file/3918810/1password-latest-fx.xpi";
         };
+        "jid0-adyhmvsP91nUO8pRv0Mn2VKeB84@jetpack" = {
+          installation_mode = "force_installed";
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4040837/raindropio-latest.xpi";
+        };
       };
       ExtensionUpdate = true;
       OfferToSaveLogins = false;
