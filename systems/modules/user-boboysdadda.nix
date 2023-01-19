@@ -28,11 +28,13 @@ in {
         go-outline
         golangci-lint
         gocode
+        kitty
         powerline-fonts
         google-cloud-sdk
         vimPlugins.dracula-vim
         glibc
         glibcLocales
+        gmailctl
         terraform-docs
         pre-commit
         neofetch
@@ -51,6 +53,7 @@ in {
         slack
         awscli2
         bluedevil
+        evolution
         gimp
         gnome.gnome-tweaks
         _1password
@@ -83,6 +86,13 @@ in {
             tomoki1207.pdf
             gruntfuggly.todo-tree
             esbenp.prettier-vscode
+          ] ++ vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "alejandra";
+            publisher = "kamadorueda";
+            version = "1.0.0";
+            sha256 = "08e9448ca866f2d2b95df3a3ae95540d0ef1dc968e2e262867831dc132fc92d9";
+          }
           ];
         })
       ]
