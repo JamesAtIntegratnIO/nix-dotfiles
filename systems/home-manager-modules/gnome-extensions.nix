@@ -1,5 +1,6 @@
 {pkgs, ...}: rec {
   home.packages = with pkgs.gnomeExtensions; [
+    appindicator
     blur-my-shell
     pano
     gsconnect
