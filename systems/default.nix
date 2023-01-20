@@ -190,7 +190,7 @@ in {
                   targets.genericLinux.enable = true;
                   imports = [
                     ./personal.nix
-                    ./mondules/emacs.nix
+                    # ./modules/emacs.nix
                   ];
                   # Must have `services.touchegg.enable = true;` for this to work
                   # 3 Fingers UP: Present Windows

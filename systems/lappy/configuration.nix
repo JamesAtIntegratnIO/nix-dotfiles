@@ -93,10 +93,10 @@
   };
 
   services = {
-    # emacs = {
-    #   enable = true;
-    #   package = pkgs.emacsUnstable;
-    # };
+    emacs = {
+      enable = true;
+      package = with pkgs; ((emacsPackagesFor emacsPgtkNativeComp).emacsWithPackages (epkgs: [epkgs.vterm])) pkgs.emacsPgtk;
+    };
     logind = {
       lidSwitchExternalPower = "ignore";
     };
