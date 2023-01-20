@@ -93,6 +93,10 @@
   };
 
   services = {
+    # emacs = {
+    #   enable = true;
+    #   package = pkgs.emacsUnstable;
+    # };
     logind = {
       lidSwitchExternalPower = "ignore";
     };

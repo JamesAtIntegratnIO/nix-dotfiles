@@ -14,6 +14,7 @@
   agenix,
   alejandra,
   disko,
+  emacs-overlay,
   ...
 }: let
   inherit
@@ -32,6 +33,7 @@
     agenix
     alejandra
     disko
+    emacs-overlay
     ;
   defaultModules = [
     {
@@ -55,6 +57,7 @@
   ];
   overlays = {
     nur = inputs.nur.overlay;
+    emacsUnstable = import inputs.emacs-overlay;
   };
   security.sudo.wheelNeedsPassword = false;
 in {
@@ -165,7 +168,6 @@ in {
             ./modules/podman.nix
             ./modules/firefox.nix
             ./modules/gnome-exclusions.nix
-            ./modules/emacs.nix
             ./home-manager-modules/appimage.nix
             agenix.nixosModule
             nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
@@ -188,6 +190,7 @@ in {
                   targets.genericLinux.enable = true;
                   imports = [
                     ./personal.nix
+                    ./mondules/emacs.nix
                   ];
                   # Must have `services.touchegg.enable = true;` for this to work
                   # 3 Fingers UP: Present Windows
