@@ -165,7 +165,7 @@ in {
             ./modules/podman.nix
             ./modules/firefox.nix
             ./modules/gnome-exclusions.nix
-            ./modules/emacsUnstable.nix
+            ./modules/emacs.nix
             ./home-manager-modules/appimage.nix
             agenix.nixosModule
             nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
