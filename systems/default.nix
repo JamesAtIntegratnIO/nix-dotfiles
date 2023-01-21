@@ -189,8 +189,7 @@ in {
                   home.stateVersion = "20.09";
                   targets.genericLinux.enable = true;
                   imports = [
-                    ./personal.nix
-                    ./modules/emacs.nix
+                    ./home-manager-modules
                   ];
                   # Must have `services.touchegg.enable = true;` for this to work
                   # 3 Fingers UP: Present Windows
