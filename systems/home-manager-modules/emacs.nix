@@ -10,5 +10,5 @@
     ];
     package = pkgs.emacsPgtk; 
   };
-
+  home.file.".emacs.d/init.el".source = ./dotfiles/emacs.el;
 }
