@@ -8,13 +8,6 @@
   pkgs,
   ...
 }: {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ./borgmatic.nix
-    ./logrotate.nix
-  ];
-
   boot = {
     kernelPackages = pkgs.linuxPackages_6_1;
     # Bootloader.
@@ -35,6 +28,7 @@
   environment = {
     variables = {
       WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+      NIXOS_OZONE_WL = "1";
     };
     # List packages installed in system profile. To search, run:
     # $ nix search wget
@@ -46,22 +40,6 @@
       cups-pdf-to-pdf
       alejandra
     ];
-  };
-
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-    };
   };
 
   hardware = {
@@ -115,6 +93,11 @@
   };
 
   services = {
+    # emacs = {
+    #   enable = true;
+    #   package = pkgs.emacsPgtk;
+    #   config = ./init.el;
+    # };
     logind = {
       lidSwitchExternalPower = "ignore";
     };
@@ -153,8 +136,6 @@
       # no need to redefine it in your config for now)
       #media-session.enable = true;
     };
-    # Enable the OpenSSH daemon.
-    openssh.enable = true;
 
     # Yubikey
     udev.packages = [pkgs.yubikey-personalization];
@@ -176,8 +157,6 @@
     description = "James Dreier";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-      plex-media-player
-      slack
     ];
   };
 

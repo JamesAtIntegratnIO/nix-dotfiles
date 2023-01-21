@@ -1,8 +1,6 @@
-{
-  pkgs,
-  ...
-}: rec {
+{pkgs, ...}: rec {
   home.packages = with pkgs.gnomeExtensions; [
+    appindicator
     blur-my-shell
     pano
     gsconnect
@@ -14,7 +12,6 @@
     custom-hot-corners-extended
     gtile
     tailscale-status
-    
   ];
 
   # To get these settings so that you can add them to your configuration after manually configuring them
@@ -22,22 +19,22 @@
   # Another way to do this is to do `dconf watch /org/gnome` and then make the changes you want and then migrate them in as you see what they are.
   dconf.settings = {
     # First we enable every extension that we install above
-    "org/gnome/shell".enabled-extensions = (map (extension: extension.extensionUuid) home.packages)
-    # Then we add any extensions that come with gnome but aren't enabled 
-    ++ 
-    [
-      "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
-      "window-list@gnome-shell-extensions.gcampax.github.com"
-      "places-menu@gnome-shell-extensions.gcampax.github.com"
-      "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
-      "apps-menu@gnome-shell-extensions.gcampax.github.com"
-      "native-window-placement@gnome-shell-extensions.gcampax.github.com"
-      "user-theme@gnome-shell-extensions.gcampax.github.com"
-    ]; 
+    "org/gnome/shell".enabled-extensions =
+      (map (extension: extension.extensionUuid) home.packages)
+      # Then we add any extensions that come with gnome but aren't enabled
+      ++ [
+        "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
+        "window-list@gnome-shell-extensions.gcampax.github.com"
+        "places-menu@gnome-shell-extensions.gcampax.github.com"
+        "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
+        "apps-menu@gnome-shell-extensions.gcampax.github.com"
+        "native-window-placement@gnome-shell-extensions.gcampax.github.com"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
+      ];
     "org/gnome/shell".disabled-extensions = [];
 
-    "org/gnome/shell/extensions/apps-menu" = { enabled = true; };
-        
+    "org/gnome/shell/extensions/apps-menu" = {enabled = true;};
+
     # Configure blur-my-shell
     "org/gnome/shell/extensions/blur-my-shell" = {
       brightness = 0.85;
@@ -59,7 +56,6 @@
       global-shortcut = ["<Super>comma"];
       incognito-shortcut = ["<Shift><Super>less"];
     };
-
 
     # Configure Bluetooth Quick Connect
     "org/gnome/shell/extensions/bluetooth-quick-connect" = {
@@ -86,7 +82,7 @@
     "org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-top-left-1" = {
       action = "move-win-to-prev-ws";
     };
-    "org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-top-left-6" = {  
+    "org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-top-left-6" = {
       action = "show-applications";
       ctrl = true;
     };
@@ -97,7 +93,7 @@
     "org/gnome/shell/extensions/custom-hot-corners-extended/monitor-0-top-right-6" = {
       ctrl = true;
     };
-    
+
     # Set the default window for primary applications
     "org/gnome/shell/extensions/auto-move-windows" = {
       application-list = [
@@ -108,7 +104,7 @@
         "discord-ptb.desktop:4"
       ];
     };
-    
+
     # The open applications bar
     "org/gnome/shell/extensions/window-list" = {
       grouping-mode = "always";
@@ -123,7 +119,7 @@
     };
     "org/gnome/desktop/interface" = {
       ## Theme stuff
-      cursor-theme = "Breeze_Snow";
+      cursor-theme = "Adwaita";
       # Icon theme https://www.pling.com/p/1305251/
       icon-theme = "candy-icons";
       gtk-theme = "Sweet-Dark";
@@ -139,7 +135,7 @@
 
     # Keybindings
     "org/gnome/shell/keybindings" = {
-      show-screenshot-ui=["<Shift><Super>s"];
+      show-screenshot-ui = ["<Shift><Super>s"];
     };
 
     "org/gnome/desktop/wm/preferences" = {
