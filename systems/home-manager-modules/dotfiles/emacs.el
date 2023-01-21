@@ -5,6 +5,18 @@
 ;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
+;; START org-mode
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
+
+;; babel config
+;; active Babel languages
+(org-babel-do-load-languages
+'org-babel-load-languages
+'((shell . t)))
+;; END org-mode
+
 (use-package vscode-dark-plus-theme
   :ensure t
   :config
