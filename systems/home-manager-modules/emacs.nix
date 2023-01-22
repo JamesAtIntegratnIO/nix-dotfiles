@@ -8,7 +8,7 @@
     enable = true;
     extraPackages = epkgs: [
     ];
-    package = pkgs.emacsPgtk;
+    package = pkgs.emacs-gtk;
     extraConfig = ''
       '(explicit-shell-file-name "${pkgs.zsh}/bin/zsh")
       '(explicit-zsh-args '("--interactive" "--login"))
