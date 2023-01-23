@@ -139,6 +139,8 @@
   :ensure t)
 ;; END treemacs
 
+
+;; START ivy
 (use-package ivy
   :demand
   :ensure t)
@@ -177,13 +179,20 @@
 (require 'ivy-posframe)
 ;; display at `ivy-posframe-style'
 (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-center)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-bottom-left)))
-;; (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-window-bottom-left)))
 (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
 (ivy-posframe-mode 1)
+;; END ivy
 
+(use-package multiple-cursors :ensure t)
+;; use C-space or C-@ to set a good mark
+;; use one of the below commands to create multiple cursors
+;; C-g to unset mark
+;; begin typing
+;; C-j to create new line (RET will exit multi-cursor)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; Run this on a fresh install to ensure all fonts for all-the-icons are installed
 ;; M-x all-the-icons-install-fonts
@@ -192,7 +201,15 @@
 
 ;; set the backup directory somewhere sane
 (setq backup-directory-alist
-  `(("." . ,(concat user-emacs-directory "backups"))))
+      `(("." . ,(concat user-emacs-directory "backups"))))
+;; Set longer retention of backups now that they have a good home
+(setq delete-old-versions t
+  kept-new-versions 6
+  kept-old-versions 2
+  version-control t)
+;; put autosaves in a sane directory
+(setq auto-save-file-name-transforms
+  `((".*" ,(concat user-emacs-directory "autosaves"))))
 
 ;; START Language Modes
 ;; Eglot

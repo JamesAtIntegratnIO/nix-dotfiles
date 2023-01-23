@@ -21,6 +21,7 @@ in {
     packages = with pkgs;
       [
         tmux
+        inxi
         nodejs
         bind
         bottom
