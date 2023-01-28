@@ -60,6 +60,8 @@
       enable = false;
     };
   };
+
+  security.sudo.wheelNeedsPassword = false;
   security.polkit.enable = true;
 
   # Enable SSH with root login

@@ -17,7 +17,7 @@ in {
     ./emacs.nix
     # ./home-manager-modules/vscode.nix
     ./zsh/zsh.nix
-    ./alacritty.nix
+    # ./alacritty.nix
     # ./home-manager-modules/firefox.nix
     ./git.nix
     ./go.nix

@@ -129,6 +129,15 @@ in {
       # nixos-rebuild --target-host boboysdadda@klipperpi.home.arpa --use-remote-sudo switch --flake .#klipperpi
       klipperpi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
+        specialArgs = {
+          withGUI = false;
+          enableFonts = false;
+          enableDev = false;
+          homeDirectory = "/home/boboysdadda";
+          fontSize = 10.0;
+          font = "FiraCode Nerd Font Mono";
+          enablePodman = false;
+        };
         modules =
           defaultModules
           ++ [
@@ -136,6 +145,7 @@ in {
             {
               sdImage.compressImage = false;
               sdImage.imageBaseName = "klippyPi-nixos-sd-image";
+              sdImage.expandOnBoot = true;
             }
             ./klipperpi
             ./modules/user-boboysdadda.nix
@@ -155,6 +165,8 @@ in {
         system = "x86_64-linux";
         specialArgs = {
           withGUI = true;
+          enableFonts = true;
+          enableDev = true;
           homeDirectory = "/home/boboysdadda";
           fontSize = 10.0;
           font = "FiraCode Nerd Font Mono";

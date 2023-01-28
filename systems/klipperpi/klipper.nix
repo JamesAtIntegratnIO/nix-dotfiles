@@ -39,8 +39,8 @@
       bed_mesh = {
         speed = 10;
         horizontal_move_z = 5;
-        mesh_min = "20,30";
-        mesh_max = "200,185";
+        mesh_min = "5,30";
+        mesh_max = "220,200";
         probe_count = "6,6";
         mesh_pps = "2,3";
         algorithm = "bicubic";
@@ -66,12 +66,12 @@
         pin = "P1.24";
         x_offset = 0;
         y_offset = 25.0;
-        z_offset = 2.920;
+        z_offset = 3.135;
         speed = 10.0;
         samples = 3;
         samples_result = "median";
-        sample_retract_dist = 3.0;
-        samples_tolerance = 0.006;
+        sample_retract_dist = 2.0;
+        samples_tolerance = 0.01;
         samples_tolerance_retries = 3;
       };
       bed_screws = {
@@ -105,9 +105,9 @@
         enable_pin = "!P2.8";
         #step_distance = .0125
         endstop_pin = "P1.27"; # P1.26 for Y-max
-        position_endstop = 180;
+        position_endstop = 200;
         position_min = 0;
-        position_max = 180;
+        position_max = 200;
         homing_speed = 80;
         rotation_distance = 40;
         microsteps = 16;

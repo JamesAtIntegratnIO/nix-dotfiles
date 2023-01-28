@@ -24,6 +24,7 @@
     initrd.secrets = {
       "/crypto_keyfile.bin" = null;
     };
+    extraModprobeConfig = '' options bluetooth disable_ertm=1 '';
   };
   environment = {
     variables = {
@@ -51,6 +52,8 @@
     bluetooth.enable = true;
     # Enable cause sound don't work
     enableAllFirmware = true;
+    # for the xbox controller
+    xpadneo.enable = true;
   };
 
   networking = {

@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  inherit (specialArgs) withGUI enablePodman;
+  inherit (specialArgs) withGUI enablePodman enableFonts enableDev;
 in {
   users.users.boboysdadda = {
     isNormalUser = true;
@@ -22,6 +22,14 @@ in {
       [
         tmux
         inxi
+        
+        gmailctl
+        neofetch
+        cht-sh
+        stern
+        rnix-lsp
+      ]
+      ++ lib.optionals enableDev [
         nodejs
         bind
         bottom
@@ -29,29 +37,28 @@ in {
         go-outline
         golangci-lint
         gocode
-        kitty
-        powerline-fonts
+        terraform-docs
+        pre-commit
         google-cloud-sdk
         vimPlugins.dracula-vim
         glibc
         glibcLocales
-        gmailctl
-        terraform-docs
-        pre-commit
-        neofetch
-        cht-sh
+      ]
+      ++ lib.optionals enableFonts [
         nerdfonts
         fira
         fira-code
         fira-mono
         fira-code-symbols
-        stern
-        rnix-lsp
+        powerline-fonts
       ]
-      ++ lib.optionals withGUI
-      [
+        
+      ++ lib.optionals withGUI [
+        kitty
         discord-ptb
         plex-media-player
+        moonlight-qt
+        remmina
         slack
         awscli2
         bluedevil
