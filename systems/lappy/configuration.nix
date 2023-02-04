@@ -84,8 +84,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-
+  
   # Select internationalisation properties.
   security = {
     # Yubikey
