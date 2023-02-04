@@ -8,6 +8,18 @@
   pkgs,
   ...
 }: {
+  # Add cert for pfsense
+  age = {
+    identityPaths = [
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/home/boboysdadda/.ssh/id_ed25519"
+    ];
+    secrets.pfsense_ca = {
+      file = ../../secrets/lappy-pfsense-ca.age;
+      name = "/ssl/pfsense-ca.pem";
+      mode = "444";
+    };
+  };
   boot = {
     kernelPackages = pkgs.linuxPackages_6_1;
     # Bootloader.

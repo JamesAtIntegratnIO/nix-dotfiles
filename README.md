@@ -75,5 +75,12 @@ This is actually configured in a few places:
   }
   ```
   Then you install [KDE Connect](https://kdeconnect.kde.org/download.html) on your phone. And follow the [instructions](https://github.com/GSConnect/gnome-shell-extension-gsconnect/wiki/Help) to set it up. 
-  
+
+
+## Inspiration / Credit Links:
+[Blades dots](https://github.com/christian-blades-cb/dots)
+
+[Aldoborrero's blog](https://aldoborrero.com/posts/setting-up-my-machines-nix-style)
+- [related git repo](https://github.com/aldoborrero/templates/tree/main/templates/blog/nix/setting-up-machines-nix-style)
+
 
