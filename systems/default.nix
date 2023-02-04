@@ -90,7 +90,10 @@ in {
         system = "x86_64-linux";
         specialArgs = {
           withGUI = true;
-          enablePodman = true;
+          enablePodman = false;
+          enableDev = false;
+          enableFonts = false;
+          homeDirectory = "/home/boboysdadda";
         };
         modules =
           defaultModules
@@ -116,7 +119,7 @@ in {
                   home.stateVersion = "20.09";
                   targets.genericLinux.enable = true;
                   imports = [
-                    ./personal.nix
+                    ./home-manager-modules
                   ];
                 }
               );
@@ -149,16 +152,27 @@ in {
             }
             ./klipperpi
             ./modules/user-boboysdadda.nix
-            agenix.nixosModule
-            {
-            }
-            # nixos-hardware.nixosModules.raspberry-pi-4 {
-            #   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-            #   hardware.raspberry-pi."4".poe-hat.enable = false;
-            #   hardware.raspberry-pi."4".poe-plus-hat.enable = false;
-            #   hardware.raspberry-pi."4".pwm0.enable = false;
-
-            # }
+            agenix.nixosModule{}
+            home-manager.nixosModules.home-manager
+            ({specialArgs, ...}: {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.users.boboysdadda = (
+                {
+                  config,
+                  pkgs,
+                  extraSpecialArgs,
+                  ...
+                }: {
+                  home.stateVersion = "20.09";
+                  targets.genericLinux.enable = true;
+                  imports = [
+                    ./home-manager-modules
+                  ];
+                }
+              );
+            })
           ];
       };
       lappy = nixpkgs.lib.nixosSystem {

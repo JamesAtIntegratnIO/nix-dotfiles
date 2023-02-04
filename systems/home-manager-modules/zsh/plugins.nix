@@ -8,8 +8,8 @@ let
       src = fetchFromGitHub {
         owner = "chisui";
         repo = "zsh-nix-shell";
-        rev = "v0.4.0";
-        sha256 = "037wz9fqmx0ngcwl9az55fgkipb745rymznxnssr3rx9irb6apzg";
+        rev = "v0.5.0";
+        sha256 = "sha256-IT3wpfw8zhiNQsrw59lbSWYh0NQ1CUdUtFzRzHlURH0=";
       };
     }
     {

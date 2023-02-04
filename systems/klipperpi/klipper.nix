@@ -66,7 +66,7 @@
         pin = "P1.24";
         x_offset = 0;
         y_offset = 25.0;
-        z_offset = 3.135;
+        z_offset = 3.425;
         speed = 10.0;
         samples = 3;
         samples_result = "median";

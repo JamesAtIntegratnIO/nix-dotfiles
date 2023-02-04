@@ -22,7 +22,7 @@ in {
       [
         tmux
         inxi
-        
+        openssl
         gmailctl
         neofetch
         cht-sh

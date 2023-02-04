@@ -1,11 +1,12 @@
 {
   config,
+  lib,
   pkgs,
   specialArgs,
   system,
   ...
 }: let
-  inherit (specialArgs) withGUI font fontSize homeDirectory;
+  inherit (specialArgs) withGUI font fontSize homeDirectory enableDev;
 in {
   nixpkgs.config.allowUnfree = true;
 
@@ -15,15 +16,12 @@ in {
   };
   imports = [
     ./emacs.nix
-    # ./home-manager-modules/vscode.nix
     ./zsh/zsh.nix
-    # ./alacritty.nix
-    # ./home-manager-modules/firefox.nix
     ./git.nix
-    ./go.nix
     ./vim.nix
-    ./gnome-extensions.nix
-  ];
+  ] ++ lib.optionals withGUI [./gnome-extensions.nix]
+  ++ lib.optionals enableDev [./go.nix];
+  
   home = {
     file.".config/neofetch/config.conf".source = ./dotfiles/neofetch.conf;
     file.".config/starship.toml".source = ./dotfiles/starship.toml;

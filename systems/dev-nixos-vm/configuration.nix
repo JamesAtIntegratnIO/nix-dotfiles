@@ -48,8 +48,8 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -58,12 +58,13 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing.enable = false;
 
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  security.sudo.wheelNeedsPassword = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -83,11 +84,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.boboysdadda = {
     isNormalUser = true;
+    initialPassword = "changeme";
     description = "James Dreier";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-      firefox
-      kate
       vim
       #  thunderbird
     ];
@@ -101,7 +101,6 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
-    agenix.defaultPackage."${system}"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

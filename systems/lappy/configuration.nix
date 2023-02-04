@@ -85,6 +85,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Add cert for pfsense
+  age.secrets.pfsense_ssl.file = ../../secrets/lappy-pfsense-ssl.age;
+
   # Select internationalisation properties.
   security = {
     # Yubikey
@@ -92,6 +95,9 @@
       login.u2fAuth = true;
       sudo.u2fAuth = true;
     };
+    pki.certificateFiles = [
+      config.age.secrets.pfsense_ssl.path
+    ];
     rtkit.enable = true;
   };
 
