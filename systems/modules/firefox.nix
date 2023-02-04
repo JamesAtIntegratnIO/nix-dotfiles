@@ -4,12 +4,21 @@
   withGUI,
   ...
 }: {
+  
+  # Add cert for pfsense
+  age.secrets.pfsense_ca.file = ../../secrets/lappy-pfsense-ca.age;
   programs.firefox = {
     enable = true;
     preferencesStatus = "default";
     # Read more about policies here: https://github.com/mozilla/policy-templates/blob/master/README.md
     policies = {
       # To get extension details navigate to `manage extensions` > `cog wheel` > `debug addons`. You can find the info there
+      Certificates = {
+        ImportEnterpriseRoots = true;
+        Install = [
+          config.age.secrets.pfsense_ca.path
+        ];
+      };
       ExtensionSettings = {
         "uBlock0@raymondhill.net" = {
           installation_mode = "force_installed";

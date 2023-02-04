@@ -7,7 +7,8 @@
 let
   klipperpi-root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7s5+BozHGncnoucGiQm+w5HqVnUhT7IOcPD9ycZtFT root@klipperpi";
   lappy-root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2QZHMsM5MwYtjk20GpYWNJ4Z0nnfkB2iMfdO/03a6j root@nixos";
-  users = [klipperpi-root lappy-root];
+  lappy-boboysdadda = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMUgouRGqNgbaBlyGh2hx+rZB72ev7DtcStA3vD9ziZ";
+  users = [klipperpi-root lappy-root lappy-boboysdadda];
 
   klipperpi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7s5+BozHGncnoucGiQm+w5HqVnUhT7IOcPD9ycZtFT root@klipperpi";
   lappy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2QZHMsM5MwYtjk20GpYWNJ4Z0nnfkB2iMfdO/03a6j root@nixos";
@@ -16,5 +17,5 @@ in {
   "klipperpi.age".publicKeys = [klipperpi-root klipperpi];
   "lappy-borg.age".publicKeys = [lappy-root lappy];
   "lappy-borg-encryption-pw.age".publicKeys = [lappy-root lappy];
-  "lappy-pfsense-ssl.age".publicKeys = [lappy-root lappy];
+  "lappy-pfsense-ca.age".publicKeys = [lappy-root lappy-boboysdadda lappy];
 }
