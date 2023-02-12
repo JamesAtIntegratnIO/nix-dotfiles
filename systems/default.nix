@@ -86,6 +86,23 @@ in {
             {networking.hostName = "m900-1";}
           ];
       };
+      # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
+      k8s-master = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./k8s-master/configuration.nix
+          ./modules/user-boboysdadda.nix
+          ({ modulesPath, pkgs, config, ... }: {
+            imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];
+            proxmox.qemuConf.name = config.networking.hostName;
+            services.cloud-init.network.enable = true;
+
+            services.openssh.enable = true;
+            nix.settings.trusted-users = [ "boboysdadda" ];
+            security.sudo.wheelNeedsPassword = false;
+          })
+        ];
+      };
       devvm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {

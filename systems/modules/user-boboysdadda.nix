@@ -30,6 +30,7 @@ in {
         rnix-lsp
       ]
       ++ lib.optionals enableDev [
+        rustc
         nodejs
         bind
         bottom

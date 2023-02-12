@@ -215,6 +215,23 @@
 ;; Eglot
 (use-package eglot :ensure t)
 
+(use-package rust-mode
+  :ensure t
+  :config
+  (add-hook 'rust-mode-hook #'rust-enable-format-on-save)
+  (setq rust-format-on-save t))
+
+(use-package rust-playground
+  :ensure t
+  :after (rust-mode))
+
+(use-package flycheck-rust
+  :ensure t
+  :after (rust-mode flycheck)
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+  (add-hook 'rust-mode-hook #'flycheck-mode))
+
 (use-package company-shell
   :ensure t
   :hook ((sh-mode . company-mode))
@@ -225,7 +242,7 @@
   :ensure t
   :delight " co"
   :hook
-  (((emacs-lisp-mode go-mode) . company-mode))
+  (((emacs-lisp-mode go-mode rust-mode) . company-mode))
   :config
   (add-to-list 'company-backends 'company-elisp)
   )
@@ -293,7 +310,7 @@
 (use-package rainbow-delimiters
   :ensure t
   :hook
-  (((lisp-mode emacs-lisp-mode clojure-mode common-lisp-mode go-mode) . rainbow-delimiters-mode))
+  (((lisp-mode emacs-lisp-mode clojure-mode common-lisp-mode go-mode rust-mode) . rainbow-delimiters-mode))
   )
 
 
