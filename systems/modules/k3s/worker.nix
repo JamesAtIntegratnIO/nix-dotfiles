@@ -1,4 +1,7 @@
 { lib, pkgs, config, ... }: {
+  imports = [
+    ./system-packages.nix
+  ];
 
   age.secrets.k8s-node-token.file = ../../../secrets/k8s-node-token.age;
   services.k3s = {

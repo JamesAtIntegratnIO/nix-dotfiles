@@ -28,12 +28,16 @@ in {
         cht-sh
         stern
         rnix-lsp
+        jq
+        dig
+        binutils
+        bottom
+        
       ]
       ++ lib.optionals enableDev [
         rustc
         nodejs
         bind
-        bottom
         gopls
         go-outline
         golangci-lint
