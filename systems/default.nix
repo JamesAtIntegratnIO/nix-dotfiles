@@ -98,6 +98,7 @@ in {
         };
         modules = [
           ./k8s-master/configuration.nix
+          ./modules/k3s/server.nix
           ./modules/user-boboysdadda.nix
           ({ modulesPath, pkgs, config, ... }: {
             imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];
@@ -120,7 +121,7 @@ in {
           homeDirectory = "/home/boboysdadda";
         };
         modules = [
-          ./k8s-master/configuration.nix
+          ./k8s-worker1/configuration.nix
           ./modules/user-boboysdadda.nix
           ({ modulesPath, pkgs, config, ... }: {
             imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];
@@ -143,7 +144,7 @@ in {
           homeDirectory = "/home/boboysdadda";
         };
         modules = [
-          ./k8s-master/configuration.nix
+          ./k8s-worker2/configuration.nix
           ./modules/user-boboysdadda.nix
           ({ modulesPath, pkgs, config, ... }: {
             imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];
