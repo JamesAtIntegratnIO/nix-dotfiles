@@ -22,6 +22,7 @@
   };
   boot = {
     kernelPackages = pkgs.linuxPackages_6_1;
+    kernelModules = [ "kvm-intel" ];
     # Bootloader.
     loader = {
       systemd-boot.enable = true;
@@ -170,11 +171,11 @@
   users.users.boboysdadda = {
     isNormalUser = true;
     description = "James Dreier";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "kvm" "libvirt"];
     packages = with pkgs; [
     ];
   };
-
+  nix.settings.system-features = [ "kvm" ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -182,6 +183,8 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  virtualisation.libvirtd.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
