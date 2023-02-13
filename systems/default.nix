@@ -122,6 +122,7 @@ in {
         };
         modules = [
           ./k8s-worker1/configuration.nix
+          ./modules/k3s/worker.nix
           ./modules/user-boboysdadda.nix
           ({ modulesPath, pkgs, config, ... }: {
             imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];
@@ -145,6 +146,7 @@ in {
         };
         modules = [
           ./k8s-worker2/configuration.nix
+          ./modules/k3s/worker.nix
           ./modules/user-boboysdadda.nix
           ({ modulesPath, pkgs, config, ... }: {
             imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];

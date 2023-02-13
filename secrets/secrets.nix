@@ -23,5 +23,5 @@ in {
   "lappy-borg.age".publicKeys = [lappy-root lappy];
   "lappy-borg-encryption-pw.age".publicKeys = [lappy-root lappy];
   "lappy-pfsense-ca.age".publicKeys = [lappy-root lappy-boboysdadda lappy];
-  "k8s-node-token.age".publicKeys = [k8s-workers];
+  "k8s-node-token.age".publicKeys = [k8s-worker1 k8s-worker2];
 }
