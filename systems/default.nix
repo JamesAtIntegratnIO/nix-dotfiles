@@ -87,7 +87,7 @@ in {
           ];
       };
       # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
-      k8s-master = nixpkgs.lib.nixosSystem {
+      k3s-master = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           withGUI = false;
@@ -97,7 +97,7 @@ in {
           homeDirectory = "/home/boboysdadda";
         };
         modules = [
-          ./k8s-master/configuration.nix
+          ./k3s-master/configuration.nix
           ./modules/k3s/server.nix
           ./modules/user-boboysdadda.nix
           ({ modulesPath, pkgs, config, ... }: {
@@ -111,7 +111,7 @@ in {
           })
         ];
       };
-      k8s-worker1 = nixpkgs.lib.nixosSystem {
+      k3s-worker1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           withGUI = false;
@@ -121,7 +121,7 @@ in {
           homeDirectory = "/home/boboysdadda";
         };
         modules = [
-          ./k8s-worker1/configuration.nix
+          ./k3s-worker1/configuration.nix
           ./modules/k3s/worker.nix
           ./modules/user-boboysdadda.nix
           agenix.nixosModule{}
@@ -136,7 +136,7 @@ in {
           })
         ];
       };
-      k8s-worker2 = nixpkgs.lib.nixosSystem {
+      k3s-worker2 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           withGUI = false;
@@ -146,7 +146,7 @@ in {
           homeDirectory = "/home/boboysdadda";
         };
         modules = [
-          ./k8s-worker2/configuration.nix
+          ./k3s-worker2/configuration.nix
           ./modules/k3s/worker.nix
           ./modules/user-boboysdadda.nix
           agenix.nixosModule{}

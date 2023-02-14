@@ -27,7 +27,7 @@ in {
         neofetch
         cht-sh
         stern
-        rnix-lsp
+        
         jq
         dig
         binutils
@@ -35,6 +35,7 @@ in {
         
       ]
       ++ lib.optionals enableDev [
+        rnix-lsp
         rustc
         nodejs
         bind
