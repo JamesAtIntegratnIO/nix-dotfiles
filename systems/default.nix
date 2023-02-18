@@ -122,7 +122,7 @@ in {
         };
         modules = [
           ./k3s-worker1/configuration.nix
-          ./modules/k3s/worker.nix
+          # ./modules/k3s/worker.nix
           ./modules/user-boboysdadda.nix
           agenix.nixosModule{}
           ({ modulesPath, pkgs, config, ... }: {
@@ -147,7 +147,7 @@ in {
         };
         modules = [
           ./k3s-worker2/configuration.nix
-          ./modules/k3s/worker.nix
+          # ./modules/k3s/worker.nix
           ./modules/user-boboysdadda.nix
           agenix.nixosModule{}
           ({ modulesPath, pkgs, config, ... }: {

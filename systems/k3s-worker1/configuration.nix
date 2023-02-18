@@ -11,7 +11,7 @@
       prefixLength = 9;
     }];
     defaultGateway = "10.0.0.1";
-    nameservers = [ "192.168.16.53", "10.0.0.1" ] 
+    nameservers = [ "192.168.16.53" "10.0.0.1" ];
   };
 
   # This value determines the NixOS release from which the default

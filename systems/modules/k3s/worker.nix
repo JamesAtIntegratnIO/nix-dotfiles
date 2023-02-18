@@ -9,6 +9,6 @@
     role = "server";
     serverAddr = lib.mkDefault "https://10.0.1.150:6443";
     tokenFile = lib.mkDefault config.age.secrets.k8s-node-token.path; # Token located at k3s-master's '/var/lib/rancher/k3s/server/node-token'
-    extraFlags = "--node-ip ${config.networking.interfaces.eth0.ipv4.addresses[0].address} --node-external-ip ${config.networking.interfaces.eth0.ipv4.addresses[0].address}"; # Update worker IPs accordingly.
+    extraFlags = "--node-ip ${builtins.getAttr "address" (lib.head config.networking.interfaces.eth0.ipv4.addresses)}"; # Update worker IPs accordingly.
   };
 }
