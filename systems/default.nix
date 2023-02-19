@@ -34,6 +34,7 @@
     alejandra
     disko
     emacs-overlay
+    fenix
     ;
   defaultModules = [
     {
@@ -58,6 +59,7 @@
   overlays = {
     nur = inputs.nur.overlay;
     emacsUnstable = import inputs.emacs-overlay;
+    fenix = inputs.fenix.overlays.default;
   };
   security.sudo.wheelNeedsPassword = false;
 in {

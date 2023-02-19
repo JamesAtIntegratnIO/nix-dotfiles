@@ -1,8 +1,8 @@
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
 ;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 (package-install 'use-package)
 (require 'use-package)
@@ -139,13 +139,16 @@
   :ensure t)
 ;; END treemacs
 
+(use-package direnv
+  :ensure t
+  :hook
+  ((prog-mode) . direnv-update-environment)
+  :config (direnv-mode t)
+  )
 
 ;; START ivy
 (use-package ivy
   :demand
-  :ensure t)
-(use-package ivy-posframe
-  :after (ivy)
   :ensure t)
 
 (use-package swiper
@@ -176,11 +179,6 @@
 (global-set-key (kbd "C-x l") 'counsel-locate)
 (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
 (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
-(require 'ivy-posframe)
-;; display at `ivy-posframe-style'
-(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
-(setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-top-center)))
-(ivy-posframe-mode 1)
 ;; END ivy
 
 (use-package multiple-cursors :ensure t)
@@ -214,6 +212,25 @@
 ;; START Language Modes
 ;; Eglot
 (use-package eglot :ensure t)
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode)
+  :config
+  (setq flycheck-flake8-error-level-alist
+	(quote (("^E9.*$" . error)
+		("^F82.*$" . error)
+		("^F83.*$" . error)
+		("^D.*$" . info)
+		("^N.*$" . info)
+		("^E501$" . info))))
+  (setq flycheck-flake8rc ".flake8")
+  (setq flycheck-flake8-maximum-complexity 10)
+  (setq flycheck-flake8-maximum-line-length 120)
+  (add-hook 'python-mode-hook 'flycheck-mode)
+  (add-to-list 'flycheck-disabled-checkers 'python-flake8)
+  (add-to-list 'flycheck-disabled-checkers 'python-pylint)
+  )
 
 (use-package rust-mode
   :ensure t

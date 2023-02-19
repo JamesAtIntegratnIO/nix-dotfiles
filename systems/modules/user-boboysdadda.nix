@@ -36,7 +36,8 @@ in {
       ]
       ++ lib.optionals enableDev [
         rnix-lsp
-        rustc
+        rustup
+        rust-analyzer-nightly
         nodejs
         bind
         gopls
