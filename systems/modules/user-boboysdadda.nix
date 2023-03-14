@@ -27,7 +27,6 @@ in {
         neofetch
         cht-sh
         stern
-        
         jq
         dig
         binutils
@@ -36,10 +35,10 @@ in {
       ]
       ++ lib.optionals enableDev [
         rnix-lsp
-        rustup
         rust-analyzer-nightly
         nodejs
         bind
+        git-ignore
         gopls
         go-outline
         golangci-lint
