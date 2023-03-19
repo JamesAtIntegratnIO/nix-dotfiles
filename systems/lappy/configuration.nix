@@ -72,6 +72,7 @@
   networking = {
     # Define your hostname
     hostName = "lappy";
+    enableIPv6 = false;
     # Enable networking
     networkmanager.enable = true;
     # wireless.enable = true;
