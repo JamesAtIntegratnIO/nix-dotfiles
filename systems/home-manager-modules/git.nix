@@ -12,7 +12,7 @@
         autoSetupRemote = true;
         init = {
           defaultBranch = "main";
-        }
+        };
       };
     };
   };
