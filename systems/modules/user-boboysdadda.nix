@@ -31,7 +31,6 @@ in {
         dig
         binutils
         bottom
-        
       ]
       ++ lib.optionals enableDev [
         rnix-lsp
@@ -58,9 +57,9 @@ in {
         fira-code-symbols
         powerline-fonts
       ]
-        
       ++ lib.optionals withGUI [
         kitty
+        google-chrome
         discord-ptb
         plex-media-player
         moonlight-qt
