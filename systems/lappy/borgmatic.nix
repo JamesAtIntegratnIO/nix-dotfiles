@@ -71,4 +71,14 @@
       };
     };
   };
+  systemd.timers.borgmatic = {
+    enable = true;
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      Unit = "borgmatic.service";
+      OnCalendar = "daily";
+      Persistent = true;
+      RandomizedDelaySec = "3h";
+    };
+  };
 }
