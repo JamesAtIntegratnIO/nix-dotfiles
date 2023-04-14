@@ -66,7 +66,7 @@
         pin = "P1.24";
         x_offset = 0;
         y_offset = 25.0;
-        z_offset = 3.630;
+        z_offset = 3.550;
         speed = 10.0;
         samples = 3;
         samples_result = "median";
@@ -128,7 +128,7 @@
         dir_pin = "P0.11";
         enable_pin = "!P2.12";
         #step_distance = 0.002417
-        nozzle_diameter = 0.400;
+        nozzle_diameter = 0.800;
         filament_diameter = 1.750;
         heater_pin = "P2.7";
         sensor_type = "EPCOS 100K B57560G104F";
