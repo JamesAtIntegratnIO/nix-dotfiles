@@ -88,6 +88,21 @@ in {
             {networking.hostName = "m900-1";}
           ];
       };
+      m900-k3s-master = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          withGUI = false;
+          enablePodman = false;
+          enableDev = false;
+          enableFonts = false;
+          homeDirectory = "/home/boboysdadda";
+        };
+        modules = [
+          ./m900/k3s-master
+          ./modules/k3s/server.nix
+          ./modules/user-boboysdadda.nix
+        ];
+      };
       # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
       k3s-master = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -102,13 +117,18 @@ in {
           ./k3s-master/configuration.nix
           ./modules/k3s/server.nix
           ./modules/user-boboysdadda.nix
-          ({ modulesPath, pkgs, config, ... }: {
-            imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];
+          ({
+            modulesPath,
+            pkgs,
+            config,
+            ...
+          }: {
+            imports = ["${modulesPath}/virtualisation/proxmox-image.nix"];
             proxmox.qemuConf.name = config.networking.hostName;
             services.cloud-init.network.enable = true;
 
             services.openssh.enable = true;
-            nix.settings.trusted-users = [ "boboysdadda" ];
+            nix.settings.trusted-users = ["boboysdadda"];
             security.sudo.wheelNeedsPassword = false;
           })
         ];
@@ -126,14 +146,20 @@ in {
           ./k3s-worker1/configuration.nix
           # ./modules/k3s/worker.nix
           ./modules/user-boboysdadda.nix
-          agenix.nixosModule{}
-          ({ modulesPath, pkgs, config, ... }: {
-            imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];
+          agenix.nixosModule
+          {}
+          ({
+            modulesPath,
+            pkgs,
+            config,
+            ...
+          }: {
+            imports = ["${modulesPath}/virtualisation/proxmox-image.nix"];
             proxmox.qemuConf.name = config.networking.hostName;
             services.cloud-init.network.enable = true;
 
             services.openssh.enable = true;
-            nix.settings.trusted-users = [ "boboysdadda" ];
+            nix.settings.trusted-users = ["boboysdadda"];
             security.sudo.wheelNeedsPassword = false;
           })
         ];
@@ -151,14 +177,20 @@ in {
           ./k3s-worker2/configuration.nix
           # ./modules/k3s/worker.nix
           ./modules/user-boboysdadda.nix
-          agenix.nixosModule{}
-          ({ modulesPath, pkgs, config, ... }: {
-            imports = [ "${modulesPath}/virtualisation/proxmox-image.nix" ];
+          agenix.nixosModule
+          {}
+          ({
+            modulesPath,
+            pkgs,
+            config,
+            ...
+          }: {
+            imports = ["${modulesPath}/virtualisation/proxmox-image.nix"];
             proxmox.qemuConf.name = config.networking.hostName;
             services.cloud-init.network.enable = true;
 
             services.openssh.enable = true;
-            nix.settings.trusted-users = [ "boboysdadda" ];
+            nix.settings.trusted-users = ["boboysdadda"];
             security.sudo.wheelNeedsPassword = false;
           })
         ];
@@ -229,7 +261,8 @@ in {
             }
             ./klipperpi
             ./modules/user-boboysdadda.nix
-            agenix.nixosModule{}
+            agenix.nixosModule
+            {}
             home-manager.nixosModules.home-manager
             ({specialArgs, ...}: {
               home-manager.useGlobalPkgs = true;

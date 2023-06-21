@@ -94,16 +94,17 @@
       ctrl = true;
     };
 
+    # This turned out to be annoying as shit.
     # Set the default window for primary applications
-    "org/gnome/shell/extensions/auto-move-windows" = {
-      application-list = [
-        "firefox.desktop:1"
-        "codium.desktop:2"
-        "org.gnome.Console.desktop:3"
-        "slack.desktop:4"
-        "discord-ptb.desktop:4"
-      ];
-    };
+    # "org/gnome/shell/extensions/auto-move-windows" = {
+    #   application-list = [
+    #     "firefox.desktop:1"
+    #     "codium.desktop:2"
+    #     "org.gnome.Console.desktop:3"
+    #     "slack.desktop:4"
+    #     "discord-ptb.desktop:4"
+    #   ];
+    # };
 
     # The open applications bar
     "org/gnome/shell/extensions/window-list" = {

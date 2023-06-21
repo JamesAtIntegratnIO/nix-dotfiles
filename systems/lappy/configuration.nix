@@ -22,7 +22,7 @@
   };
   boot = {
     kernelPackages = pkgs.linuxPackages_6_1;
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = ["kvm-intel"];
     # Bootloader.
     loader = {
       systemd-boot.enable = true;
@@ -37,7 +37,7 @@
     initrd.secrets = {
       "/crypto_keyfile.bin" = null;
     };
-    extraModprobeConfig = '' options bluetooth disable_ertm=1 '';
+    extraModprobeConfig = ''options bluetooth disable_ertm=1 '';
   };
   environment = {
     variables = {
@@ -98,7 +98,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
+
   # Select internationalisation properties.
   security = {
     # Yubikey
@@ -154,8 +154,8 @@
       #media-session.enable = true;
     };
     udev.extraRules = ''
-SUBSYSTEM=="power_supply",ENV{POWER_SUPPLY_ONLINE}=="0",RUN+="${pkgs.power-profiles-daemon}/bin/powerprofilesctl set power-saver"
-SUBSYSTEM=="power_supply",ENV{POWER_SUPPLY_ONLINE}=="1",RUN+="${pkgs.power-profiles-daemon}/bin/powerprofilesctl set performance"
+      SUBSYSTEM=="power_supply",ENV{POWER_SUPPLY_ONLINE}=="0",RUN+="${pkgs.power-profiles-daemon}/bin/powerprofilesctl set power-saver"
+      SUBSYSTEM=="power_supply",ENV{POWER_SUPPLY_ONLINE}=="1",RUN+="${pkgs.power-profiles-daemon}/bin/powerprofilesctl set performance"
     '';
     # Yubikey
     udev.packages = [pkgs.yubikey-personalization];
@@ -179,7 +179,7 @@ SUBSYSTEM=="power_supply",ENV{POWER_SUPPLY_ONLINE}=="1",RUN+="${pkgs.power-profi
     packages = with pkgs; [
     ];
   };
-  nix.settings.system-features = [ "kvm" ];
+  nix.settings.system-features = ["kvm"];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

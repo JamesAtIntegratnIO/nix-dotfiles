@@ -32,10 +32,10 @@
         ssh_command = "${pkgs.openssh}/bin/ssh -i ${config.age.secrets.lappy-borg.path} -o 'StrictHostKeyChecking accept-new'";
       };
       retention = {
-        keep_daily = 3;
+        keep_daily = 7;
         keep_weekly = 4;
         keep_monthly = 12;
-        keep_yearly = 2;
+        keep_yearly = 1;
         # prefix = "{hostname}";
       };
       consistency = {

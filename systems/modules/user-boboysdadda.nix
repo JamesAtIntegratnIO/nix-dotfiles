@@ -31,6 +31,7 @@ in {
         dig
         binutils
         bottom
+        webkitgtk_4_1
       ]
       ++ lib.optionals enableDev [
         rnix-lsp
@@ -92,6 +93,7 @@ in {
               tamasfe.even-better-toml
               ms-vscode-remote.remote-ssh
               redhat.vscode-yaml
+              hashicorp.terraform
 
               # Extensions for my KB
               foam.foam-vscode
