@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ../default.nix
+    ./hardware-configuration.nix
   ];
 
   networking = {
