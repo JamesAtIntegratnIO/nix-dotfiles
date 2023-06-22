@@ -13,29 +13,22 @@
   ];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "sd_mod"];
-  boot.initrd.kernelModules = ["dm-snapshot"];
+  boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "tmpfs";
-    fsType = "tmpfs";
+    device = "/dev/disk/by-uuid/c9d4900f-7d45-4da8-8f11-bff0cb109e4e";
+    fsType = "ext4";
   };
 
-  fileSystems."/nix/.ro-store" = {
-    device = "/nix/store/2zbp2ahgryib3r12ri0a0z2l2i9bbyqg-squashfs.img (deleted)";
-    fsType = "squashfs";
-    options = ["loop"];
-  };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/5EC8-E990";
+    fsType = "vfat";
 
-  fileSystems."/nix/.rw-store" = {
-    device = "tmpfs";
-    fsType = "tmpfs";
-  };
-
-  fileSystems."/nix/store" = {
-    device = "overlay";
-    fsType = "overlay";
+    options = [
+      "x-systemd.automount"
+    ];
   };
 
   swapDevices = [];

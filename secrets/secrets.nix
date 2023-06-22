@@ -8,20 +8,18 @@ let
   klipperpi-root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7s5+BozHGncnoucGiQm+w5HqVnUhT7IOcPD9ycZtFT root@klipperpi";
   lappy-root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2QZHMsM5MwYtjk20GpYWNJ4Z0nnfkB2iMfdO/03a6j root@nixos";
   lappy-boboysdadda = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMUgouRGqNgbaBlyGh2hx+rZB72ev7DtcStA3vD9ziZ";
-  k8s-worker1-root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHqVDSD3NQJu1JTr1XcixoFdAsQF+INC1oBXP3Pp6FDF root@k8s-worker1";
-  k8s-worker2-root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGbJj65sfd54+CyXF9dLwwfsAl+ZivZqziMo+tlnIn+ root@k8s-worker2";
-  users = [klipperpi-root lappy-root lappy-boboysdadda k8s-worker1-root k8s-worker2-root];
+  m900-k3s-master-root = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHoQ9ni6b1LEY227n95jwLDwMA9xHjGFB4qltaZ429FS root@nixos";
+  users = [klipperpi-root lappy-root lappy-boboysdadda m900-k3s-master-root];
 
   klipperpi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7s5+BozHGncnoucGiQm+w5HqVnUhT7IOcPD9ycZtFT root@klipperpi";
   lappy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2QZHMsM5MwYtjk20GpYWNJ4Z0nnfkB2iMfdO/03a6j root@nixos";
-  k8s-worker1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHqVDSD3NQJu1JTr1XcixoFdAsQF+INC1oBXP3Pp6FDF root@k8s-worker1";
-  k8s-worker2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOGbJj65sfd54+CyXF9dLwwfsAl+ZivZqziMo+tlnIn+ root@k8s-worker2";
-  systems = [klipperpi lappy k8s-worker1 k8s-worker2];
-  k8s-workers = [k8s-worker1 k8s-worker2];
+  m900-k3s-master = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHoQ9ni6b1LEY227n95jwLDwMA9xHjGFB4qltaZ429FS root@nixos";
+  systems = [klipperpi lappy m900-k3s-master];
+  k3s-hosts = [m900-k3s-master];
 in {
   "klipperpi.age".publicKeys = [klipperpi-root klipperpi];
   "lappy-borg.age".publicKeys = [lappy-root lappy];
   "lappy-borg-encryption-pw.age".publicKeys = [lappy-root lappy];
   "lappy-pfsense-ca.age".publicKeys = [lappy-root lappy-boboysdadda lappy];
-  "k8s-node-token.age".publicKeys = [k8s-worker1 k8s-worker2];
+  "k3s-node-token.age".publicKeys = k3s-hosts;
 }

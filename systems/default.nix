@@ -46,7 +46,7 @@
     ({...}: {
       imports = [
         disko.nixosModules.disko
-
+        agenix.nixosModule
         ./modules/tailscale.nix
         ./modules/i18n.nix
         ./modules/openssh.nix
@@ -97,11 +97,40 @@ in {
           enableFonts = false;
           homeDirectory = "/home/boboysdadda";
         };
-        modules = [
-          ./m900/k3s-master
-          ./modules/k3s/server.nix
-          ./modules/user-boboysdadda.nix
-        ];
+        modules =
+          defaultModules
+          ++ [
+            ./m900/k3s-master
+            ./modules/k3s/server.nix
+            ./modules/user-boboysdadda.nix
+            home-manager.nixosModules.home-manager
+            ({specialArgs, ...}: {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.users.boboysdadda = (
+                {
+                  config,
+                  pkgs,
+                  extraSpecialArgs,
+                  ...
+                }: {
+                  home.stateVersion = "20.09";
+                  targets.genericLinux.enable = true;
+                  imports = [
+                    ./home-manager-modules
+                  ];
+                  # Must have `services.touchegg.enable = true;` for this to work
+                  # 3 Fingers UP: Present Windows
+                  # 3 Fingers DOWN: Show Desktop
+                  # 3 Fingers LEFT/RIGHT: Switch Virtual Desktops
+                  # 4 Fingers UP/DOWN: Control System Volume
+                  # [Browsers] 4 Fingers LEFT/RIGHT: Go Back/Forward
+                  xdg.configFile."touchegg/touchegg.conf".source = "${toucheggkde}/touchegg.conf";
+                }
+              );
+            })
+          ];
       };
       # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
       k3s-master = nixpkgs.lib.nixosSystem {
