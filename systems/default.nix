@@ -4,6 +4,7 @@
   inputs,
   nixpkgs,
   flake-parts,
+  kubenix,
   home-manager,
   flake-utils,
   nixpkgs-stable,
@@ -23,6 +24,7 @@
     system
     nixpkgs
     flake-parts
+    kubenix
     home-manager
     flake-utils
     nixpkgs-stable
@@ -334,7 +336,6 @@ in {
             ./modules/firefox.nix
             ./modules/gnome-exclusions.nix
             ./home-manager-modules/appimage.nix
-            agenix.nixosModule
             nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
             {
               nixpkgs.overlays = nixpkgs.lib.attrValues overlays;

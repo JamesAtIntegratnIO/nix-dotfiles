@@ -23,7 +23,6 @@ in {
         tmux
         inxi
         openssl
-        gmailctl
         neofetch
         cht-sh
         stern
@@ -32,6 +31,7 @@ in {
         binutils
         bottom
         webkitgtk_4_1
+        nfs-utils
       ]
       ++ lib.optionals enableDev [
         rnix-lsp
