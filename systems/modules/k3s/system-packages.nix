@@ -1,6 +1,10 @@
-{ pkgs, lib, config, ... }: {
-
-  boot.kernelModules = [ "overlay" "br_netfilter" ]; # Needed for K3s?
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: {
+  boot.kernelModules = ["overlay" "br_netfilter"]; # Needed for K3s?
   boot.kernel.sysctl = {
     "net.bridge-nf-call-ip6tables" = 1;
     "net.bridge-nf-call-iptables" = 1;
@@ -10,7 +14,6 @@
     tmux
     inxi
     openssl
-    gmailctl
     neofetch
     cht-sh
     stern
