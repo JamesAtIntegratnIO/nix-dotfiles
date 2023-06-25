@@ -2,7 +2,6 @@
   imports = [
     ../default.nix
     ./hardware-configuration.nix
-    ./kubenix
   ];
 
   networking = {

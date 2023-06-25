@@ -4,7 +4,6 @@
   inputs,
   nixpkgs,
   flake-parts,
-  kubenix,
   home-manager,
   flake-utils,
   nixpkgs-stable,
@@ -24,7 +23,6 @@
     system
     nixpkgs
     flake-parts
-    kubenix
     home-manager
     flake-utils
     nixpkgs-stable
@@ -122,13 +120,80 @@ in {
                   imports = [
                     ./home-manager-modules
                   ];
-                  # Must have `services.touchegg.enable = true;` for this to work
-                  # 3 Fingers UP: Present Windows
-                  # 3 Fingers DOWN: Show Desktop
-                  # 3 Fingers LEFT/RIGHT: Switch Virtual Desktops
-                  # 4 Fingers UP/DOWN: Control System Volume
-                  # [Browsers] 4 Fingers LEFT/RIGHT: Go Back/Forward
-                  xdg.configFile."touchegg/touchegg.conf".source = "${toucheggkde}/touchegg.conf";
+                }
+              );
+            })
+          ];
+      };
+      m900-k3s-worker1 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          withGUI = false;
+          enablePodman = false;
+          enableDev = false;
+          enableFonts = false;
+          homeDirectory = "/home/boboysdadda";
+        };
+        modules =
+          defaultModules
+          ++ [
+            ./m900/k3s-worker1
+            ./modules/k3s/worker.nix
+            ./modules/user-boboysdadda.nix
+            home-manager.nixosModules.home-manager
+            ({specialArgs, ...}: {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.users.boboysdadda = (
+                {
+                  config,
+                  pkgs,
+                  extraSpecialArgs,
+                  ...
+                }: {
+                  home.stateVersion = "20.09";
+                  targets.genericLinux.enable = true;
+                  imports = [
+                    ./home-manager-modules
+                  ];
+                }
+              );
+            })
+          ];
+      };
+      m900-k3s-worker2 = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          withGUI = false;
+          enablePodman = false;
+          enableDev = false;
+          enableFonts = false;
+          homeDirectory = "/home/boboysdadda";
+        };
+        modules =
+          defaultModules
+          ++ [
+            ./m900/k3s-worker2
+            ./modules/k3s/worker.nix
+            ./modules/user-boboysdadda.nix
+            home-manager.nixosModules.home-manager
+            ({specialArgs, ...}: {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = specialArgs;
+              home-manager.users.boboysdadda = (
+                {
+                  config,
+                  pkgs,
+                  extraSpecialArgs,
+                  ...
+                }: {
+                  home.stateVersion = "20.09";
+                  targets.genericLinux.enable = true;
+                  imports = [
+                    ./home-manager-modules
+                  ];
                 }
               );
             })

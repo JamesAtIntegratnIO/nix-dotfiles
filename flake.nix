@@ -42,7 +42,6 @@
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    kubenix.url = "github:hall/kubenix";
   };
 
   outputs = inputs @ {
@@ -50,7 +49,6 @@
     nixpkgs,
     flake-parts,
     flake-root,
-    kubenix
     mission-control,
     home-manager,
     flake-utils,

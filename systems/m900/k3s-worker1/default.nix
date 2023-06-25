@@ -5,7 +5,7 @@
 
   networking = {
     enableIPv6 = false;
-    hostName = "k3s-master";
+    hostName = "k3s-worker1";
     interfaces.eth0.ipv4.addresses = [
       {
         address = "10.0.1.102";
