@@ -22,4 +22,7 @@ in {
   "lappy-borg-encryption-pw.age".publicKeys = [lappy-root lappy];
   "lappy-pfsense-ca.age".publicKeys = [lappy-root lappy-boboysdadda lappy];
   "k3s-node-token.age".publicKeys = k3s-hosts;
+  "k3s-server.crt.age".publicKeys = k3s-hosts;
+  "k3s-server.key.age".publicKeys = k3s-hosts;
+  "k3s-ca.key.age".publicKeys = k3s-hosts;
 }
