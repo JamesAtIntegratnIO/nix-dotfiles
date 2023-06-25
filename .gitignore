@@ -1,2 +1,6 @@
 result*
 secret/*
+
+pki/*
+*.crt
+*.key
