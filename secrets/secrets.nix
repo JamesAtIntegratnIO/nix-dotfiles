@@ -14,8 +14,10 @@ let
   klipperpi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7s5+BozHGncnoucGiQm+w5HqVnUhT7IOcPD9ycZtFT root@klipperpi";
   lappy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2QZHMsM5MwYtjk20GpYWNJ4Z0nnfkB2iMfdO/03a6j root@nixos";
   m900-k3s-master = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHoQ9ni6b1LEY227n95jwLDwMA9xHjGFB4qltaZ429FS root@nixos";
+  m900-k3s-worker1 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICJqSXjRKoEJkSN2y2RGvBGHJBbZwajt+0K18gVHGGJP root@nixos";
+  m900-k3s-worker2 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBMmqDyXsw3JZ8xwym3Pw1bTHWTqD67lWxNgsOCd0Bks root@nixos2";
   systems = [klipperpi lappy m900-k3s-master];
-  k3s-hosts = [m900-k3s-master];
+  k3s-hosts = [m900-k3s-master m900-k3s-worker1 m900-k3s-worker2];
 in {
   "klipperpi.age".publicKeys = [klipperpi-root klipperpi];
   "lappy-borg.age".publicKeys = [lappy-root lappy];
