@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./system-packages.nix
+    ./nfs.nix
   ];
 
   age.secrets.k3s-node-token.file = ../../../secrets/k3s-node-token.age;
