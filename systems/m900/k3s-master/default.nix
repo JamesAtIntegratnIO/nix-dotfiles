@@ -2,6 +2,7 @@
   imports = [
     ../default.nix
     ./hardware-configuration.nix
+    ./services/metallb-oneshot.nix
   ];
 
   networking = {
@@ -15,5 +16,13 @@
     ];
     defaultGateway = "10.0.0.1";
     nameservers = ["192.168.16.53" "10.0.0.1"];
+  };
+
+  environment = {
+    systemPackages = with pkgs; [
+      #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      vim
+      kubernetes-helm
+    ];
   };
 }
