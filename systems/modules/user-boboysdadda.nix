@@ -6,6 +6,7 @@
 }: let
   inherit (specialArgs) withGUI enablePodman enableFonts enableDev;
 in {
+  programs.zsh.enable = true;
   users.users.boboysdadda = {
     isNormalUser = true;
     extraGroups = [
