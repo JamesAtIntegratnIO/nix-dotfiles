@@ -219,15 +219,21 @@ in {
             config,
             ...
           }: {
-            imports = ["${modulesPath}/virtualisation/proxmox-image.nix"];
-            proxmox = {
-              qemuConf = {
-                name = config.networking.hostName;
-                virtio0 = "local-zfs";
-                cores = 4;
-                memory = 4096;
-              };
-            };
+            imports = [
+              "${modulesPath}/virtualisation/proxmox-image.nix"
+              {
+                proxmox = {
+                  qemuConf = {
+                    name = config.networking.hostName;
+                    virtio0 = "local-zfs";
+                    cores = 4;
+                    memory = 4096;
+                    additionalSpace = "20G";
+                  };
+                };
+              }
+            ];
+
             services.cloud-init.network.enable = true;
 
             services.openssh.enable = true;
@@ -256,15 +262,20 @@ in {
             config,
             ...
           }: {
-            imports = ["${modulesPath}/virtualisation/proxmox-image.nix"];
-            proxmox = {
-              qemuConf = {
-                name = config.networking.hostName;
-                virtio0 = "local-zfs";
-                cores = 4;
-                memory = 4096;
-              };
-            };
+            imports = [
+              "${modulesPath}/virtualisation/proxmox-image.nix"
+              {
+                proxmox = {
+                  qemuConf = {
+                    name = config.networking.hostName;
+                    virtio0 = "local-zfs";
+                    cores = 4;
+                    memory = 4096;
+                  };
+                };
+              }
+            ];
+
             services.cloud-init.network.enable = true;
 
             services.openssh.enable = true;

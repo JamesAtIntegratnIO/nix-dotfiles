@@ -18,6 +18,7 @@ in {
       securePort = kubeMasterAPIServerPort;
       advertiseAddress = kubeMasterIP;
     };
+    clusterCidr = "10.130.0.0/16";
 
     addons.dns.enable = true;
   };
