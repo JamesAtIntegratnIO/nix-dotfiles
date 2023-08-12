@@ -10,6 +10,7 @@
   ];
 
   age.secrets.k3s-node-token.file = ../../../secrets/k3s-node-token.age;
+  networking.firewall.enable = false;
   services.k3s = {
     enable = true;
     role = "agent";

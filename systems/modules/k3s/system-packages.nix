@@ -24,5 +24,6 @@
     bottom
     nano
     vim
+    nfs-utils
   ];
 }

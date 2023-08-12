@@ -8,6 +8,9 @@
   pkgs,
   ...
 }: {
+  system.activationScripts.diff = ''
+    ${pkgs.nvd}/bin/nvd --nix-bin-dir=${pkgs.nix}/bin diff /run/current-system "$systemConfig"
+  '';
   # Add cert for pfsense
   age = {
     identityPaths = [
@@ -187,6 +190,7 @@
     enable = true;
     enableSSHSupport = true;
   };
+  programs.zsh.enable = true;
 
   virtualisation.libvirtd.enable = true;
 

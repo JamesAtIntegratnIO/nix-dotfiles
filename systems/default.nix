@@ -200,6 +200,36 @@ in {
           ];
       };
       # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
+      k8s-master = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {
+          withGUI = false;
+          enablePodman = false;
+          enableDev = false;
+          enableFonts = false;
+          homeDirectory = "/home/boboysdadda";
+        };
+        modules = [
+          ./proxmox/k8s-master/configuration.nix
+          ./modules/k8s/server.nix
+          ./modules/user-boboysdadda.nix
+          ({
+            modulesPath,
+            pkgs,
+            config,
+            ...
+          }: {
+            imports = ["${modulesPath}/virtualisation/proxmox-image.nix"];
+            proxmox.qemuConf.name = config.networking.hostName;
+            services.cloud-init.network.enable = true;
+
+            services.openssh.enable = true;
+            nix.settings.trusted-users = ["boboysdadda"];
+            security.sudo.wheelNeedsPassword = false;
+          })
+        ];
+      };
+      # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
       k3s-master = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
