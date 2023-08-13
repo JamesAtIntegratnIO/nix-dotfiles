@@ -8,6 +8,9 @@
   kubeMasterHostname = "k8s-master";
   kubeMasterAPIServerPort = 6443;
 in {
+  imports = [
+    ./system-packages.nix
+  ];
   networking.firewall.enable = false;
   services.kubernetes = {
     roles = ["master" "node"];
