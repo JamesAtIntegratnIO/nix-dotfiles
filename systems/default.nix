@@ -210,7 +210,7 @@ in {
           homeDirectory = "/home/boboysdadda";
         };
         modules = [
-          ./proxmox/k8s-master/configuration.nix
+          ./proxmox/k8s-master
           ./modules/k8s/server.nix
           ./modules/user-boboysdadda.nix
           ({
@@ -251,7 +251,7 @@ in {
           homeDirectory = "/home/boboysdadda";
         };
         modules = [
-          ./proxmox/k8s-worker1/configuration.nix
+          ./proxmox/k8s-worker1
           ./modules/k8s/worker.nix
           ./modules/user-boboysdadda.nix
           ({
@@ -292,7 +292,7 @@ in {
           homeDirectory = "/home/boboysdadda";
         };
         modules = [
-          ./proxmox/k8s-worker2/configuration.nix
+          ./proxmox/k8s-worker2
           ./modules/k8s/worker.nix
           ./modules/user-boboysdadda.nix
           ({
