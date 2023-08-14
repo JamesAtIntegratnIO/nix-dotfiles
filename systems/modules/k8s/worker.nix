@@ -10,13 +10,6 @@ in {
   # resolve master hostname
   networking.extraHosts = "${kubeMasterIP} ${kubeMasterHostname}";
 
-  # packages for administration tasks
-  environment.systemPackages = with pkgs; [
-    kompose
-    kubectl
-    kubernetes
-  ];
-
   services.kubernetes = let
     api = "https://${kubeMasterHostname}:${toString kubeMasterAPIServerPort}";
   in {
@@ -30,8 +23,5 @@ in {
 
     # use coredns
     addons.dns.enable = true;
-
-    # needed if you use swap
-    kubelet.extraOpts = "--fail-swap-on=false";
   };
 }

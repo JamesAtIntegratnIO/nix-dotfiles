@@ -7,16 +7,29 @@
   i18n.defaultLocale = "en_US.UTF-8";
   networking = {
     enableIPv6 = false;
-    hostName = "k8s-master";
-    interfaces.eth0.ipv4.addresses = [
-      {
-        address = "10.0.2.101";
-        prefixLength = 9;
-      }
-    ];
     defaultGateway = "10.0.0.1";
     nameservers = ["192.168.16.53" "10.0.0.1"];
+    firewall = {
+      enable = false;
+    };
   };
+
+  environment.systemPackages = with pkgs; [
+    tmux
+    inxi
+    openssl
+    neofetch
+    cht-sh
+    stern
+    rnix-lsp
+    jq
+    dig
+    binutils
+    bottom
+    nano
+    vim
+    nfs-utils
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
