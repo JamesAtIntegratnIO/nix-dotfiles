@@ -29,6 +29,8 @@
         exec = pkgs.writeShellScriptBin "update-config" ''
           set -euo pipefail
           hn=$(hostname -s)
+          nix flake lock --update-input nixpkgs
+          nix flake lock --update-input home-manager
           sudo nixos-rebuild switch --flake .#$hn
         '';
       };
@@ -39,6 +41,15 @@
           set -euo pipefail
 
           nix build .#nixosConfigurations.$1.config.system.build.toplevel
+        '';
+      };
+      nix-build-proxmox = {
+        category = "Nix";
+        description = "Builds VMA image for proxmox";
+        exec = pkgs.writeShellScriptBin "nix-build-proxmox" ''
+          set -euo pipefail
+
+          nix build .#nixosConfigurations.$1.config.system.build.VMA
         '';
       };
       # ISOs
