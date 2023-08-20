@@ -6,6 +6,7 @@
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
   networking = {
+    domain = "home.arpa";
     enableIPv6 = false;
     defaultGateway = "10.0.0.1";
     nameservers = ["192.168.16.53" "10.0.0.1"];
@@ -13,6 +14,9 @@
       enable = false;
     };
   };
+
+  boot.supportedFilesystems = ["nfs"];
+  services.rpcbind.enable = true;
 
   environment.systemPackages = with pkgs; [
     tmux

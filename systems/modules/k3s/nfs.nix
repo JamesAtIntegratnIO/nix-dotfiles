@@ -5,7 +5,7 @@
   ...
 }: {
   fileSystems."/mnt/kube_storage" = {
-    device = "10.0.0.10:/mnt/user/kube_storage";
+    device = "10.0.0.12:/mnt/user/kube_storage";
     fsType = "nfs";
     options = [
       "x-systemd.automount" # automount nfs
