@@ -110,13 +110,24 @@ in {
           }
         );
       };
+      proxmoxImageSettings = {
+        virtio ? "local-zfs",
+        cores ? 4,
+        memory ? 4096,
+        additionalSpace ? "20G",
+      }: {
+        qemuConf = {
+          name = config.networking.hostName;
+          virtio0 = virtio;
+          cores = cores;
+          memory = memory;
+          additionalSpace = additionalSpace;
+        };
+      };
     in {
       m900-1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = false;
-          enablePodman = false;
-        };
+        specialArgs = defaultArgs;
         modules =
           defaultModules
           ++ [
@@ -127,13 +138,7 @@ in {
       };
       m900-k3s-master = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = false;
-          enablePodman = false;
-          enableDev = false;
-          enableFonts = false;
-          homeDirectory = "/home/boboysdadda";
-        };
+        specialArgs = defaultArgs;
         modules =
           defaultModules
           ++ [
@@ -149,13 +154,7 @@ in {
       };
       m900-k3s-worker1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = false;
-          enablePodman = false;
-          enableDev = false;
-          enableFonts = false;
-          homeDirectory = "/home/boboysdadda";
-        };
+        specialArgs = defaultArgs;
         modules =
           defaultModules
           ++ [
@@ -171,13 +170,7 @@ in {
       };
       m900-k3s-worker2 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = false;
-          enablePodman = false;
-          enableDev = false;
-          enableFonts = false;
-          homeDirectory = "/home/boboysdadda";
-        };
+        specialArgs = defaultArgs;
         modules =
           defaultModules
           ++ [
@@ -194,13 +187,7 @@ in {
       # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
       k8s-master = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = false;
-          enablePodman = false;
-          enableDev = false;
-          enableFonts = false;
-          homeDirectory = "/home/boboysdadda";
-        };
+        specialArgs = defaultArgs;
         modules = [
           ./proxmox/k8s-master
           ./modules/k8s/server.nix
@@ -214,15 +201,7 @@ in {
             imports = [
               "${modulesPath}/virtualisation/proxmox-image.nix"
               {
-                proxmox = {
-                  qemuConf = {
-                    name = config.networking.hostName;
-                    virtio0 = "local-zfs";
-                    cores = 4;
-                    memory = 4096;
-                    additionalSpace = "20G";
-                  };
-                };
+                proxmox = proxmoxImageSettings;
               }
             ];
             services.cloud-init.network.enable = true;
@@ -235,13 +214,7 @@ in {
       # nix build .#nixosConfigrations.k8s-worker1.config.system.build.VMA
       k8s-worker1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = false;
-          enablePodman = false;
-          enableDev = false;
-          enableFonts = false;
-          homeDirectory = "/home/boboysdadda";
-        };
+        specialArgs = defaultArgs;
         modules = [
           ./proxmox/k8s-worker1
           ./modules/k8s/worker.nix
@@ -255,15 +228,7 @@ in {
             imports = [
               "${modulesPath}/virtualisation/proxmox-image.nix"
               {
-                proxmox = {
-                  qemuConf = {
-                    name = config.networking.hostName;
-                    virtio0 = "local-zfs";
-                    cores = 4;
-                    memory = 4096;
-                    additionalSpace = "20G";
-                  };
-                };
+                proxmox = proxmoxImageSettings;
               }
             ];
             services.cloud-init.network.enable = true;
@@ -290,15 +255,7 @@ in {
             imports = [
               "${modulesPath}/virtualisation/proxmox-image.nix"
               {
-                proxmox = {
-                  qemuConf = {
-                    name = config.networking.hostName;
-                    virtio0 = "local-zfs";
-                    cores = 4;
-                    memory = 4096;
-                    additionalSpace = "20G";
-                  };
-                };
+                proxmox = proxmoxImageSettings;
               }
             ];
             services.cloud-init.network.enable = true;
@@ -430,9 +387,6 @@ in {
           withGUI = true;
           enableFonts = true;
           enableDev = true;
-          homeDirectory = "/home/boboysdadda";
-          fontSize = 10.0;
-          font = "FiraCode Nerd Font Mono";
           enablePodman = true;
         };
         modules =
