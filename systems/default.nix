@@ -74,6 +74,23 @@ in {
     #   }
     # );
     nixosConfigurations = let
+      defaultArgs = {
+        withGUI ? false,
+        enableFonts ? false,
+        enableDev ? false,
+        homeDirectory ? "/home/boboysdadda",
+        fontSize ? 10.0,
+        font ? "FiraCode Nerd Font Mono",
+        enablePodman ? false,
+      }: {
+        withGUI = withGUI;
+        enableFonts = enableFonts;
+        enableDev = enableDev;
+        homeDirectory = homeDirectory;
+        fontSize = fontSize;
+        font = font;
+        enablePodman = enablePodman;
+      };
       homeManagerConfig = args: {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
@@ -259,13 +276,7 @@ in {
       # nix build .#nixosConfigrations.k8s-worker1.config.system.build.VMA
       k8s-worker2 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = false;
-          enablePodman = false;
-          enableDev = false;
-          enableFonts = false;
-          homeDirectory = "/home/boboysdadda";
-        };
+        specialArgs = defaultArgs;
         modules = [
           ./proxmox/k8s-worker2
           ./modules/k8s/worker.nix
@@ -300,13 +311,7 @@ in {
       # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
       k3s-master = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = false;
-          enablePodman = false;
-          enableDev = false;
-          enableFonts = false;
-          homeDirectory = "/home/boboysdadda";
-        };
+        specialArgs = defaultArgs;
         modules = [
           ./k3s-master/configuration.nix
           ./modules/k3s/server.nix
@@ -329,13 +334,7 @@ in {
       };
       k3s-worker1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = false;
-          enablePodman = false;
-          enableDev = false;
-          enableFonts = false;
-          homeDirectory = "/home/boboysdadda";
-        };
+        specialArgs = defaultArgs;
         modules = [
           ./k3s-worker1/configuration.nix
           # ./modules/k3s/worker.nix
@@ -360,13 +359,7 @@ in {
       };
       k3s-worker2 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = false;
-          enablePodman = false;
-          enableDev = false;
-          enableFonts = false;
-          homeDirectory = "/home/boboysdadda";
-        };
+        specialArgs = defaultArgs;
         modules = [
           ./k3s-worker2/configuration.nix
           # ./modules/k3s/worker.nix
@@ -391,13 +384,7 @@ in {
       };
       devvm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
-          withGUI = true;
-          enablePodman = false;
-          enableDev = false;
-          enableFonts = false;
-          homeDirectory = "/home/boboysdadda";
-        };
+        specialArgs = defaultArgs;
         modules =
           defaultModules
           ++ [
@@ -416,15 +403,7 @@ in {
       # nixos-rebuild --target-host boboysdadda@klipperpi.home.arpa --use-remote-sudo switch --flake .#klipperpi
       klipperpi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = {
-          withGUI = false;
-          enableFonts = false;
-          enableDev = false;
-          homeDirectory = "/home/boboysdadda";
-          fontSize = 10.0;
-          font = "FiraCode Nerd Font Mono";
-          enablePodman = false;
-        };
+        specialArgs = defaultArgs;
         modules =
           defaultModules
           ++ [
@@ -447,7 +426,7 @@ in {
       };
       lappy = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {
+        specialArgs = defaultArgs {
           withGUI = true;
           enableFonts = true;
           enableDev = true;
