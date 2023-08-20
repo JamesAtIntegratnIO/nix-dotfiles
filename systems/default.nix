@@ -111,14 +111,15 @@ in {
         );
       };
       proxmoxImageSettings = {
-        virtio ? "local-zfs",
+        name,
+        virtio0 ? "local-zfs",
         cores ? 4,
         memory ? 4096,
         additionalSpace ? "20G",
       }: {
         qemuConf = {
-          name = config.networking.hostName;
-          virtio0 = virtio;
+          name = name;
+          virtio0 = virtio0;
           cores = cores;
           memory = memory;
           additionalSpace = additionalSpace;
@@ -127,7 +128,7 @@ in {
     in {
       m900-1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules =
           defaultModules
           ++ [
@@ -138,7 +139,7 @@ in {
       };
       m900-k3s-master = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules =
           defaultModules
           ++ [
@@ -154,7 +155,7 @@ in {
       };
       m900-k3s-worker1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules =
           defaultModules
           ++ [
@@ -170,7 +171,7 @@ in {
       };
       m900-k3s-worker2 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules =
           defaultModules
           ++ [
@@ -187,7 +188,7 @@ in {
       # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
       k8s-master = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules = [
           ./proxmox/k8s-master
           ./modules/k8s/server.nix
@@ -200,9 +201,9 @@ in {
           }: {
             imports = [
               "${modulesPath}/virtualisation/proxmox-image.nix"
-              {
-                proxmox = proxmoxImageSettings;
-              }
+              # {
+              #   proxmox = proxmoxImageSettings {name = config.networking.hostName;};
+              # }
             ];
             services.cloud-init.network.enable = true;
             services.openssh.enable = true;
@@ -214,7 +215,7 @@ in {
       # nix build .#nixosConfigrations.k8s-worker1.config.system.build.VMA
       k8s-worker1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules = [
           ./proxmox/k8s-worker1
           ./modules/k8s/worker.nix
@@ -227,9 +228,9 @@ in {
           }: {
             imports = [
               "${modulesPath}/virtualisation/proxmox-image.nix"
-              {
-                proxmox = proxmoxImageSettings;
-              }
+              # {
+              #   proxmox = proxmoxImageSettings {name = config.networking.hostName;};
+              # }
             ];
             services.cloud-init.network.enable = true;
             services.openssh.enable = true;
@@ -241,7 +242,7 @@ in {
       # nix build .#nixosConfigrations.k8s-worker1.config.system.build.VMA
       k8s-worker2 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules = [
           ./proxmox/k8s-worker2
           ./modules/k8s/worker.nix
@@ -254,10 +255,8 @@ in {
           }: {
             imports = [
               "${modulesPath}/virtualisation/proxmox-image.nix"
-              {
-                proxmox = proxmoxImageSettings;
-              }
             ];
+            proxmox = proxmoxImageSettings {name = config.networking.hostName;};
             services.cloud-init.network.enable = true;
             services.openssh.enable = true;
             nix.settings.trusted-users = ["boboysdadda"];
@@ -268,7 +267,7 @@ in {
       # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
       k3s-master = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        # specialArgs = defaultArgs {};
         modules = [
           ./k3s-master/configuration.nix
           ./modules/k3s/server.nix
@@ -291,7 +290,7 @@ in {
       };
       k3s-worker1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules = [
           ./k3s-worker1/configuration.nix
           # ./modules/k3s/worker.nix
@@ -316,7 +315,7 @@ in {
       };
       k3s-worker2 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules = [
           ./k3s-worker2/configuration.nix
           # ./modules/k3s/worker.nix
@@ -341,7 +340,7 @@ in {
       };
       devvm = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules =
           defaultModules
           ++ [
@@ -360,7 +359,7 @@ in {
       # nixos-rebuild --target-host boboysdadda@klipperpi.home.arpa --use-remote-sudo switch --flake .#klipperpi
       klipperpi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = defaultArgs;
+        specialArgs = defaultArgs {};
         modules =
           defaultModules
           ++ [
@@ -403,10 +402,10 @@ in {
               nixpkgs.overlays = nixpkgs.lib.attrValues overlays;
             }
             home-manager.nixosModules.home-manager
-            (
-              {specialArgs, ...}:
-                homeManagerConfig specialArgs
-            )
+            # (
+            #   {specialArgs, ...}:
+            #     homeManagerConfig specialArgs
+            # )
           ];
       };
     };
