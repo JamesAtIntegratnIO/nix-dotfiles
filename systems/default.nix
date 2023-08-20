@@ -73,7 +73,27 @@ in {
     #     inherit system nixpkgs nur home-manager toucheggkde;
     #   }
     # );
-    nixosConfigurations = {
+    nixosConfigurations = let
+      homeManagerConfig = args: {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.extraSpecialArgs = args;
+        home-manager.users.boboysdadda = (
+          {
+            config,
+            pkgs,
+            extraSpecialArgs,
+            ...
+          }: {
+            home.stateVersion = "20.09";
+            targets.genericLinux.enable = true;
+            imports = [
+              ./home-manager-modules
+            ];
+          }
+        );
+      };
+    in {
       m900-1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
@@ -104,25 +124,10 @@ in {
             ./modules/k3s/server.nix
             ./modules/user-boboysdadda.nix
             home-manager.nixosModules.home-manager
-            ({specialArgs, ...}: {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.users.boboysdadda = (
-                {
-                  config,
-                  pkgs,
-                  extraSpecialArgs,
-                  ...
-                }: {
-                  home.stateVersion = "20.09";
-                  targets.genericLinux.enable = true;
-                  imports = [
-                    ./home-manager-modules
-                  ];
-                }
-              );
-            })
+            (
+              {specialArgs, ...}:
+                homeManagerConfig specialArgs
+            )
           ];
       };
       m900-k3s-worker1 = nixpkgs.lib.nixosSystem {
@@ -141,25 +146,10 @@ in {
             ./modules/k3s/worker.nix
             ./modules/user-boboysdadda.nix
             home-manager.nixosModules.home-manager
-            ({specialArgs, ...}: {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.users.boboysdadda = (
-                {
-                  config,
-                  pkgs,
-                  extraSpecialArgs,
-                  ...
-                }: {
-                  home.stateVersion = "20.09";
-                  targets.genericLinux.enable = true;
-                  imports = [
-                    ./home-manager-modules
-                  ];
-                }
-              );
-            })
+            (
+              {specialArgs, ...}:
+                homeManagerConfig specialArgs
+            )
           ];
       };
       m900-k3s-worker2 = nixpkgs.lib.nixosSystem {
@@ -178,25 +168,10 @@ in {
             ./modules/k3s/worker.nix
             ./modules/user-boboysdadda.nix
             home-manager.nixosModules.home-manager
-            ({specialArgs, ...}: {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.users.boboysdadda = (
-                {
-                  config,
-                  pkgs,
-                  extraSpecialArgs,
-                  ...
-                }: {
-                  home.stateVersion = "20.09";
-                  targets.genericLinux.enable = true;
-                  imports = [
-                    ./home-manager-modules
-                  ];
-                }
-              );
-            })
+            (
+              {specialArgs, ...}:
+                homeManagerConfig specialArgs
+            )
           ];
       };
       # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
@@ -429,29 +404,10 @@ in {
             ./dev-nixos-vm/configuration.nix
             ./modules/user-boboysdadda.nix
             home-manager.nixosModules.home-manager
-            ({
-              specialArgs,
-              agenix,
-              ...
-            }: {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.users.boboysdadda = (
-                {
-                  config,
-                  pkgs,
-                  extraSpecialArgs,
-                  ...
-                }: {
-                  home.stateVersion = "20.09";
-                  targets.genericLinux.enable = true;
-                  imports = [
-                    ./home-manager-modules
-                  ];
-                }
-              );
-            })
+            (
+              {specialArgs, ...}:
+                homeManagerConfig specialArgs
+            )
           ];
       };
       # Build SD card CMD
@@ -483,25 +439,10 @@ in {
             agenix.nixosModule
             {}
             home-manager.nixosModules.home-manager
-            ({specialArgs, ...}: {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.users.boboysdadda = (
-                {
-                  config,
-                  pkgs,
-                  extraSpecialArgs,
-                  ...
-                }: {
-                  home.stateVersion = "20.09";
-                  targets.genericLinux.enable = true;
-                  imports = [
-                    ./home-manager-modules
-                  ];
-                }
-              );
-            })
+            (
+              {specialArgs, ...}:
+                homeManagerConfig specialArgs
+            )
           ];
       };
       lappy = nixpkgs.lib.nixosSystem {
@@ -529,32 +470,10 @@ in {
               nixpkgs.overlays = nixpkgs.lib.attrValues overlays;
             }
             home-manager.nixosModules.home-manager
-            ({specialArgs, ...}: {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = specialArgs;
-              home-manager.users.boboysdadda = (
-                {
-                  config,
-                  pkgs,
-                  extraSpecialArgs,
-                  ...
-                }: {
-                  home.stateVersion = "20.09";
-                  targets.genericLinux.enable = true;
-                  imports = [
-                    ./home-manager-modules
-                  ];
-                  # Must have `services.touchegg.enable = true;` for this to work
-                  # 3 Fingers UP: Present Windows
-                  # 3 Fingers DOWN: Show Desktop
-                  # 3 Fingers LEFT/RIGHT: Switch Virtual Desktops
-                  # 4 Fingers UP/DOWN: Control System Volume
-                  # [Browsers] 4 Fingers LEFT/RIGHT: Go Back/Forward
-                  xdg.configFile."touchegg/touchegg.conf".source = "${toucheggkde}/touchegg.conf";
-                }
-              );
-            })
+            (
+              {specialArgs, ...}:
+                homeManagerConfig specialArgs
+            )
           ];
       };
     };
