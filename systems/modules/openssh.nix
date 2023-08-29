@@ -2,8 +2,10 @@
   # Enable the OpenSSH daemon with sane defaults
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
-    kbdInteractiveAuthentication = false;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
     openFirewall = true;
   };
 }

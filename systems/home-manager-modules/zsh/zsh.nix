@@ -1,13 +1,24 @@
-{ pkgs, homeDirectory, ... }:
 {
+  pkgs,
+  homeDirectory,
+  ...
+}: {
   programs.zsh = with pkgs; {
     enable = true;
     oh-my-zsh.enable = true;
-    plugins = import ./plugins.nix { inherit pkgs; };
+    plugins = import ./plugins.nix {inherit pkgs;};
+    zplug = {
+      enable = true;
+      plugins = [
+        {
+          name = "plugins/kubectl, from:oh-my-zsh";
+        }
+      ];
+    };
     localVariables = {};
     dotDir = ".config/zsh";
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     history = {
       size = 50000;
       save = 10000;
@@ -16,18 +27,18 @@
       extended = true;
     };
     sessionVariables = {
-      GPG_TTY="$(tty)";
-      SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)";
-      XDG_DATA_DIRS="${homeDirectory}/.nix-profile/share/:${homeDirectory}/.local/share/:/usr/share/:/usr/local/share/:$XDG_DATA_DIRS";
+      GPG_TTY = "$(tty)";
+      SSH_AUTH_SOCK = "$(gpgconf --list-dirs agent-ssh-socket)";
+      XDG_DATA_DIRS = "${homeDirectory}/.nix-profile/share/:${homeDirectory}/.local/share/:/usr/share/:/usr/local/share/:$XDG_DATA_DIRS";
       # For Alacritty : See https://github.com/alacritty/alacritty/issues/1501
-      WINIT_X11_SCALE_FACTOR= "1.0";
+      WINIT_X11_SCALE_FACTOR = "1.0";
     };
     initExtraFirst = "gpgconf --launch gpg-agent";
     initExtra = ''
       autoload -Uz compinit
       compinit
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
-      zstyle ':completion:*' rehash true                              # automatically find new executables in path 
+      zstyle ':completion:*' rehash true                              # automatically find new executables in path
       zstyle ':completion:*' completer _expand _complete _ignored _approximate
       zstyle ':completion:*' menu select
       zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
@@ -55,4 +66,3 @@
     enableZshIntegration = true;
   };
 }
-

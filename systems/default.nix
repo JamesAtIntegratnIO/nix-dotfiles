@@ -210,6 +210,11 @@ in {
             nix.settings.trusted-users = ["boboysdadda"];
             security.sudo.wheelNeedsPassword = false;
           })
+          home-manager.nixosModules.home-manager
+          (
+            {specialArgs, ...}:
+              homeManagerConfig specialArgs
+          )
         ];
       };
       # nix build .#nixosConfigrations.k8s-worker1.config.system.build.VMA
@@ -237,6 +242,11 @@ in {
             nix.settings.trusted-users = ["boboysdadda"];
             security.sudo.wheelNeedsPassword = false;
           })
+          home-manager.nixosModules.home-manager
+          (
+            {specialArgs, ...}:
+              homeManagerConfig specialArgs
+          )
         ];
       };
       # nix build .#nixosConfigrations.k8s-worker1.config.system.build.VMA
@@ -262,6 +272,11 @@ in {
             nix.settings.trusted-users = ["boboysdadda"];
             security.sudo.wheelNeedsPassword = false;
           })
+          home-manager.nixosModules.home-manager
+          (
+            {specialArgs, ...}:
+              homeManagerConfig specialArgs
+          )
         ];
       };
       # nix build .#nixosConfigrations.k8s-master.config.system.build.VMA
@@ -402,10 +417,47 @@ in {
               nixpkgs.overlays = nixpkgs.lib.attrValues overlays;
             }
             home-manager.nixosModules.home-manager
-            # (
-            #   {specialArgs, ...}:
-            #     homeManagerConfig specialArgs
-            # )
+            (
+              {specialArgs, ...}:
+                homeManagerConfig specialArgs
+            )
+          ];
+      };
+      # nix build .#nixosConfigurations.vault.config.system.build.tarball
+      vault = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        specialArgs = defaultArgs {};
+        modules =
+          defaultModules
+          ++ [
+            ./modules/user-boboysdadda.nix
+            ({
+              modulesPath,
+              pkgs,
+              ...
+            }: {
+              imports = ["${modulesPath}/virtualisation/proxmox-lxc.nix"];
+              system.stateVersion = "23.11";
+              services.vault = {
+                enable = true;
+                package = pkgs.vault-bin;
+                address = "0.0.0.0:8200";
+                storageBackend = "file";
+                storagePath = "/mnt/kube_storage/vault";
+                extraConfig = ''
+                  ui = true
+                  disable_mlock = true
+                '';
+              };
+              services.openssh.enable = true;
+              nix.settings.trusted-users = ["boboysdadda"];
+              security.sudo.wheelNeedsPassword = false;
+              networking.firewall = {
+                enable = true;
+                allowedTCPPorts = [8200 8201];
+              };
+            })
           ];
       };
     };

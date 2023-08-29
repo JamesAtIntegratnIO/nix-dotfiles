@@ -1,6 +1,4 @@
-{pkgs, ...}:
-
-let
+{pkgs, ...}: let
   zshPlugins = with pkgs; [
     {
       name = "zsh-nix-shell";
@@ -42,4 +40,6 @@ let
       };
       file = "zsh-history-substring-search.zsh";
     }
-  ]; in zshPlugins
+  ];
+in
+  zshPlugins

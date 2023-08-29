@@ -76,11 +76,10 @@ in {
         _1password-gui
         yubioath-flutter
         (vscode-with-extensions.override {
-          vscode = vscodium;
           vscodeExtensions = with vscode-extensions;
             [
               golang.go
-              #  pkgs.vscode-extensions.github.copilot
+              github.copilot
               mhutchie.git-graph
               eamodio.gitlens
               viktorqvarfordt.vscode-pitch-black-theme
