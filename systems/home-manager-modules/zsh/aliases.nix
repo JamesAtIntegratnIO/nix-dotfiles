@@ -36,7 +36,6 @@
   please = "sudo !!";
   tb = "nc termbin.com 9999";
   upd = "/usr/bin/update";
-  code = "codium";
 
  # fix for alacritty
  aterm = "nixGL alacritty";

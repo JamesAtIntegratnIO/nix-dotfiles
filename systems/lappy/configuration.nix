@@ -56,6 +56,7 @@
       libnotify
       cups-pdf-to-pdf
       alejandra
+      kubectl
     ];
   };
 
@@ -126,7 +127,7 @@
       enable = true;
       # Enable the KDE Plasma Desktop Environment.
       displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
+      desktopManager.gnome.enable = false;
       # Configure keymap in X11
       layout = "us";
       xkbVariant = "";

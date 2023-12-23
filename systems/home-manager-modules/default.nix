@@ -4,6 +4,7 @@
   pkgs,
   specialArgs,
   system,
+  hyprland,
   ...
 }: let
   inherit (specialArgs) withGUI font fontSize homeDirectory enableDev;
@@ -14,14 +15,18 @@ in {
     bash.enable = true;
     direnv.enable = true;
   };
-  imports = [
-    ./emacs.nix
-    ./zsh/zsh.nix
-    ./git.nix
-    ./vim.nix
-  ] ++ lib.optionals withGUI [./gnome-extensions.nix]
-  ++ lib.optionals enableDev [./go.nix];
-  
+  imports =
+    [
+      # ./emacs.nix
+      ./zsh/zsh.nix
+      ./git.nix
+      ./vim.nix
+      ./hyprland
+      ./waybar
+      ./dunst
+    ]
+    ++ lib.optionals withGUI [./gnome-extensions.nix]
+    ++ lib.optionals enableDev [./go.nix];
   home = {
     file.".config/neofetch/config.conf".source = ./dotfiles/neofetch.conf;
     file.".config/starship.toml".source = ./dotfiles/starship.toml;

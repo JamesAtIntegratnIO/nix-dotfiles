@@ -3,6 +3,7 @@
   system,
   inputs,
   nixpkgs,
+  hyprland,
   flake-parts,
   home-manager,
   flake-utils,
@@ -22,6 +23,7 @@
     self
     system
     nixpkgs
+    hyprland
     flake-parts
     home-manager
     flake-utils
@@ -46,7 +48,7 @@
     ({...}: {
       imports = [
         disko.nixosModules.disko
-        agenix.nixosModule
+        agenix.nixosModules.default
         ./modules/tailscale.nix
         ./modules/i18n.nix
         ./modules/openssh.nix
@@ -416,6 +418,7 @@ in {
             {
               nixpkgs.overlays = nixpkgs.lib.attrValues overlays;
             }
+            hyprland.nixosModules.default
             home-manager.nixosModules.home-manager
             (
               {specialArgs, ...}:

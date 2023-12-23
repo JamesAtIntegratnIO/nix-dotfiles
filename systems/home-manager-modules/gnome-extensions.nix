@@ -2,7 +2,7 @@
   home.packages = with pkgs.gnomeExtensions; [
     appindicator
     blur-my-shell
-    pano
+    # pano
     gsconnect
     removable-drive-menu
     bluetooth-quick-connect
@@ -26,7 +26,7 @@
         "auto-move-windows@gnome-shell-extensions.gcampax.github.com"
         "window-list@gnome-shell-extensions.gcampax.github.com"
         "places-menu@gnome-shell-extensions.gcampax.github.com"
-        "workspace-indicator@gnome-shell-extensions.gcampax.github.com"
+        # "workspace-indicator@gnome-shell-extensions.gcampax.github.com" Gnome 45 bakes this into the activities button now
         "apps-menu@gnome-shell-extensions.gcampax.github.com"
         "native-window-placement@gnome-shell-extensions.gcampax.github.com"
         "user-theme@gnome-shell-extensions.gcampax.github.com"
@@ -52,10 +52,10 @@
     "org/gnome/shell/extensions/gsconnect".show-indicators = true;
 
     # Configure Pano
-    "org/gnome/shell/extensions/pano" = {
-      global-shortcut = ["<Super>comma"];
-      incognito-shortcut = ["<Shift><Super>less"];
-    };
+    # "org/gnome/shell/extensions/pano" = {
+    #   global-shortcut = ["<Super>comma"];
+    #   incognito-shortcut = ["<Shift><Super>less"];
+    # };
 
     # Configure Bluetooth Quick Connect
     "org/gnome/shell/extensions/bluetooth-quick-connect" = {

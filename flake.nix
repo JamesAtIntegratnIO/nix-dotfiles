@@ -9,6 +9,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     flake-utils.url = "github:numtide/flake-utils";
     vscode-server.url = "github:msteen/nixos-vscode-server";
@@ -47,6 +50,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    hyprland,
     flake-parts,
     flake-root,
     mission-control,

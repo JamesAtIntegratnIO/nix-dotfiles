@@ -111,6 +111,12 @@ in {
                 version = "1.0.0";
                 sha256 = "08e9448ca866f2d2b95df3a3ae95540d0ef1dc968e2e262867831dc132fc92d9";
               }
+              {
+                name = "nunjucks";
+                publisher = "ronnidc";
+                version = "0.3.1";
+                sha256 = "sha256-7YfmRMhC+HFmYgYtyHWrzSi7PZS3tdDHly9S1kDMmjY=";
+              }
             ];
         })
       ]
