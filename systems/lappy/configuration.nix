@@ -102,7 +102,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
+  programs.hyprland.enable = true;
   # Select internationalisation properties.
   security = {
     # Yubikey
@@ -126,8 +126,10 @@
       # Enable the X11 windowing system.
       enable = true;
       # Enable the KDE Plasma Desktop Environment.
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = false;
+      displayManager.sddm = {
+        enable = true;
+      };
+      desktopManager.gnome.enable = true;
       # Configure keymap in X11
       layout = "us";
       xkbVariant = "";

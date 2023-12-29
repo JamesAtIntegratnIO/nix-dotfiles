@@ -4,7 +4,9 @@
   inputs,
   pkgs,
   ...
-}: {
+}: let
+  inherit (config.modules.desktop) screenWidth screenHeight screenRefreshRate screenScalingRatio;
+in {
   wayland.windowManager.hyprland.settings = {
     # Set programs that you use
     # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
@@ -18,8 +20,9 @@
     ];
     # Monitor config
     monitor = [
-      "eDP-1,1920x1200,3840x0,1"
+      "eDP-1, ${toString screenWidth}x${toString screenHeight},3840x0,${toString screenScalingRatio}"
       "DP-6,3840x2160,0x0,1"
+      "DP-2,1920x1080,3840x0,1"
     ];
 
     bindl = [
